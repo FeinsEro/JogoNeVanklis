@@ -1,5 +1,8 @@
 #include <stdio.h>
+
+//Includes do Allegro
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
 
 int main(int argc, char **argv) {
 	ALLEGRO_DISPLAY *display = NULL;
@@ -8,9 +11,15 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "Falha em iniciar saporra");
 		return -1;
 	}
+
 	display = al_create_display(640, 480);
 	if (!display) {
 		fprintf(stderr, "erro no display");
+		return -1;
+	}
+
+	if (!al_init_image_addon()) {
+		fprintf(stderr, "Erro ao iniciar suporte a imagens");
 		return -1;
 	}
 
