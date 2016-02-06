@@ -14,12 +14,9 @@ int main(int argc, char **argv) {
 		return -1;
 	}
 
-	while (1) {
-		al_clear_to_color(al_map_rgb(250, 250, 250));
-		al_flip_display();
-		al_rest(10.0);
-	}
-
+	al_clear_to_color(al_map_rgb(250, 250, 250));
+	al_flip_display();
+	al_rest(10.0);
 	al_destroy_display(display);
 
 	return 0;
