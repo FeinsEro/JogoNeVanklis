@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Character.hpp" />
     <ClInclude Include="EventQueue.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Sprite.hpp" />
   </ItemGroup>
