@@ -19,16 +19,27 @@ EventQueue::EventQueue(ALLEGRO_DISPLAY* d) {
 
 }
 
+int mouse_lastx, mouse_lasty;
+
 //Verifica se há eventos e preenche a event queue.
 //Retorna false se recebe um evento que provoque a saída do jogo
 bool EventQueue::CheckEvents() {
 	ALLEGRO_TIMEOUT timeout;
 	ALLEGRO_EVENT ev;
 
+	if (_events.size() > MAX_QUEUE_SIZE) {
+		fprintf(stderr, "[EventQueue] Elemento retirado da fila\n");
+		
+		while (_events.size() >= MAX_QUEUE_SIZE)
+			_events.pop();
+	}
+
 	//10 ms de timeout para obter os eventos
 	al_init_timeout(&timeout, 0.01);
 
 	while (al_wait_for_event_until(_allegro_queue, &ev, &timeout)) {
+		al_init_timeout(&timeout, 0.01);
+
 		/* Por enquanto apenas trataremos eventos de mouse e de teclado */
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 			return false;
@@ -39,7 +50,7 @@ bool EventQueue::CheckEvents() {
 			ev.type == ALLEGRO_EVENT_KEY_UP ){
 	
 			e.keycode = ev.keyboard.keycode;
-			e.keyletter = ((char)ev.keyboard.unichar & 0xff);
+			e.keyletter = (char)(ev.keyboard.unichar);
 
 			switch (ev.type) {
 			case ALLEGRO_EVENT_KEY_DOWN:
@@ -59,8 +70,8 @@ bool EventQueue::CheckEvents() {
 		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN ||
 			ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP || 
 			ev.type == ALLEGRO_EVENT_MOUSE_AXES ) {
-			e.mouse_x = ev.mouse.x;
-			e.mouse_y = ev.mouse.y;
+			mouse_lastx = ev.mouse.x;
+			mouse_lasty = ev.mouse.y;
 
 			e.mouse_button = ev.mouse.button;
 		
@@ -82,15 +93,21 @@ bool EventQueue::CheckEvents() {
 			e.mouse_button = 0;
 		}
 
-		fprintf(stderr, "[EventQueue] Evento inserido: ");
-		fprintf(stderr, "[EventQueue]\tTecla %c (scancode %d), keystatus %d\n ",
+		e.mouse_x = mouse_lastx;
+		e.mouse_y = mouse_lasty;
+
+		
+		fprintf(stderr, "[EventQueue] Evento #%d \n", _events.size());
+		fprintf(stderr, "[EventQueue]\tTecla %c (scancode %d), keystatus %d\n",
 			e.keyletter, e.keycode, e.key_status);
 		fprintf(stderr, "[EventQueue]\tPosição do mouse: (%d, %d), botão %d, mousestatus %d\n",
 			e.mouse_x, e.mouse_y, e.mouse_button, e.mouse_status);
 
 		//Insere o evento na fila
 		_events.push(e);
+		
 	}
+	return true;
 }
 
 //Obtém o primeiro evento da fila. Retorna false se não houverem mais eventos, caso contrário retorna true.

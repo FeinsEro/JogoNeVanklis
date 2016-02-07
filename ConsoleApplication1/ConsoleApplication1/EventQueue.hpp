@@ -32,6 +32,11 @@ enum AltKeys {
 #include <allegro5/mouse.h>
 #include <allegro5/display.h>
 
+/*	Tamanho máximo da fila antes que o jogo comece a retirar os primeiros elementos inseridos 
+	Sem isso, algum filho da puta poderia facilmente encher a memória de eventos */
+#define MAX_QUEUE_SIZE 1500
+
+
 class EventQueue {
 private:
 	std::queue<Event> _events;
