@@ -25,10 +25,11 @@ int main(int argc, char **argv) {
 		return -1;
 	}
 
-	al_clear_to_color(al_map_rgb(0, 0, 0));
 	EventQueue ev(display);
 
-	while (!ev.CheckEvents()) {
+	while (ev.CheckEvents()) {
+
+		al_clear_to_color(al_map_rgb(0, 0, 0));
 		al_flip_display();
 
 		al_rest(0.1);

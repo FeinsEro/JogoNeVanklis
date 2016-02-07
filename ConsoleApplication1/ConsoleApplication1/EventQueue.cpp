@@ -19,6 +19,8 @@ EventQueue::EventQueue(ALLEGRO_DISPLAY* d) {
 
 }
 
+int mouse_lastx, mouse_lasty;
+
 //Verifica se há eventos e preenche a event queue.
 //Retorna false se recebe um evento que provoque a saída do jogo
 bool EventQueue::CheckEvents() {
@@ -39,7 +41,7 @@ bool EventQueue::CheckEvents() {
 			ev.type == ALLEGRO_EVENT_KEY_UP ){
 	
 			e.keycode = ev.keyboard.keycode;
-			e.keyletter = ((char)ev.keyboard.unichar & 0xff);
+			e.keyletter = (char)(ev.keyboard.unichar);
 
 			switch (ev.type) {
 			case ALLEGRO_EVENT_KEY_DOWN:
@@ -59,8 +61,8 @@ bool EventQueue::CheckEvents() {
 		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN ||
 			ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP || 
 			ev.type == ALLEGRO_EVENT_MOUSE_AXES ) {
-			e.mouse_x = ev.mouse.x;
-			e.mouse_y = ev.mouse.y;
+			mouse_lastx = ev.mouse.x;
+			mouse_lasty = ev.mouse.y;
 
 			e.mouse_button = ev.mouse.button;
 		
@@ -82,7 +84,10 @@ bool EventQueue::CheckEvents() {
 			e.mouse_button = 0;
 		}
 
-		fprintf(stderr, "[EventQueue] Evento inserido: ");
+		e.mouse_x = mouse_lastx;
+		e.mouse_y = mouse_lasty;
+
+		fprintf(stderr, "[EventQueue] Evento #%d \n", _events.size());
 		fprintf(stderr, "[EventQueue]\tTecla %c (scancode %d), keystatus %d\n ",
 			e.keyletter, e.keycode, e.key_status);
 		fprintf(stderr, "[EventQueue]\tPosição do mouse: (%d, %d), botão %d, mousestatus %d\n",
@@ -90,7 +95,9 @@ bool EventQueue::CheckEvents() {
 
 		//Insere o evento na fila
 		_events.push(e);
+		
 	}
+	return true;
 }
 
 //Obtém o primeiro evento da fila. Retorna false se não houverem mais eventos, caso contrário retorna true.
