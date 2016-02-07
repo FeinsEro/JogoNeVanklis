@@ -8,7 +8,7 @@ protected:
 
 
 	std::string _name;
-	unsigned int _HP, _ATK, _DEF, _labia, _dinheiro;
+	unsigned int _HP, _ATK, _DEF, _labia, _dinheiro, _medo, _sanidade;
 public:
 	inline std::string GetName() { return this->_name; }
 	inline void SetName(std::string name) { this->_name = name; }
@@ -21,6 +21,6 @@ public:
 	virtual void Lutar() = 0;
 	virtual void Reviver() = 0;
 
-	Character(unsigned int XPos = 0, unsigned int YPos = 0, std::string name = "", unsigned int HP = 0, unsigned int dinheiro = 0, unsigned int ATK = 0, unsigned int DEF = 0, unsigned int labia = 0);
+	Character(unsigned int XPos = 0, unsigned int YPos = 0, std::string name = "", unsigned int HP = 0, unsigned int dinheiro = 0, unsigned int ATK = 0, unsigned int DEF = 0, unsigned int labia = 0, unsigned int medo = 0, unsigned int sanidade = 0);
 
 };
