@@ -4,6 +4,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 
+#include "CharacterManager.hpp"
 #include "EventQueue.hpp"
 
 int main(int argc, char **argv) {
@@ -26,6 +27,10 @@ int main(int argc, char **argv) {
 	}
 
 	EventQueue ev(display);
+	CharacterManager cm;
+
+	Player mb = Player(10, 10, "Master Black");
+	cm.AddCharacter(&mb);
 
 	while (ev.CheckEvents()) {
 

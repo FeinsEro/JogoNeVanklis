@@ -9,12 +9,15 @@ protected:
 
 	std::string _name;
 	unsigned int _HP, _ATK, _DEF, _labia, _dinheiro, _medo, _sanidade;
+	int _ID;
 public:
 	inline std::string GetName() { return this->_name; }
 	inline void SetName(std::string name) { this->_name = name; }
 
 	inline void GetPosition(unsigned int& x, unsigned int& y) { x = this->_XPos; y = this->_YPos; }
 	inline void SetPosition(unsigned int& x, unsigned int& y) { this->_XPos = x; this->_YPos = y; }
+
+	inline int GetID() { return _ID; }
 
 	virtual void Falar() = 0;
 	virtual void Andar() = 0;
