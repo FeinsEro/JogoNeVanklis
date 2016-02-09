@@ -1,6 +1,6 @@
 #include "EventQueue.hpp"
 
-EventQueue::EventQueue(ALLEGRO_DISPLAY* d) {
+EventQueue::EventQueue(Renderer* r) {
 	//Obtém a event queue do Allegro, a registra e a torna default
 	//Nós vamos obter nossos eventos a partir dela
 	_allegro_queue = al_create_event_queue();
@@ -11,7 +11,7 @@ EventQueue::EventQueue(ALLEGRO_DISPLAY* d) {
 
 	//Registra para receber eventos do display, do mouse e do teclado
 	al_register_event_source(_allegro_queue,
-		al_get_display_event_source(d));
+		al_get_display_event_source(r->_display));
 	al_register_event_source(_allegro_queue,
 		al_get_mouse_event_source());
 	al_register_event_source(_allegro_queue,

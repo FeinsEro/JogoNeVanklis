@@ -1,45 +1,48 @@
 #include <stdio.h>
 
 //Includes do Allegro
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
 
 #include "CharacterManager.hpp"
 #include "EventQueue.hpp"
+#include "Renderer.hpp"
 
 int main(int argc, char **argv) {
-	ALLEGRO_DISPLAY *display = NULL;
 
-	if (!al_init()) {
-		fprintf(stderr, "Falha em iniciar saporra");
+	Renderer* r;
+	try {
+		r = new Renderer(640, 480);
+	}
+	catch (std::runtime_error& e) {
+		MessageBoxA(NULL, e.what(), "Um erro ocorreu", MB_ICONERROR);
 		return -1;
 	}
-
-	display = al_create_display(640, 480);
-	if (!display) {
-		fprintf(stderr, "erro no display");
-		return -1;
-	}
-
-	if (!al_init_image_addon()) {
-		fprintf(stderr, "Erro ao iniciar suporte a imagens");
-		return -1;
-	}
-
-	EventQueue ev(display);
+	
+	EventQueue ev(r);
+	
 	CharacterManager cm;
+	r->SetCharManager(&cm);
 
 	Player mb = Player(10, 10, "Master Black");
 	cm.AddCharacter(&mb);
 
-	while (ev.CheckEvents()) {
+	bool render = true;;
 
-		al_clear_to_color(al_map_rgb(0, 0, 0));
-		al_flip_display();
+	while (render) {
+		//Processa eventos
+		if (!ev.CheckEvents()) {
+			render = false;
+		}
+
+		//Atualiza personagens
+
+
+		//Os renderiza
+		r->Render();
+
 
 		al_rest(0.01);
 	}
-	al_destroy_display(display);
 
+	delete r;
 	return 0;
 }

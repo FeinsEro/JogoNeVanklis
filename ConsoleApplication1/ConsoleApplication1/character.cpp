@@ -3,7 +3,7 @@
 
 static int lastID = 0;
 
-Character::Character(unsigned int XPos, unsigned int YPos, std::string name,
+Character::Character(Sprite* s, unsigned int XPos, unsigned int YPos, std::string name,
 	unsigned int HP, unsigned int dinheiro, unsigned int ATK, 
 	unsigned int DEF, unsigned int labia, unsigned int medo, unsigned sanidade)
 {
@@ -18,6 +18,8 @@ Character::Character(unsigned int XPos, unsigned int YPos, std::string name,
 	this->_sanidade = sanidade;
 	
 	this->_ID = lastID++;
+
+	this->_sprite = s;
 
 	fprintf(stderr, "[Character] Char \"%s\" (id %d) criado em (%d, %d)\n",
 		name.c_str(), _ID, XPos, YPos);

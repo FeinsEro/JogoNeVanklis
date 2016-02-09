@@ -12,6 +12,9 @@ private:
 
 public:
 	CharacterManager();
+
+	inline void GetAllChars(std::vector<Character*>* chars) { *chars = _chars; }
+
 	void AddCharacter(Character*);
 	void RemoveCharacter(int id);
 

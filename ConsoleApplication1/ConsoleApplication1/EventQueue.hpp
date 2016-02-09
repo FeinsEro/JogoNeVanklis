@@ -28,9 +28,12 @@ enum AltKeys {
 
 /* A classe que cuida da event queue */
 #include <queue> //std::queue
+
 #include <allegro5/keyboard.h> 
 #include <allegro5/mouse.h>
 #include <allegro5/display.h>
+
+#include "Renderer.hpp"
 
 /*	Tamanho máximo da fila antes que o jogo comece a retirar os primeiros elementos inseridos 
 	Sem isso, algum filho da puta poderia facilmente encher a memória de eventos */
@@ -45,7 +48,7 @@ private:
 public:
 	//Construtor
 	//POR FAVOR MUDE PARA A CLASSE RENDERER QUANDO ELA ESTIVER PRONTA. EU QUERO A API DO ALLEGRO BEM ENCAPSULADA
-	EventQueue(ALLEGRO_DISPLAY* d);
+	EventQueue(Renderer* r);
 
 	//Verifica se há eventos e preenche a event queue.
 	//Retorna false se recebe um evento que provoque a saída do jogo
