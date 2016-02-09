@@ -6,6 +6,7 @@
 #include "EventQueue.hpp"
 #include "Renderer.hpp"
 
+bool cima = false, baixo = false, direita = false, esquerda = false;
 int main(int argc, char **argv) {
 
 	Renderer* r;
@@ -42,26 +43,47 @@ int main(int argc, char **argv) {
 			unsigned int x, y;
 			mb.GetPosition(x, y);
 
+			
+
+
 			switch (e.keycode) {
 			case ALLEGRO_KEY_UP:
-				y--;
+				if (e.key_status == ButtonStatus::Pressed)
+					cima = true;
+				else if (e.key_status == ButtonStatus::Released)
+					cima = false;
 				break;
 
 			case ALLEGRO_KEY_DOWN:
-				y++;
+				if (e.key_status == ButtonStatus::Pressed)
+					baixo = true;
+				else if (e.key_status == ButtonStatus::Released)
+					baixo = false;
 				break;
 
 			case ALLEGRO_KEY_LEFT:
-				x--;
+				if (e.key_status == ButtonStatus::Pressed)
+					esquerda = true;
+				else if (e.key_status == ButtonStatus::Released)
+					esquerda = false;
 				break;
 
 			case ALLEGRO_KEY_RIGHT:
-				x++;
+				if (e.key_status == ButtonStatus::Pressed)
+					direita = true;
+				else if (e.key_status == ButtonStatus::Released)
+					direita = false;
 				break;
 
 
 
 			}
+
+			if (cima) y--;
+			if (baixo) y++;
+			if (direita) x++;
+			if (esquerda) x--;
+
 			mb.SetPosition(x, y);
 
 		}
