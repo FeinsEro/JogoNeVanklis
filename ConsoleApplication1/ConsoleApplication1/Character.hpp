@@ -20,6 +20,21 @@ public:
 
 	inline void GetPosition(unsigned int& x, unsigned int& y) { x = this->_XPos; y = this->_YPos; }
 	inline void SetPosition(unsigned int& x, unsigned int& y) { this->_XPos = x; this->_YPos = y; }
+	inline void GetHP(unsigned int& HP) { HP = this->_HP; }
+	inline void SetHP(unsigned int& HP) { this->_HP = HP; }
+	inline void GetATK(unsigned int& ATK) { ATK = this->_ATK; }
+	inline void SetATK(unsigned int& ATK) { this->_ATK = ATK; }
+	inline void GetDEF(unsigned int& DEF) { DEF = this->_DEF; }
+	inline void SetDEF(unsigned int& DEF) { this->_DEF = DEF; }
+	inline void GetLabia(unsigned int& labia) { labia = this->_labia; }
+	inline void SetLabia(unsigned int& labia) { this->_labia = labia; }
+	inline void GetDinheiro(unsigned int& dinheiro) { dinheiro = this->_dinheiro; }
+	inline void SetDinheiro(unsigned int& dinheiro) { this->_dinheiro = dinheiro; }
+	inline void GetMedo(unsigned int& medo) { medo = this->_medo; }
+	inline void SetMedo(unsigned int& medo) { this->_medo = medo; }
+	inline void GetSanidade(unsigned int& sanidade) { sanidade = this->_sanidade; }
+	inline void SetSanidade(unsigned int& sanidade) { this->_sanidade = sanidade; }
+
 
 	inline void GetSprite(Sprite** s) { *s = _sprite; }
 	inline void SetSprite(Sprite* s) { _sprite = s; }
