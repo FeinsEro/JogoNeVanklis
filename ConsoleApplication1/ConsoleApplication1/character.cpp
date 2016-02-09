@@ -3,9 +3,11 @@
 
 static int lastID = 0;
 
-Character::Character(Sprite* s, unsigned int XPos, unsigned int YPos, std::string name,
+Character::Character(Sprite* s, unsigned int XP, unsigned int XPos, unsigned int YPos, std::string name,
 	unsigned int HP, unsigned int dinheiro, unsigned int ATK, 
-	unsigned int DEF, unsigned int labia, unsigned int medo, unsigned sanidade)
+	unsigned int DEF, unsigned int labia, unsigned int medo, unsigned sanidade, 
+	unsigned int armadura, unsigned int mana, unsigned int atkdemon,
+	unsigned int defdemon)
 {
 	this->_XPos = XPos;
 	this->_YPos = YPos;
@@ -21,10 +23,19 @@ Character::Character(Sprite* s, unsigned int XPos, unsigned int YPos, std::strin
 
 	this->_sprite = s;
 
-	fprintf(stderr, "[Character] Char \"%s\" (id %d) criado em (%d, %d)\n",
-		name.c_str(), _ID, XPos, YPos);
+	this->_armadura = armadura;
+	this->_mana = mana;
+	this->_atkdemon = atkdemon;
+	this->_defdemon = defdemon;
+
+	this->_xp = XP;
+
+	fprintf(stderr, "[Character] Char \"%s\" (id %d) criado em (%d, %d), %d de XP\n",
+		name.c_str(), _ID, XPos, YPos, XP);
 	fprintf(stderr, "[Character] \t dinheiro: %d, atk: %d, def: %d\n",
 		dinheiro, ATK, DEF);
-	fprintf(stderr, "[Character] \t lábia: %d, medo: %d, sanidade: %d\n",
-		labia, medo, sanidade);
+	fprintf(stderr, "[Character] \t lábia: %d, medo: %d, sanidade: %d, armadura: %d\n",
+		labia, medo, sanidade, armadura);
+	fprintf(stderr, "[Character] \t mana: %d, atkdemon: %d, defdemon: %d\n",
+		mana, atkdemon, defdemon);
 }

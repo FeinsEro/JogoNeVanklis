@@ -10,13 +10,18 @@ protected:
 
 
 	std::string _name;
-	unsigned int _HP, _ATK, _DEF, _labia, _dinheiro, _medo, _sanidade;
+	unsigned int _xp;
+	unsigned int _HP, _ATK, _DEF, _labia, _dinheiro, _medo, _sanidade, _armadura;
+	unsigned int _mana, _atkdemon, _defdemon;
 	int _ID;
 
 	Sprite* _sprite;
 public:
 	inline std::string GetName() { return this->_name; }
 	inline void SetName(std::string name) { this->_name = name; }
+
+	inline void GetXP(unsigned int& xp) { xp = this->_xp; }
+	inline void SetXP(unsigned int& xp) { this->_xp = xp; }
 
 	inline void GetPosition(unsigned int& x, unsigned int& y) { x = this->_XPos; y = this->_YPos; }
 	inline void SetPosition(unsigned int& x, unsigned int& y) { this->_XPos = x; this->_YPos = y; }
@@ -35,6 +40,14 @@ public:
 	inline void GetSanidade(unsigned int& sanidade) { sanidade = this->_sanidade; }
 	inline void SetSanidade(unsigned int& sanidade) { this->_sanidade = sanidade; }
 
+	inline void GetArmadura(unsigned int& armadura) { armadura = this->_armadura; }
+	inline void SetArmadura(unsigned int& armadura) { this->_armadura = armadura; }
+	inline void GetMana(unsigned int& mana) { mana = this->_mana; }
+	inline void SetMana(unsigned int& mana) { this->_mana = mana; }
+	inline void GetAtkDemon(unsigned int& atkdemon) { atkdemon = this->_atkdemon; }
+	inline void SetAtkDemon(unsigned int& atkdemon) { this->_atkdemon = atkdemon; }
+	inline void GetDefDemon(unsigned int& defdemon) { defdemon = this->_defdemon; }
+	inline void SetDefDemon(unsigned int& defdemon) { this->_defdemon = defdemon; }
 
 	inline void GetSprite(Sprite** s) { *s = _sprite; }
 	inline void SetSprite(Sprite* s) { _sprite = s; }
@@ -47,8 +60,13 @@ public:
 	virtual void DoEvents() = 0;
 	virtual void Reviver() = 0;
 
-	Character(Sprite* s = NULL, unsigned int XPos = 0, unsigned int YPos = 0, std::string name = "",
-		unsigned int HP = 0, unsigned int dinheiro = 0, unsigned int ATK = 0, unsigned int DEF = 0, 
-		unsigned int labia = 0, unsigned int medo = 0, unsigned int sanidade = 0);
+	Character(Sprite* s = NULL, unsigned int XP = 0, 
+		unsigned int XPos = 0, unsigned int YPos = 0, std::string name = "",
+		unsigned int HP = 0, unsigned int dinheiro = 0, unsigned int ATK = 0, unsigned int DEF = 0,
+		unsigned int labia = 0, unsigned int medo = 0, unsigned int sanidade = 0,
+		unsigned int armadura = 0, unsigned int mana = 0, unsigned int atkdemon = 0,
+		unsigned int defdemon = 0);
+
+
 
 };
