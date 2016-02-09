@@ -101,13 +101,13 @@ bool EventQueue::CheckEvents() {
 		e.mouse_x = mouse_lastx;
 		e.mouse_y = mouse_lasty;
 
-		
+		/*
 		fprintf(stderr, "[EventQueue] Evento #%d \n", _events.size());
 		fprintf(stderr, "[EventQueue]\tTecla %c (scancode %d), keystatus %d\n",
 			e.keyletter, e.keycode, e.key_status);
 		fprintf(stderr, "[EventQueue]\tPosição do mouse: (%d, %d), botão %d, mousestatus %d\n",
 			e.mouse_x, e.mouse_y, e.mouse_button, e.mouse_status);
-
+			*/
 		//Insere o evento na fila
 		_events.push(e);
 		

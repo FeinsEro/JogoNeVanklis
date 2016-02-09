@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 
 		//Atualiza personagens
 		Event e;
-		if (ev.PopEvent(e)) {
+		while (ev.PopEvent(e)) {
 			unsigned int x, y;
 			mb.GetPosition(x, y);
 
