@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 	CharacterManager cm;
 	r->SetCharManager(&cm);
 
-	Player mb = Player(10, 10, "Master Black");
+	Player mb = Player(10, 10, "Dann Von Veigar");
 	Sprite s = Sprite("..\\characters\\abraoleos.bmp", 64, 64);
 	mb.SetSprite(&s);
 
