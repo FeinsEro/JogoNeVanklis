@@ -48,10 +48,13 @@ bool Renderer::Render() {
 
 		if (!s) continue;
 
-		unsigned int gamex, gamey;
-		c->GetPosition(gamex, gamey);
+		int gamex, gamey;
+		c->GetPosition((unsigned int&)gamex, (unsigned int&)gamey);
 
-		if (_screenx > (gamex)) {
+
+		ALLEGRO_BITMAP* bm_sprite = s->GetFrameImage();
+
+		if (_screenx > (gamex + (al_get_bitmap_width(bm_sprite)/_unitsize))) {
 			//Não dá nem pra ver o personagem
 			continue;
 		}
@@ -61,10 +64,11 @@ bool Renderer::Render() {
 			continue;
 		}
 
+
 		float drawx = (gamex - _screenx) * _unitsize;
 		float drawy = (gamey - _screeny) * _unitsize;
 
-		al_draw_bitmap(s->GetFrameImage(), drawx, drawy, 0);
+		al_draw_bitmap(bm_sprite, drawx, drawy, 0);
 	}
 
 	al_flip_display();
