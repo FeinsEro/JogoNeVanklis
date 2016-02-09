@@ -20,6 +20,7 @@ EventQueue::EventQueue(Renderer* r) {
 }
 
 int mouse_lastx, mouse_lasty;
+int last_key = 0;
 
 //Verifica se há eventos e preenche a event queue.
 //Retorna false se recebe um evento que provoque a saída do jogo
@@ -47,18 +48,22 @@ bool EventQueue::CheckEvents() {
 		Event e = { 0 };
 
 		if (ev.type == ALLEGRO_EVENT_KEY_DOWN || 
-			ev.type == ALLEGRO_EVENT_KEY_UP ){
+			ev.type == ALLEGRO_EVENT_KEY_UP ||
+			ev.type == ALLEGRO_EVENT_KEY_CHAR ){
 	
 			e.keycode = ev.keyboard.keycode;
 			e.keyletter = (char)(ev.keyboard.unichar);
 
+		
 			switch (ev.type) {
 			case ALLEGRO_EVENT_KEY_DOWN:
 				e.key_status = ButtonStatus::Pressed;
+				last_key = e.keycode;
 
 				break;
 			case ALLEGRO_EVENT_KEY_UP:
 				e.key_status = ButtonStatus::Released;
+				last_key = 0;
 
 				break;
 			}

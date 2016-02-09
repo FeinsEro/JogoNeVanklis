@@ -29,6 +29,7 @@ public:
 	virtual void Falar() = 0;
 	virtual void Andar() = 0;
 	virtual void Lutar() = 0;
+	virtual void DoEvents() = 0;
 	virtual void Reviver() = 0;
 
 	Character(Sprite* s = NULL, unsigned int XPos = 0, unsigned int YPos = 0, std::string name = "",

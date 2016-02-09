@@ -19,6 +19,14 @@ Renderer::Renderer(int w, int h) {
 	}
 
 	fprintf(stderr, "[Renderer] Renderer criado. Resolução: %dx%d\n", w, h);
+
+	_screenx = 0;
+	_screeny = 0;
+
+	_screenw = w;
+	_screenh = h;
+
+	_unitsize = 4.0; //4 pixels = 1 unidade
 }
 
 /* Renderiza um frame. */
@@ -40,7 +48,23 @@ bool Renderer::Render() {
 
 		if (!s) continue;
 
-		al_draw_bitmap(s->GetFrameImage(), 0.0, 0.0, 0);
+		unsigned int gamex, gamey;
+		c->GetPosition(gamex, gamey);
+
+		if (_screenx > (gamex)) {
+			//Não dá nem pra ver o personagem
+			continue;
+		}
+
+		if ((_screenx)+(_screenw / _unitsize) < gamex) {
+			//A tela está antes do personagem
+			continue;
+		}
+
+		float drawx = (gamex - _screenx) * _unitsize;
+		float drawy = (gamey - _screeny) * _unitsize;
+
+		al_draw_bitmap(s->GetFrameImage(), drawx, drawy, 0);
 	}
 
 	al_flip_display();

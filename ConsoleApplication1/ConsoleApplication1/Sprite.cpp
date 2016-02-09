@@ -32,8 +32,9 @@ void Sprite::UpdateSheet() {
 
 	fprintf(stderr, "[Sprite] Spritesheet adicionado: %s\n", this->sheet_path.c_str());
 	fprintf(stderr, "[Sprite] \tTamanho: %dx%d\n", _image_width, _image_height);
-	fprintf(stderr, "[Sprite] \t%d frames detectados", _frame_count);
+	fprintf(stderr, "[Sprite] \t%d frames detectados\n", _frame_count);
 
+	this->StepFrames(0); //carrega o primeiro frame
 }
 ALLEGRO_BITMAP* Sprite::NextFrame(){
 	return this->StepFrames(1);	

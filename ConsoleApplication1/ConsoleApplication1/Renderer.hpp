@@ -15,7 +15,7 @@ private:
 	int _screenw, _screenh; //Tamanho da tela
 
 	int _screenx, _screeny; //Onde a tela está (em relação ao jogo)
-	int _unitsize; //Quantos pixels são necessários para 1 unidade no jogo?
+	float _unitsize; //Quantos pixels são necessários para 1 unidade no jogo?
 	
 	CharacterManager* _cm;
 public:

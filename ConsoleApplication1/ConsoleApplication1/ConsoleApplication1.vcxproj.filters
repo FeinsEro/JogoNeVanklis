@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Sprites">
+      <UniqueIdentifier>{05233dfe-61c7-4e11-9624-de8e842a42e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,5 +61,10 @@
     <ClInclude Include="CharacterManager.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\characters\abraoleos.bmp">
+      <Filter>Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

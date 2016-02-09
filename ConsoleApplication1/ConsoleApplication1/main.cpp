@@ -23,6 +23,9 @@ int main(int argc, char **argv) {
 	r->SetCharManager(&cm);
 
 	Player mb = Player(10, 10, "Master Black");
+	Sprite s = Sprite("..\\characters\\abraoleos.bmp", 64, 64);
+	mb.SetSprite(&s);
+
 	cm.AddCharacter(&mb);
 
 	bool render = true;;
@@ -34,7 +37,34 @@ int main(int argc, char **argv) {
 		}
 
 		//Atualiza personagens
+		Event e;
+		if (ev.PopEvent(e)) {
+			unsigned int x, y;
+			mb.GetPosition(x, y);
 
+			switch (e.keycode) {
+			case ALLEGRO_KEY_UP:
+				y--;
+				break;
+
+			case ALLEGRO_KEY_DOWN:
+				y++;
+				break;
+
+			case ALLEGRO_KEY_LEFT:
+				x--;
+				break;
+
+			case ALLEGRO_KEY_RIGHT:
+				x++;
+				break;
+
+
+
+			}
+			mb.SetPosition(x, y);
+
+		}
 
 		//Os renderiza
 		r->Render();
