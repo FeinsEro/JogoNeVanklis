@@ -11,7 +11,7 @@ EventQueue::EventQueue(Renderer* r) {
 
 	//Registra para receber eventos do display, do mouse e do teclado
 	al_register_event_source(_allegro_queue,
-		al_get_display_event_source(r->_display));
+		al_get_display_event_source(r->GetDisplay()));
 	al_register_event_source(_allegro_queue,
 		al_get_mouse_event_source());
 	al_register_event_source(_allegro_queue,

@@ -6,6 +6,8 @@
 #include "EventQueue.hpp"
 #include "Renderer.hpp"
 
+#include <allegro5/allegro_windows.h>
+
 bool cima = false, baixo = false, direita = false, esquerda = false;
 int main(int argc, char **argv) {
 
@@ -14,7 +16,8 @@ int main(int argc, char **argv) {
 		r = new Renderer(640, 480);
 	}
 	catch (std::runtime_error& e) {
-		MessageBoxA(NULL, e.what(), "Um erro ocorreu", MB_ICONERROR);
+		MessageBoxA(r->GetDisplay() ? al_get_win_window_handle(r->GetDisplay()) : NULL,
+			e.what(), "Um erro ocorreu", MB_ICONERROR);
 		return -1;
 	}
 	

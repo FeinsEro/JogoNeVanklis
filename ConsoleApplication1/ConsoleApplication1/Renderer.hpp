@@ -9,7 +9,6 @@
 #include "CharacterManager.hpp"
 
 class Renderer {
-	friend class EventQueue;
 private:
 	ALLEGRO_DISPLAY* _display;
 	int _screenw, _screenh; //Tamanho da tela
@@ -25,6 +24,8 @@ public:
 
 	inline void SetCharManager(CharacterManager* cm) { _cm = cm; }
 	inline CharacterManager* GetCharManager() { return _cm; }
+
+	inline ALLEGRO_DISPLAY* GetDisplay() { return _display; }
 
 	/* Renderiza um frame. */
 	bool Render();
