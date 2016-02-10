@@ -57,9 +57,13 @@ ALLEGRO_BITMAP* Sprite::StepFrames(int num) {
 	this->_frame_y = (num * _frame_width) / _image_width;
 	this->_frame_x = (num * _frame_width) % _image_width;
 	
+
 	//Talvez usar unique_ptr no bitmap do frame
 	this->_frame_cache = al_create_sub_bitmap(this->_sheet_cache, this->_frame_x, this->_frame_y,
 		this->_frame_width, this->_frame_height);
+
+	//Depois mudar a transparência pra uma cor menos usada (como o tradicional magenta)
+	al_convert_mask_to_alpha(this->_frame_cache, al_map_rgb(255, 255, 255));
 
 	return this->_frame_cache;
 }
