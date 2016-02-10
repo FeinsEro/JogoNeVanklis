@@ -39,3 +39,51 @@ Character::Character(Sprite* s, unsigned int XP, unsigned int XPos, unsigned int
 	fprintf(stderr, "[Character] \t mana: %d, atkdemon: %d, defdemon: %d\n",
 		mana, atkdemon, defdemon);
 }
+
+void Character::AddItem(Item* i) { 
+	
+	this->_items.push_back(i);
+
+	std::string iname;
+	i->GetName(iname);
+	fprintf(stderr, "[Character] Item %s adicionado ao inventário de %s\n",
+		iname.c_str(), _name.c_str());
+
+}
+
+void Character::RemoveItem(int itemID) {
+	for (auto it = _items.begin();
+	it != _items.end();
+		++it) {
+
+		Item* i = *it;
+		if (i->GetID() == itemID) {
+
+			std::string iname;
+			i->GetName(iname);
+			fprintf(stderr, "[Character] Item %s removido do inventário de %s\n",
+				iname.c_str(), _name.c_str());
+
+			_items.erase(it);
+			return;
+		}
+
+	}
+
+
+}
+
+Item* Character::GetItem(int itemID) {
+	for (auto it = _items.begin();
+	it != _items.end();
+		++it) {
+
+		Item* i = *it;
+		if (i->GetID() == itemID) {
+			return i;
+		}
+
+	}
+
+
+}

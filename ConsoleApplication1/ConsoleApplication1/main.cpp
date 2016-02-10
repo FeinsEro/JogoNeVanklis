@@ -11,13 +11,16 @@
 bool cima = false, baixo = false, direita = false, esquerda = false;
 int main(int argc, char **argv) {
 
-	Renderer* r;
+	Renderer* r = NULL;
 	try {
 		r = new Renderer(640, 480);
 	}
 	catch (std::runtime_error& e) {
-		MessageBoxA(r->GetDisplay() ? al_get_win_window_handle(r->GetDisplay()) : NULL,
-			e.what(), "Um erro ocorreu", MB_ICONERROR);
+		if (r)
+			MessageBoxA(r->GetDisplay() ? al_get_win_window_handle(r->GetDisplay()) : NULL,
+				e.what(), "Um erro ocorreu", MB_ICONERROR);
+		else
+			MessageBoxA(NULL, e.what(), "Um erro ocorreu", MB_ICONERROR);
 		return -1;
 	}
 	
@@ -27,6 +30,10 @@ int main(int argc, char **argv) {
 	r->SetCharManager(&cm);
 
 	Player mb = Player(10, 10, "Dann Von Veigar");
+
+	Item it = Item("Insígnia do MC Bin Laden", 3000);
+	mb.AddItem(&it);
+
 	Sprite s = Sprite("..\\characters\\abraoleos.bmp", 64, 64);
 	mb.SetSprite(&s);
 

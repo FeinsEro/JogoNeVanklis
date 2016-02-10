@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="EventQueue.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="character.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Character.hpp" />
     <ClInclude Include="CharacterManager.hpp" />
     <ClInclude Include="EventQueue.hpp" />
+    <ClInclude Include="Item.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Sprite.hpp" />

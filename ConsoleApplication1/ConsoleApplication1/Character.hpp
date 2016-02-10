@@ -1,8 +1,11 @@
 #pragma once
 #include <string>
+#include <vector>
+
 #include <allegro5\allegro.h>
 
 #include "Sprite.hpp"
+#include "Item.hpp"
 
 class Character {
 protected:
@@ -14,6 +17,8 @@ protected:
 	unsigned int _HP, _ATK, _DEF, _labia, _dinheiro, _medo, _sanidade, _armadura;
 	unsigned int _mana, _atkdemon, _defdemon;
 	int _ID;
+
+	std::vector<Item*> _items;
 
 	Sprite* _sprite;
 public:
@@ -51,6 +56,10 @@ public:
 
 	inline void GetSprite(Sprite** s) { *s = _sprite; }
 	inline void SetSprite(Sprite* s) { _sprite = s; }
+	
+	void AddItem(Item* i);
+	void RemoveItem(int itemID);
+	Item* GetItem(int itemID);
 
 	inline int GetID() { return _ID; }
 
