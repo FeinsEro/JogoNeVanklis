@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
 	Player mb = Player(10, 10, "Dann Von Veigar");
 
-	Item it = Item("Insígnia do MC Bin Laden", 3000);
+	Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	mb.AddItem(&it);
 
 	Sprite s = Sprite("..\\characters\\abraoleos.bmp", 64, 64);
