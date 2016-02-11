@@ -24,6 +24,9 @@ public:
 	inline void GetName(std::string& name) { name = _name; }
 
 
-	Item(std::string name, std::string descricao, unsigned int value, int bonusHP, int bonusATK, int bonusDEF, int bonusAMR, int bonusMagicDEF, int bonusLabia, int bonusSanidade, int bonusNoFear, unsigned int bonusXP, unsigned int bonusDinheiro);
+	Item(std::string name, std::string descricao, unsigned int value, 
+		int bonusHP = 0, int bonusATK = 0, int bonusDEF = 0, int bonusAMR = 0,
+		int bonusMagicDEF = 0, int bonusLabia = 0, int bonusSanidade = 0,
+		int bonusNoFear = 0, unsigned int bonusXP = 0, unsigned int bonusDinheiro = 0);
 
 };
