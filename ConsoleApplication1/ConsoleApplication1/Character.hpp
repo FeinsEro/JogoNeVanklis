@@ -61,6 +61,8 @@ public:
 	void RemoveItem(int itemID);
 	Item* GetItem(int itemID);
 
+	inline void GetAllItems(std::vector<Item*>** list) { *list = &_items; }
+
 	inline int GetID() { return _ID; }
 
 	virtual void Falar() = 0;

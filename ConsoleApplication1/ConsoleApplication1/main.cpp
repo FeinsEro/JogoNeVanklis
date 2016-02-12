@@ -6,6 +6,9 @@
 #include "EventQueue.hpp"
 #include "Renderer.hpp"
 
+#include <iostream>
+#include <sstream> //stringstream
+
 #include <allegro5/allegro_windows.h>
 
 bool cima = false, baixo = false, direita = false, esquerda = false;
@@ -85,6 +88,28 @@ int main(int argc, char **argv) {
 					direita = false;
 				break;
 
+			case ALLEGRO_KEY_I:
+
+				if (e.keyletter != 'i') continue;
+
+				//Enumera os itens no inventário do player.
+				std::vector<Item*>* list;
+				mb.GetAllItems(&list);
+
+				std::stringstream line;
+
+				for (auto i = list->begin();
+				i != list->end();
+					i++) {
+					std::string name;
+					(*i)->GetName(name);
+					line << (*i)->GetID() << " - " << name << " - " << (*i)->GetValue() << " money" << std::endl;
+					
+				}
+
+				MessageBoxA(al_get_win_window_handle(r->GetDisplay()), line.str().c_str(), "Inventário", 0);
+
+				break;
 
 
 			}
