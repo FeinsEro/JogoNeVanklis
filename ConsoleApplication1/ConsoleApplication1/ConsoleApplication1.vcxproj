@@ -169,6 +169,7 @@
     <ClInclude Include="EnemyFactory.hpp" />
     <ClInclude Include="EventQueue.hpp" />
     <ClInclude Include="Item.hpp" />
+    <ClInclude Include="Map.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Sprite.hpp" />

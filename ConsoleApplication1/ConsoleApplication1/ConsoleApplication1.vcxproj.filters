@@ -76,6 +76,9 @@
     <ClInclude Include="EnemyFactory.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Map.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\characters\abraoleos.bmp">
