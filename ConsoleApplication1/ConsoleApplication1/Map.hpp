@@ -11,6 +11,7 @@ struct layer
 	int w, h;
 	int tile_spacing_w, tile_spacing_h;
 };
+
 struct tile
 {
 	BITMAP *pict;
@@ -22,6 +23,14 @@ struct tile
 #include <allegro5\bitmap.h>
 class TileMap {
 private:
-		ALLEGRO_BITMAP *tiles;	
+		//Bitmap contendo todos os tiles
+		static ALLEGRO_BITMAP* tiles;	
+
+		//Altura e largura padrão de cada tile, no arquivo.
+		static int tile_width, tile_height; 
+
+public:
+	void Open(const char* path);
+	
 
 };

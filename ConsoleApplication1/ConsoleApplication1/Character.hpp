@@ -6,6 +6,7 @@
 
 #include "Sprite.hpp"
 #include "Item.hpp"
+#include "Map.hpp"
 
 #define TYPEID_PLAYER 0
 
@@ -74,7 +75,7 @@ public:
 	virtual std::string Falar() = 0;
 	virtual void Andar() = 0;
 	virtual void Lutar() = 0;
-	virtual void DoEvents() = 0;
+	virtual void DoEvents(void* charmanager, TileMap* map) = 0;
 	virtual void Reviver() = 0;
 
 
