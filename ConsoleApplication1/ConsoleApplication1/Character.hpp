@@ -7,6 +7,8 @@
 #include "Sprite.hpp"
 #include "Item.hpp"
 
+#define TYPEID_PLAYER 0
+
 class Character {
 protected:
 	unsigned int _XPos, _YPos;
@@ -16,7 +18,11 @@ protected:
 	unsigned int _xp;
 	unsigned int _HP, _ATK, _DEF, _labia, _dinheiro, _medo, _sanidade, _armadura;
 	unsigned int _mana, _atkdemon, _defdemon;
+	
 	int _ID;
+
+	//Id de tipo. Vai ser usada pelo EnemyFactory e pelo futuro NPCFactory para criar os objetos 
+	int _TypeID; 
 
 	std::vector<Item*> _items;
 

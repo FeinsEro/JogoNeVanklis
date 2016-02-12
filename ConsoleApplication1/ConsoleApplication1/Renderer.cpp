@@ -10,6 +10,9 @@ Renderer::Renderer(int w, int h) {
 	}
 
 	_display = al_create_display(w, h);
+
+	al_set_window_title(_display, "Dois Demônios");
+	
 	if (!_display) {
 		throw std::runtime_error("erro no display");
 	}
