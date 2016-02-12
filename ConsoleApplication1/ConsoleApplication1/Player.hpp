@@ -7,7 +7,7 @@ public:
 	Player(unsigned int x, unsigned int y, const char* name);
 
 	void DoEvents() {}
-	void Falar() {}
+	std::string Falar() { return ""; }
 	void Andar() {}
 	void Lutar() {}
 	void Reviver() {}

@@ -71,11 +71,12 @@ public:
 
 	inline int GetID() { return _ID; }
 
-	virtual void Falar() = 0;
+	virtual std::string Falar() = 0;
 	virtual void Andar() = 0;
 	virtual void Lutar() = 0;
 	virtual void DoEvents() = 0;
 	virtual void Reviver() = 0;
+
 
 	Character(Sprite* s = NULL, unsigned int XP = 0, 
 		unsigned int XPos = 0, unsigned int YPos = 0, std::string name = "",
@@ -83,7 +84,6 @@ public:
 		unsigned int labia = 0, unsigned int medo = 0, unsigned int sanidade = 0,
 		unsigned int armadura = 0, unsigned int mana = 0, unsigned int atkdemon = 0,
 		unsigned int defdemon = 0);
-
 
 
 };
