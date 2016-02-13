@@ -152,7 +152,6 @@
   <ItemGroup>
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
-    <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EventQueue.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
