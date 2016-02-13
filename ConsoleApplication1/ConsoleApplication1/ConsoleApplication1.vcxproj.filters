@@ -51,6 +51,9 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md">
@@ -86,6 +89,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Map.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

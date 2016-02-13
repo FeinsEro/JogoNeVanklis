@@ -21,6 +21,10 @@ Renderer::Renderer(int w, int h) {
 		throw std::runtime_error("Erro ao iniciar suporte a imagens");
 	}
 
+	if (!al_init_primitives_addon()) {
+		throw std::runtime_error("Erro ao iniciar suporte a desenho de formas");
+	}
+
 	fprintf(stderr, "[Renderer] Renderer criado. Resolução: %dx%d\n", w, h);
 
 	_screenx = 0;
@@ -72,6 +76,11 @@ bool Renderer::Render() {
 		float drawy = (gamey - _screeny) * _unitsize;
 
 		al_draw_bitmap(bm_sprite, drawx, drawy, 0);
+	}
+
+	//Renderiza os HUDs
+	if (_hud) {
+		al_draw_bitmap(_hud->Draw(this->_display), 0, 0, 0);
 	}
 
 	al_flip_display();
