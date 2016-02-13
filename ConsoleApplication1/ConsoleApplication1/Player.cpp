@@ -8,3 +8,12 @@ Player::Player(unsigned int x, unsigned int y, const char* name) : Character(NUL
 	this->_TypeID = TYPEID_PLAYER;
 }
 
+
+void Player::DoEvents(void* cm, TileMap* map) {
+	
+}
+
+void Player::Andar() {
+	//Atualiza a animação
+	this->_sprite->NextFrame();
+}

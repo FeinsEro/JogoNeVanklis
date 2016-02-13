@@ -45,17 +45,17 @@ ALLEGRO_BITMAP* Sprite::PreviousFrame(){
 ALLEGRO_BITMAP* Sprite::StepFrames(int num) {
 	
 	this->_frame_num += num;
-
+	
 	if (this->_frame_num < 0) {
-		this->_frame_num = 0; //loop agora não
+		this->_frame_num = this->_frame_count - 1;
 	}
 
-	if (this->_frame_num > this->_frame_count) {
-		this->_frame_num = this->_frame_count;
+	if (this->_frame_num >= this->_frame_count) {
+		this->_frame_num = 0;
 	}
 
-	this->_frame_y = (num * _frame_width) / _image_width;
-	this->_frame_x = (num * _frame_width) % _image_width;
+	this->_frame_y = (this->_frame_num * _frame_width) / _image_width;
+	this->_frame_x = (this->_frame_num * _frame_width) % _image_width;
 	
 
 	//Talvez usar unique_ptr no bitmap do frame

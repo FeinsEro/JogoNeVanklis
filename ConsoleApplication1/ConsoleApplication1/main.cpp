@@ -41,18 +41,19 @@ int main(int argc, char **argv) {
 		bool render = true;;
 
 		while (render) {
+			//Atualiza personagens
+
+
 			//Processa eventos
 			if (!ev.CheckEvents()) {
 				render = false;
 			}
 
-			//Atualiza personagens
+			
 			Event e;
 			while (ev.PopEvent(e)) {
 				unsigned int x, y;
 				mb.GetPosition(x, y);
-
-			
 
 
 				switch (e.keycode) {
@@ -114,6 +115,8 @@ int main(int argc, char **argv) {
 				if (baixo) y++;
 				if (direita) x++;
 				if (esquerda) x--;
+
+				mb.Andar();
 
 				mb.SetPosition(x, y);
 

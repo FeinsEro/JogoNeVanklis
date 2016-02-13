@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Sprite.hpp"
+
 /* Classe genérica para itens */
 
 class Item {

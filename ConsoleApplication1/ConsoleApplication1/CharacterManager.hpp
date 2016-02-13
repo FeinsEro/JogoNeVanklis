@@ -18,4 +18,6 @@ public:
 	void AddCharacter(Character*);
 	void RemoveCharacter(int id);
 
+	void DoAllEvents();
+
 };
