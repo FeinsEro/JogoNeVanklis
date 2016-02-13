@@ -18,7 +18,8 @@ Character::Character(Sprite* s, unsigned int XP, unsigned int XPos, unsigned int
 	this->_labia = labia;
 	this->_medo = medo;
 	this->_sanidade = sanidade;
-	
+	this->_HP = HP;
+
 	this->_ID = lastID++;
 
 	this->_sprite = s;

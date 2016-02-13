@@ -153,9 +153,11 @@
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="EventQueue.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="character.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -169,6 +171,7 @@
     <ClInclude Include="CharacterManager.hpp" />
     <ClInclude Include="EnemyFactory.hpp" />
     <ClInclude Include="EventQueue.hpp" />
+    <ClInclude Include="HUD.hpp" />
     <ClInclude Include="Item.hpp" />
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="Player.hpp" />

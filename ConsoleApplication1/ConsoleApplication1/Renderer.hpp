@@ -5,13 +5,17 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
 
 #include "CharacterManager.hpp"
+#include "HUD.hpp"
 
 class Renderer {
 private:
 	ALLEGRO_DISPLAY* _display;
 	int _screenw, _screenh; //Tamanho da tela
+
+	HUD* _hud;
 
 	int _screenx, _screeny; //Onde a tela está (em relação ao jogo)
 	float _unitsize; //Quantos pixels são necessários para 1 unidade no jogo?
@@ -26,6 +30,9 @@ public:
 	inline CharacterManager* GetCharManager() { return _cm; }
 
 	inline ALLEGRO_DISPLAY* GetDisplay() { return _display; }
+
+	inline HUD* GetHUD() { return _hud; }
+	inline void SetHUD(HUD* h) { _hud = h; }
 
 	/* Renderiza um frame. */
 	bool Render();
