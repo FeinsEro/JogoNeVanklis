@@ -1,4 +1,5 @@
 #pragma once
+
 struct map
 {
 	struct layer *data;
@@ -14,22 +15,25 @@ struct layer
 
 struct tile
 {
-	BITMAP *pict;
+	int tile_index;
 	int flags;
 	int trans;
 };
 
 #include <allegro5\allegro.h>
 #include <allegro5\bitmap.h>
+
+#include <stdexcept> //std::runtime_error()
+
 class TileMap {
 private:
-		//Bitmap contendo todos os tiles
-		static ALLEGRO_BITMAP* tiles;	
-
-		//Altura e largura padrão de cada tile, no arquivo.
-		static int tile_width, tile_height; 
+		
+		std::string map_path; //Caminho do mapa
+		map map_file;
 
 public:
+	TileMap();
+
 	void Open(const char* path);
 	
 
