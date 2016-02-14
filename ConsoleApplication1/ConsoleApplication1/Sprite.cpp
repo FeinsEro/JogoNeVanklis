@@ -20,9 +20,11 @@ void Sprite::SetPath(std::string val) { this->sheet_path = val; UpdateSheet(); }
 
 void Sprite::UpdateSheet() {
 	_sheet_cache = al_load_bitmap(this->sheet_path.c_str());
-
 	this->_image_height = al_get_bitmap_height(_sheet_cache);
 	this->_image_width = al_get_bitmap_width(_sheet_cache);
+
+	//Depois mudar a transparência pra uma cor menos usada (como o tradicional magenta)
+	al_convert_mask_to_alpha(_sheet_cache, al_map_rgb(255, 0, 255));
 
 	this->_frame_count = (_image_width / _frame_width) * (_image_height / _frame_height);
 
@@ -62,8 +64,7 @@ ALLEGRO_BITMAP* Sprite::StepFrames(int num) {
 	this->_frame_cache = al_create_sub_bitmap(this->_sheet_cache, this->_frame_x, this->_frame_y,
 		this->_frame_width, this->_frame_height);
 
-	//Depois mudar a transparência pra uma cor menos usada (como o tradicional magenta)
-	al_convert_mask_to_alpha(this->_frame_cache, al_map_rgb(255, 0, 255));
+	
 
 	return this->_frame_cache;
 }

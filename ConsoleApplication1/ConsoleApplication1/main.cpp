@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 
 	Renderer* r = NULL;
 	try {
-		r = new Renderer(640, 480);
+		r = new Renderer(800, 600);
 	
 		EventQueue ev(r);
 	
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
 		mb.AddItem(&it);
 
-		Sprite s = Sprite("..\\characters\\dann.bmp");
+		Sprite s = Sprite("..\\characters\\dann.bmp", 160, 160);
 		mb.SetSprite(&s);
 
 		cm.AddCharacter(&mb);

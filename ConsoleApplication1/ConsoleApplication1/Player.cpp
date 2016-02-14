@@ -26,11 +26,21 @@ void Player::Andar(int deltax, int deltay) {
 	if (deltay != 0) {
 		fn = this->_sprite->GetFrameNumber();
 
-		if (fn < 1 || fn >= 2) {
-			this->_sprite->SetFrame(0);
+		if (deltay > 0) {
+			if (fn < 1 || fn >= 2) {
+				this->_sprite->SetFrame(0);
+			}
+
+			framestop = -1;
 		}
-			
-		framestop = -1;
+		else {
+			if (fn < 8 || fn >= 9) {
+				this->_sprite->SetFrame(7);
+			}
+
+			framestop = 6;
+
+		}
 		this->_sprite->NextFrame();		
 	}
 

@@ -180,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\characters\abraoleos.bmp" />
+    <Image Include="..\characters\akhbran.bmp" />
+    <Image Include="..\characters\asura.bmp" />
+    <Image Include="..\characters\dann.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

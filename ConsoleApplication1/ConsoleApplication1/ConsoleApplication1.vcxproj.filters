@@ -96,5 +96,14 @@
     <Image Include="..\characters\abraoleos.bmp">
       <Filter>Sprites</Filter>
     </Image>
+    <Image Include="..\characters\akhbran.bmp">
+      <Filter>Sprites</Filter>
+    </Image>
+    <Image Include="..\characters\asura.bmp">
+      <Filter>Sprites</Filter>
+    </Image>
+    <Image Include="..\characters\dann.bmp">
+      <Filter>Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>
