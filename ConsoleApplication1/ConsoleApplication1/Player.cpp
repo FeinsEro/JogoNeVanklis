@@ -13,7 +13,47 @@ void Player::DoEvents(void* cm, TileMap* map) {
 	
 }
 
-void Player::Andar() {
-	//Atualiza a animação
-	this->_sprite->NextFrame();
+int framestop = -1;
+
+void Player::Andar(int deltax, int deltay) {
+	
+	if (deltax == 0 && deltay == 0) {
+		this->_sprite->SetFrame(framestop);
+		this->_sprite->NextFrame();
+	}
+
+	int fn;
+	if (deltay != 0) {
+		fn = this->_sprite->GetFrameNumber();
+
+		if (fn < 1 || fn >= 2) {
+			this->_sprite->SetFrame(0);
+		}
+			
+		framestop = -1;
+		this->_sprite->NextFrame();		
+	}
+
+	if (deltax != 0) {
+		if (deltax < 0) {
+			fn = this->_sprite->GetFrameNumber();
+
+			if (fn < 3 || fn >= 4) {
+				this->_sprite->SetFrame(2);
+			}
+
+			framestop = 2;
+				
+			this->_sprite->NextFrame();		
+		} else {
+			fn = this->_sprite->GetFrameNumber();
+
+			if (fn < 5 || fn >= 6) {
+				this->_sprite->SetFrame(4);
+			}
+
+			framestop = 4;
+			this->_sprite->NextFrame();
+		}
+	}
 }

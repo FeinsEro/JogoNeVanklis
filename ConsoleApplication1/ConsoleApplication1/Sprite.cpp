@@ -63,7 +63,7 @@ ALLEGRO_BITMAP* Sprite::StepFrames(int num) {
 		this->_frame_width, this->_frame_height);
 
 	//Depois mudar a transparência pra uma cor menos usada (como o tradicional magenta)
-	al_convert_mask_to_alpha(this->_frame_cache, al_map_rgb(255, 255, 255));
+	al_convert_mask_to_alpha(this->_frame_cache, al_map_rgb(255, 0, 255));
 
 	return this->_frame_cache;
 }
@@ -74,4 +74,8 @@ int Sprite::GetFrameNumber() {
 
 ALLEGRO_BITMAP* Sprite::GetFrameImage() {
 	return this->_frame_cache;
+}
+
+void Sprite::SetFrame(int num) {
+	this->_frame_num = num;
 }

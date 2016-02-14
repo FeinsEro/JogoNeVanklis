@@ -46,6 +46,7 @@ public:
 
 	int GetFrameNumber();
 	ALLEGRO_BITMAP* GetFrameImage();
+	void SetFrame(int);
 
 };
 

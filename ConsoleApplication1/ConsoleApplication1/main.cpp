@@ -12,6 +12,7 @@
 #include <allegro5/allegro_windows.h>
 
 bool cima = false, baixo = false, direita = false, esquerda = false;
+int frames = 0;
 int main(int argc, char **argv) {
 
 	Renderer* r = NULL;
@@ -28,7 +29,7 @@ int main(int argc, char **argv) {
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
 		mb.AddItem(&it);
 
-		Sprite s = Sprite("..\\characters\\abraoleos.bmp", 64, 64);
+		Sprite s = Sprite("..\\characters\\dann.bmp");
 		mb.SetSprite(&s);
 
 		cm.AddCharacter(&mb);
@@ -39,6 +40,7 @@ int main(int argc, char **argv) {
 	
 
 		bool render = true;;
+		int playerdx = 0, playerdy = 0;
 
 		while (render) {
 			//Atualiza personagens
@@ -51,10 +53,12 @@ int main(int argc, char **argv) {
 
 			
 			Event e;
-			while (ev.PopEvent(e)) {
+
+			if (ev.PopEvent(e)) {
 				unsigned int x, y;
 				mb.GetPosition(x, y);
 
+				int dx = 0, dy = 0;
 
 				switch (e.keycode) {
 				case ALLEGRO_KEY_UP:
@@ -111,21 +115,34 @@ int main(int argc, char **argv) {
 
 				}
 
-				if (cima) y--;
-				if (baixo) y++;
-				if (direita) x++;
-				if (esquerda) x--;
+				if (cima) dy--;
+				if (baixo) dy++;
+				if (direita) dx++;
+				if (esquerda) dx--;
 
-				mb.Andar();
+				
+
+				x += dx;
+				y += dy;
+
+				playerdx += dx;
+				playerdy += dy;
 
 				mb.SetPosition(x, y);
 
 			}
 
+
+			if (frames % 8 == 0) {
+				mb.Andar(playerdx, playerdy);
+				playerdx = 0;
+				playerdy = 0;
+			}
+
 			//Os renderiza
 			r->Render();
 
-
+			frames++;
 			al_rest(0.01);
 		}
 

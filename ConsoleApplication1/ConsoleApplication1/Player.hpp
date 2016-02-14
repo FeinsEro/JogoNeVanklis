@@ -8,7 +8,7 @@ public:
 
 	void DoEvents(void* cm, TileMap* map);
 	std::string Falar() { return ""; }
-	void Andar();
+	void Andar(int deltax, int deltay);
 	void Lutar() {}
 	void Reviver() {}
 

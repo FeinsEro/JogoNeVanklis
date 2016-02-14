@@ -73,7 +73,7 @@ public:
 	inline int GetID() { return _ID; }
 
 	virtual std::string Falar() = 0;
-	virtual void Andar() = 0;
+	virtual void Andar(int deltax, int deltay) = 0;
 	virtual void Lutar() = 0;
 	virtual void DoEvents(void* charmanager, TileMap* map) = 0;
 	virtual void Reviver() = 0;
