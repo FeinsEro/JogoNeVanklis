@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
 		mb.AddItem(&it);
 
-		Sprite s = Sprite("..\\characters\\dann.bmp", 160, 160);
+		Sprite s = Sprite("..\\characters\\dann.bmp");
 		mb.SetSprite(&s);
 
 		cm.AddCharacter(&mb);
