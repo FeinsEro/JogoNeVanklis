@@ -73,6 +73,7 @@ Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
 
 	}
 
+	return destiny;
 }
 
 
@@ -97,7 +98,6 @@ void  CharacterManager::DoFight(Character* attacker, Character* defender) {
 	//Pega todos os itens de defesa do defensor
 	defender->GetAllItems(&itens);
 
-	int atkbonus = 0;
 	for (auto it = itens->begin();
 	it != itens->end();
 		it++) {

@@ -34,11 +34,19 @@ ALLEGRO_BITMAP* HUD::Draw(ALLEGRO_DISPLAY* d) {
 	//Desenha a quantidade de vida e o nome do personagem (só um exemplo)
 	al_draw_text(_default_font, al_map_rgb(0xff, 0xff, 0xff), 10, 10, 0, _p->GetName().c_str());
 
-	char num_str[10];
-	unsigned int hp; _p->GetHP(hp);
-	sprintf_s(&num_str[0], 10, "HP: %-3d", hp);
+	char num_str[16];
+	unsigned int n; _p->GetHP(n);
+	sprintf_s(&num_str[0], 10, "HP: %-3d", n);
 	al_draw_text(_default_font, al_map_rgb(0xff, 0x00, 0x33), (al_get_display_width(d)) - 100, 10, 0,
 		num_str);
+
+	_p->GetDinheiro(n);
+	sprintf_s(&num_str[0], 16, "%5d gold", n);
+	al_draw_text(_default_font, al_map_rgb(0xff, 0x99, 0x00), (al_get_display_width(d)) - 250, 10, 0,
+		num_str);
+
+
+	
 
 	al_set_target_bitmap(al_get_backbuffer(d));
 	return _bHUD;
