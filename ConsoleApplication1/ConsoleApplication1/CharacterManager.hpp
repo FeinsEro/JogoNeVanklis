@@ -18,6 +18,12 @@ public:
 	void AddCharacter(Character*);
 	void RemoveCharacter(int id);
 
+	/* Verifica quem está mais próximo de você, numa determinada direção*/
+	Character* GetNearestCharacter(Character*, int angle);
+
+	/* Inicia uma luta simples. */
+	void DoFight(Character* attacker, Character* defender);
+
 	void DoAllEvents();
 
 };

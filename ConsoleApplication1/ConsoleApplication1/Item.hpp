@@ -30,6 +30,9 @@ public:
 		int bonusMagicDEF = 0, int bonusLabia = 0, int bonusSanidade = 0,
 		int bonusNoFear = 0, unsigned int bonusXP = 0, unsigned int bonusDinheiro = 0);
 
+	inline int GetATKBonus() { return _bonusATK; }
+	inline int GetDEFBonus() { return _bonusDEF; }
+
 	inline void SetSprite(Sprite* s) { _sprite = s; }
 	inline void GetSprite(Sprite** s) { *s = _sprite; }
 };

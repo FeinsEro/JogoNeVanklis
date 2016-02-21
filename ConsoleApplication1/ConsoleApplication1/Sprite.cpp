@@ -20,6 +20,7 @@ void Sprite::SetPath(std::string val) { this->sheet_path = val; UpdateSheet(); }
 
 void Sprite::UpdateSheet() {
 	_sheet_cache = al_load_bitmap(this->sheet_path.c_str());
+
 	this->_image_height = al_get_bitmap_height(_sheet_cache);
 	this->_image_width = al_get_bitmap_width(_sheet_cache);
 

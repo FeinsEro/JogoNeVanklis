@@ -33,3 +33,83 @@ void CharacterManager::DoAllEvents() {
 		(*i)->DoEvents(this, NULL);
 	}
 }
+
+
+/* Mostra o char mais próximo de você, a 'angle' graus.
+	0	graus = cima
+	90	graus = direita
+	180	graus = baixo
+	270 graus = esquerda 
+	
+	Atualmente, 'angle' não faz efeito.
+	*/
+
+Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
+	unsigned int x, y, w, h;
+	c->GetPosition(x, y);
+
+	//1 unidade = 4 pixels
+	//Sprites têm 32 pixels (geralmente) = 8 unidades.
+	//TODO: Character::Get/SetSize()
+	w = 8;
+	h = 8;
+
+	Character* destiny = NULL;
+
+	for (auto it = _chars.begin();
+	it != _chars.end();
+		it++) {
+		unsigned int destx, desty;
+		(*it)->GetPosition(destx, desty);
+
+		if (destx > (x - 2 * w) && destx < (x + 2 * w)) {
+			if (desty > (y - 2 * w) && desty < (y + 2 * w)) {
+				
+				destiny = (Character*)(*it);
+			}
+		}
+
+		
+
+	}
+
+}
+
+
+void  CharacterManager::DoFight(Character* attacker, Character* defender) {
+
+	//Pega todos os itens de ataque do atacante
+	std::vector<Item*>* itens;
+	attacker->GetAllItems(&itens);
+
+	int atkbonus = 0, defbonus = 0;
+
+	for (auto it = itens->begin();
+	it != itens->end();
+		it++) {
+		atkbonus += (*it)->GetATKBonus();
+	}
+
+	int atk = 0;
+	attacker->GetATK((unsigned int&) atk);
+	atk += atkbonus;
+
+	//Pega todos os itens de defesa do defensor
+	defender->GetAllItems(&itens);
+
+	int atkbonus = 0;
+	for (auto it = itens->begin();
+	it != itens->end();
+		it++) {
+		defbonus += (*it)->GetDEFBonus();
+	}
+
+	int def = 0;
+	defender->GetDEF((unsigned int&)atk);
+	def += defbonus;
+
+	unsigned int hp;
+	defender->GetHP(hp);
+	hp -= (atk - def);
+	defender->SetHP(hp);
+}
