@@ -9,7 +9,7 @@ Player::Player(unsigned int x, unsigned int y, const char* name) : Character(NUL
 }
 
 
-void Player::DoEvents(void* cm, TileMap* map) {
+void Player::DoEvents(void* cm, Map* map) {
 	
 }
 

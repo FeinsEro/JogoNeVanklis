@@ -1,40 +1,21 @@
 #pragma once
 
-struct map
-{
-	struct layer *data;
-	int total_layers;
-};
-struct layer
-{
-	int x, y; 
-	struct tile *data;
-	int w, h;
-	int tile_spacing_w, tile_spacing_h;
-};
+/* Internal things for the map */
+#include <allegro5/bitmap.h>
 
-struct tile
-{
-	int tile_index;
-	int flags;
-	int trans;
-};
-
-#include <allegro5\allegro.h>
-#include <allegro5\bitmap.h>
-
-#include <stdexcept> //std::runtime_error()
-
-class TileMap {
+class Map {
 private:
-		
-		std::string map_path; //Caminho do mapa
-		map map_file;
+	int _width, _height;
+
+	/* Índices no array de tiles.*/
+	int* _map_tile_indices;
 
 public:
-	TileMap();
+	Map(int w, int h);
 
-	void Open(const char* path);
-	
+	void SetData(int* indices);
+	int* GetData() const;
 
+	/* Load all map tiles */
+	static void LoadTiles();
 };

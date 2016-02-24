@@ -158,6 +158,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="character.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapOpener.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="Item.hpp" />
     <ClInclude Include="Map.hpp" />
+    <ClInclude Include="MapOpener.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Sprite.hpp" />

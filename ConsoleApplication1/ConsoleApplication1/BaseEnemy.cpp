@@ -1,23 +1,29 @@
 #include "BaseEnemy.hpp"
 
-BaseEnemy::BaseEnemy(BaseEnemy& b, unsigned int x, unsigned int y) : Character() {
-	this->_XPos = x;
-	this->_YPos = y;
-	this->_name = b._name;
-	this->_dinheiro = b._dinheiro;
-	this->_ATK = b._ATK;
-	this->_DEF = b._DEF;
-	this->_labia = b._labia;
-	this->_medo = b._medo;
-	this->_sanidade = b._sanidade;
+/*
+Model for CloneEnemy function
+BaseEnemy* BaseEnemy::CloneEnemy(unsigned int x, unsigned int y) : Character() {
+	BaseEnemy* b = new BaseEnemy();
 
-	this->_sprite = b._sprite;
+	b->_XPos = x;
+	b->_YPos = y;
+	b->_name = this->_name;
+	b->_dinheiro = this->_dinheiro;
+	b->_ATK = this->_ATK;
+	b->_DEF = this->_DEF;
+	b->_labia = this->_labia;
+	b->_medo = this->_medo;
+	b->_sanidade = this->_sanidade;
 
-	this->_armadura = b._armadura;
-	this->_mana = b._mana;
-	this->_atkdemon = b._atkdemon;
-	this->_defdemon = b._defdemon;
+	b->_sprite = this->_sprite;
 
-	this->_xp = b._xp;
+	b->_armadura = this->_armadura;
+	b->_mana = this->_mana;
+	b->_atkdemon = this->_atkdemon;
+	b->_defdemon = this->_defdemon;
 
+	b->_xp = this->_xp;
+
+	return b;
 }
+*/

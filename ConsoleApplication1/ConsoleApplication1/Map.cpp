@@ -1,24 +1,23 @@
 #include "Map.hpp"
 
 //Bitmap contendo todos os tiles
-static ALLEGRO_BITMAP* tiles;
+static ALLEGRO_BITMAP* tile_files;
 
-//Altura e largura padrão de cada tile.
-const int tile_width = 48, tile_height = 48;
+Map::Map(int w, int h) {
+	_width = w;
+	_height = h;
+}
 
-const char* tile_file_path = "tiles.bmp";
-
-TileMap::TileMap() {
-	if (!tiles) {
-		tiles = al_load_bitmap(tile_file_path);
-
-		if (!tiles) {
-			throw std::runtime_error("Arquivo de tiles não encontrado. ");
-		}
-	}
+void Map::SetData(int* indices) {
+	_map_tile_indices = indices;
+}
+int* Map::GetData() const{
+	return _map_tile_indices;
 
 }
 
-void TileMap::Open(const char* path) {
+/* Carrega todos os tiles. Eles serão necessários para compor o mapa. */
+void Map::LoadTiles() {
+
 
 }
