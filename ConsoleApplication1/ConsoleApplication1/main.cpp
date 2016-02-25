@@ -5,6 +5,8 @@
 #include "CharacterManager.hpp"
 #include "EventQueue.hpp"
 #include "Renderer.hpp"
+#include "MapOpener.hpp"
+
 
 #include <iostream>
 #include <sstream> //stringstream
@@ -31,6 +33,17 @@ int main(int argc, char **argv) {
 
 		Sprite s = Sprite("..\\characters\\Normal.png");
 		mb.SetSprite(&s);
+		
+		Map* m;
+		
+		MapOpener mpop;
+		m = mpop.Open("..\\maps\\map1.map");
+		
+		if (!m) {
+			char strmaperr[32];
+			sprintf_s(strmaperr, 32, "Erro ao abrir o mapa!");
+			throw std::runtime_error(strmaperr);
+		}
 
 		cm.AddCharacter(&mb);
 

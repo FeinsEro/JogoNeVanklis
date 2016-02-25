@@ -2,7 +2,9 @@
 
 Map* MapOpener::Open(std::string path) {
 	FILE* fMap;
-	if (fopen_s(&fMap, path.c_str(), "rb") != 0) {
+	int err = fopen_s(&fMap, path.c_str(), "rb");
+	if (err != 0) {
+		fprintf(stderr, "[MapOpener] Erro %d ao abrir o mapa %s\n", err, path.c_str());
 		return NULL; //Erro ao abrir o arquivo.
 	}
 
@@ -14,7 +16,7 @@ Map* MapOpener::Open(std::string path) {
 
 	if (mapData.signature[0] != 'W' && mapData.signature[1] != 'E' &&
 		mapData.signature[2] != 'R' && mapData.signature[3] != 'L') {
-		return NULL; //Magic number do arquivo errado
+		return NULL; //Magic number do arquivo está errado
 	}
 
 	if (mapData.offset_to_data < sizeof(MapFile)) {
@@ -23,7 +25,7 @@ Map* MapOpener::Open(std::string path) {
 
 	Map* mp = new Map(mapData.width, mapData.height);
 
-	int* data = new int[mapData.width, mapData.height];
+	int* data = new int[mapData.width * mapData.height];
 	fseek(fMap, mapData.offset_to_data, 0);
 
 	if (fread(data, sizeof(int), mapData.width * mapData.height, fMap) !=
@@ -32,6 +34,9 @@ Map* MapOpener::Open(std::string path) {
 		delete data;
 		return NULL;
 	}
+
+	fprintf(stderr, "[MapOpener] O mapa %s possui %d x %d blocos\n",
+		path.c_str(), mapData.width, mapData.height);
 
 	mp->SetData(data);
 	return mp;
