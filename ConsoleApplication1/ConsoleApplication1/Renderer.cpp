@@ -11,6 +11,10 @@ Renderer::Renderer(int w, int h) {
 
 	_display = al_create_display(w, h);
 
+	//Enable vsync
+	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
+
+
 	al_set_window_title(_display, "Dois Demônios");
 	
 	if (!_display) {
@@ -25,6 +29,7 @@ Renderer::Renderer(int w, int h) {
 		throw std::runtime_error("Erro ao iniciar suporte a desenho de formas");
 	}
 
+	
 	fprintf(stderr, "[Renderer] Renderer criado. Resolução: %dx%d\n", w, h);
 
 	_screenx = 0;
@@ -75,7 +80,9 @@ bool Renderer::Render() {
 		float drawx = (gamex - _screenx) * _unitsize;
 		float drawy = (gamey - _screeny) * _unitsize;
 
-		al_draw_bitmap(bm_sprite, drawx, drawy, 0);
+		al_draw_scaled_bitmap(bm_sprite, 0, 0, al_get_bitmap_width(bm_sprite), al_get_bitmap_height(bm_sprite),
+			drawx, drawy, al_get_bitmap_width(bm_sprite) * s->GetZoomFactor(),
+			al_get_bitmap_height(bm_sprite) * s->GetZoomFactor(), 0);
 	}
 
 	//Renderiza os HUDs

@@ -22,6 +22,8 @@ private:
 	int _frame_width, _frame_height; //Largura e altura do frame (em pixels)
 	int _frame_count; //Frames da imagem
 
+	float _zoom; //Zoom factor, default is 1.
+
 	int _frame_x, _frame_y; //X e Y do frame atual
 	int _frame_num; //O número do frame atual
 
@@ -34,11 +36,16 @@ private:
 
 public:
 	Sprite();
-	Sprite(const char* path, 
+	Sprite(const char* path,
+		int frame_width = DEFAULT_FRAME_WIDTH, int height = DEFAULT_FRAME_HEIGHT);
+	Sprite(const char* path, float zoomfactor,
 		int frame_width = DEFAULT_FRAME_WIDTH, int height = DEFAULT_FRAME_HEIGHT);
 	
 	void GetPath(std::string&);
 	void SetPath(std::string);
+
+	void SetZoomFactor(float);
+	float GetZoomFactor();
 
 	ALLEGRO_BITMAP* NextFrame();
 	ALLEGRO_BITMAP* PreviousFrame();

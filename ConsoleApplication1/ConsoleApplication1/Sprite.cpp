@@ -4,11 +4,25 @@ Sprite::Sprite(){
 	
 }
 
-Sprite::Sprite(const char* path, int frame_width, int frame_height){
+Sprite::Sprite(const char* path, int frame_width, int frame_height) {
 	this->sheet_path = std::string(path);
 	this->_frame_width = frame_width;
 	this->_frame_height = frame_height;
 	this->_frame_cache = NULL;
+
+	this->_zoom = 1.0f;
+
+	UpdateSheet();
+
+}
+
+Sprite::Sprite(const char* path, float zoomfactor, int frame_width, int frame_height) {
+	this->sheet_path = std::string(path);
+	this->_frame_width = frame_width;
+	this->_frame_height = frame_height;
+	this->_frame_cache = NULL;
+
+	this->_zoom = zoomfactor;
 
 	UpdateSheet();
 
@@ -17,6 +31,8 @@ Sprite::Sprite(const char* path, int frame_width, int frame_height){
 void Sprite::GetPath(std::string& val) { val = this->sheet_path; }
 void Sprite::SetPath(std::string val) { this->sheet_path = val; UpdateSheet(); }
 
+void Sprite::SetZoomFactor(float zoom) { _zoom = zoom; }
+float Sprite::GetZoomFactor() { return _zoom; }
 
 void Sprite::UpdateSheet() {
 	_sheet_cache = al_load_bitmap(this->sheet_path.c_str());

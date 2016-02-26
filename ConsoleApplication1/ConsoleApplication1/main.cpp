@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
 		mb.AddItem(&it);
 
-		Sprite s = Sprite("..\\characters\\Normal.png");
+		Sprite s = Sprite("..\\characters\\Normal.png", 1.5f);
 		mb.SetSprite(&s);
 		
 		Map* m;
@@ -56,6 +56,7 @@ int main(int argc, char **argv) {
 		int playerdx = 0, playerdy = 0;
 
 		while (render) {
+			
 			//Atualiza personagens
 
 
@@ -156,7 +157,6 @@ int main(int argc, char **argv) {
 			r->Render();
 
 			frames++;
-			al_rest(0.01);
 		}
 
 	}
