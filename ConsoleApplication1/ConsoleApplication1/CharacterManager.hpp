@@ -21,6 +21,10 @@ public:
 	/* Verifica quem está mais próximo de você, numa determinada direção*/
 	Character* GetNearestCharacter(Character*, int angle);
 
+	/*	Verifica quem está mais próximo de você, numa determinada direção, 
+		numa determinada distância (em blocos do jogo)*/
+	Character* GetNearestCharacterInRange(Character*, float angle, int range);
+
 	/* Inicia uma luta simples. */
 	void DoFight(Character* attacker, Character* defender);
 

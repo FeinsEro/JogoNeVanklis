@@ -61,12 +61,21 @@ Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
 		it++) {
 		unsigned int destx, desty;
 		(*it)->GetPosition(destx, desty);
+		Sprite* s;
+		(*it)->GetSprite(&s);
+
+		w = 8 * s->GetZoomFactor();
+		h = 8 * s->GetZoomFactor();
 
 		if (destx > (x - 2 * w) && destx < (x + 2 * w)) {
-			if (desty > (y - 2 * w) && desty < (y + 2 * w)) {
-				
+
+			if (c->GetID() != (*it)->GetID())
 				destiny = (Character*)(*it);
-			}
+		}
+
+		if (desty >(y - 2 * h) && desty < (y + 2 * h)) {
+			if (c->GetID() != (*it)->GetID())
+				destiny = (Character*)(*it);
 		}
 
 		
@@ -76,6 +85,11 @@ Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
 	return destiny;
 }
 
+
+Character * CharacterManager::GetNearestCharacterInRange(Character* c, float angle, int range)
+{
+	return NULL;
+}
 
 void  CharacterManager::DoFight(Character* attacker, Character* defender) {
 

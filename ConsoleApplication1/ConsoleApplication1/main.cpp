@@ -153,6 +153,8 @@ int main(int argc, char **argv) {
 				playerdy = 0;
 			}
 
+			cm.DoAllEvents();
+			
 			//Os renderiza
 			r->Render();
 
