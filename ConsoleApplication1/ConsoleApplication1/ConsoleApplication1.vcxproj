@@ -183,6 +183,7 @@
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Sprite.hpp" />
+    <ClInclude Include="Tree.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\characters\abraoleos.bmp" />

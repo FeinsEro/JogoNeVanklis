@@ -6,7 +6,7 @@
 #include "EventQueue.hpp"
 #include "Renderer.hpp"
 #include "MapOpener.hpp"
-
+#include "Tree.hpp"
 
 #include <iostream>
 #include <sstream> //stringstream
@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
 		r->SetCharManager(&cm);
 
 		Player mb = Player(10, 10, "Dann Von Veigar");
+	
 
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
 		mb.AddItem(&it);
@@ -34,8 +35,13 @@ int main(int argc, char **argv) {
 		Sprite s = Sprite("..\\characters\\Normal.png", 1.5f);
 		mb.SetSprite(&s);
 		
+		Tree t = Tree(20, 20);
+		Sprite stree = Sprite("..\\characters\\arvore1.png", 60, 80);
+		t.SetSprite(&stree);
+
 		Map* m;
 		
+
 		MapOpener mpop;
 		m = mpop.Open("..\\maps\\map1.map");
 		
@@ -46,6 +52,7 @@ int main(int argc, char **argv) {
 		}
 
 		cm.AddCharacter(&mb);
+		cm.AddCharacter(&t);
 
 		HUD* hud = new HUD(&mb);
 		r->SetHUD(hud);
