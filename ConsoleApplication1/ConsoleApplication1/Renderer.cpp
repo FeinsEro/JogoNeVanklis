@@ -49,11 +49,16 @@ bool Renderer::Render() {
 	std::vector<Character*> characters;
 	_cm->GetAllChars(&characters);
 
-	//Renderiza o mapa
 	int playerx, playery;
+
+	// Calcula a posição da tela pela posição do player.
+	// Isso permite que ele fique estático enquanto a tela se move.
 	_cm->GetPlayer()->GetPosition((unsigned int&)playerx, (unsigned int&)playery);
 	_screenx = max(0, playerx - (_screenw / 2 / _unitsize));
 	_screeny = max(0, playery - (_screenh / 2 /_unitsize));
+
+	//Renderiza o mapa
+
 
 	//Renderiza os sprites dos characters nas posições que eles estão
 	for (auto sp_iter = characters.begin();

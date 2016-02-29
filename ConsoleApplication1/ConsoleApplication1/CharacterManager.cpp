@@ -68,16 +68,13 @@ Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
 		h = 8 * s->GetZoomFactor();
 
 		if (destx > (x - 2 * w) && destx < (x + 2 * w)) {
-
-			if (c->GetID() != (*it)->GetID())
-				destiny = (Character*)(*it);
+			if (desty > (y - 2 * h) && desty < (y + 2 * h)) {
+				if (c->GetID() != (*it)->GetID())
+					destiny = (Character*)(*it);
+			}
 		}
 
-		if (desty >(y - 2 * h) && desty < (y + 2 * h)) {
-			if (c->GetID() != (*it)->GetID())
-				destiny = (Character*)(*it);
-		}
-
+	
 		
 
 	}

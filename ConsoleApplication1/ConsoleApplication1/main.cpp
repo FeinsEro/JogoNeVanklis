@@ -150,6 +150,9 @@ int main(int argc, char **argv) {
 				playerdx += dx;
 				playerdy += dy;
 
+				x = max(1, x);
+				y = max(1, y);
+
 				mb.SetPosition(x, y);
 
 			}
