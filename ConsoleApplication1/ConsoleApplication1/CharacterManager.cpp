@@ -127,3 +127,24 @@ void  CharacterManager::DoFight(Character* attacker, Character* defender) {
 	hp -= (atk - def);
 	defender->SetHP(hp);
 }
+
+
+
+void CharacterManager::SetPlayer(Player* p) {
+	//O player deve ser um character já adicionado (isso evita duplicação de código
+	for (auto it = _chars.begin(); it != _chars.end(); it++){
+		//O player tem um ID específico.
+		if ((*it)->GetID() == p->GetID()) {
+			_player = it;
+			return;
+		}
+
+	}
+
+	//Não achou? Então adicionamos.
+	_chars.push_back(p);
+	_player = --_chars.end();
+}
+Player* CharacterManager::GetPlayer() {
+	return (Player*)(*_player);
+}

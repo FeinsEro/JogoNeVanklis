@@ -53,6 +53,7 @@ int main(int argc, char **argv) {
 
 		cm.AddCharacter(&mb);
 		cm.AddCharacter(&t);
+		cm.SetPlayer(&mb);
 
 		HUD* hud = new HUD(&mb);
 		r->SetHUD(hud);

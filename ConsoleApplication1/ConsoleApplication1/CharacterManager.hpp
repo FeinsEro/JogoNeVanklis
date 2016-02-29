@@ -14,6 +14,8 @@ public:
 	CharacterManager();
 
 	inline void GetAllChars(std::vector<Character*>* chars) { *chars = _chars; }
+	std::vector<Character*>::iterator _player;
+
 
 	void AddCharacter(Character*);
 	void RemoveCharacter(int id);
@@ -29,5 +31,8 @@ public:
 	void DoFight(Character* attacker, Character* defender);
 
 	void DoAllEvents();
+
+	void SetPlayer(Player*);
+	Player* GetPlayer();
 
 };

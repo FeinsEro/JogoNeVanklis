@@ -16,8 +16,12 @@ int* Map::GetData() const{
 
 }
 
+//void Render(int startx, int endx, int width, int height);
+
 /* Carrega todos os tiles. Eles serão necessários para compor o mapa. */
 void Map::LoadTiles() {
 
 
 }
+
+
