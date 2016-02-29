@@ -63,7 +63,11 @@ int main(int argc, char **argv) {
 		
 
 		MapOpener mpop;
-		m = mpop.Open("..\\maps\\map1.map");
+		m = mpop.Open("..\\maps\\map2.map");
+
+		int px, py;
+		m->GetInitialPlayerPos(px, py);
+		mb.SetPosition((unsigned int&)px, (unsigned int&)py);
 		
 		if (!m) {
 			char strmaperr[32];
@@ -193,9 +197,9 @@ int main(int argc, char **argv) {
 	catch (std::runtime_error& e) {
 		if (r)
 			MessageBoxA(r->GetDisplay() ? al_get_win_window_handle(r->GetDisplay()) : NULL,
-				e.what(), "Um erro ocorreu", MB_ICONERROR);
+				e.what(), "Dois Demônios - Erro", MB_ICONERROR);
 		else
-			MessageBoxA(NULL, e.what(), "Um erro ocorreu", MB_ICONERROR);
+			MessageBoxA(NULL, e.what(), "Dois Demônios - Erro", MB_ICONERROR);
 		return -1;
 	}
 

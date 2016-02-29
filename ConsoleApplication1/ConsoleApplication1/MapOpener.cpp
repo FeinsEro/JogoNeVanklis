@@ -39,6 +39,7 @@ Map* MapOpener::Open(std::string path) {
 		path.c_str(), mapData.width, mapData.height);
 
 	mp->SetData(data);
+	mp->SetInitialPlayerPos(mapData.playerX, mapData.playerY);
 	return mp;
 
 }

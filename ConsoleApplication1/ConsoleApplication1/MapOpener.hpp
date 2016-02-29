@@ -13,6 +13,9 @@ struct MapFile {
 	int width;			//Largura
 	int height;			//Altura
 	int offset_to_data;	//Posição do arquivo onde estão os dados do mapa.
+	int offset_to_chars;
+	int playerX;
+	int playerY;
 };
 
 class MapOpener {
