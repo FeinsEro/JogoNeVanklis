@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
+    <ClCompile Include="CharFactory.cpp" />
     <ClCompile Include="EventQueue.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />
@@ -174,7 +176,7 @@
     <ClInclude Include="Character.hpp" />
     <ClInclude Include="CharacterManager.hpp" />
     <ClInclude Include="DaysCont.hpp" />
-    <ClInclude Include="EnemyFactory.hpp" />
+    <ClInclude Include="CharFactory.hpp" />
     <ClInclude Include="EventQueue.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="Item.hpp" />

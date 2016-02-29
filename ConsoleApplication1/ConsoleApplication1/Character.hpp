@@ -14,6 +14,7 @@ class Character {
 protected:
 	unsigned int _XPos, _YPos;
 
+	static int lastID;
 
 	std::string _name;
 	unsigned int _xp;
@@ -22,13 +23,17 @@ protected:
 	
 	int _ID;
 
-	//Id de tipo. Vai ser usada pelo EnemyFactory e pelo futuro NPCFactory para criar os objetos 
+	//Id de tipo. Vai ser usada pelo CharFactory para criar os objetos 
 	int _TypeID; 
 
 	std::vector<Item*> _items;
 
 	Sprite* _sprite;
 public:
+
+
+	inline int GetTypeID() { return _TypeID; }
+
 	inline std::string GetName() { return this->_name; }
 	inline void SetName(std::string name) { this->_name = name; }
 
@@ -78,6 +83,8 @@ public:
 	virtual void DoEvents(void* charmanager, Map* map) = 0;
 	virtual void Reviver() = 0;
 
+	virtual Character* Clone(unsigned int x, unsigned int y) { return NULL; }
+
 
 	Character(Sprite* s = NULL, unsigned int XP = 0, 
 		unsigned int XPos = 0, unsigned int YPos = 0, std::string name = "",
@@ -85,6 +92,5 @@ public:
 		unsigned int labia = 0, unsigned int medo = 0, unsigned int sanidade = 0,
 		unsigned int armadura = 0, unsigned int mana = 0, unsigned int atkdemon = 0,
 		unsigned int defdemon = 0);
-
 
 };

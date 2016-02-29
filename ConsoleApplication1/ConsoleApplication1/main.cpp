@@ -6,6 +6,8 @@
 #include "EventQueue.hpp"
 #include "Renderer.hpp"
 #include "MapOpener.hpp"
+
+#include "CharFactory.hpp"
 #include "Tree.hpp"
 
 #include <iostream>
@@ -34,10 +36,28 @@ int main(int argc, char **argv) {
 
 		Sprite s = Sprite("..\\characters\\Normal.png", 1.5f);
 		mb.SetSprite(&s);
-		
+
+		CharFactory* cf = new CharFactory(&cm);
+
 		Tree t = Tree(20, 20);
 		Sprite stree = Sprite("..\\characters\\arvore1.png", 60, 80);
 		t.SetSprite(&stree);
+
+		cf->RegisterCharacter(t.GetTypeID(), &t);
+
+
+		cm.AddCharacter(&mb);
+		cm.SetPlayer(&mb);
+
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 15));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 50, 15));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 95, 15));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 50));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 50, 50));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 95, 50));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 95));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 50, 95));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 95, 95));
 
 		Map* m;
 		
@@ -51,9 +71,6 @@ int main(int argc, char **argv) {
 			throw std::runtime_error(strmaperr);
 		}
 
-		cm.AddCharacter(&mb);
-		cm.AddCharacter(&t);
-		cm.SetPlayer(&mb);
 
 		HUD* hud = new HUD(&mb);
 		r->SetHUD(hud);
@@ -158,7 +175,7 @@ int main(int argc, char **argv) {
 			}
 
 
-			if (frames % 8 == 0) {
+			if (frames % 16 == 0) {
 				mb.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;

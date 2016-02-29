@@ -19,9 +19,9 @@ void Player::DoEvents(void* cm, Map* map) {
 	
 	Character* c = charm->GetNearestCharacter(this, angle);
 
-	if (c)
+	/*if (c)
 		fprintf(stderr, "[Player] %s\n",c->GetName().c_str());
-	fprintf(stderr, "[Player] Ângulo: %.1f graus\n", angle);
+	fprintf(stderr, "[Player] Ângulo: %.1f graus\n", angle); */
 	
 }
 

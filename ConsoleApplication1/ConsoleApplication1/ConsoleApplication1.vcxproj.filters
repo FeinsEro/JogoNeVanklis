@@ -54,6 +54,12 @@
     <ClCompile Include="MapOpener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CharFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md">
@@ -85,9 +91,6 @@
     <ClInclude Include="BaseEnemy.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyFactory.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Map.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -101,6 +104,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Tree.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharFactory.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

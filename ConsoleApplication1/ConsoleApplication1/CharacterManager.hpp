@@ -14,7 +14,7 @@ public:
 	CharacterManager();
 
 	inline void GetAllChars(std::vector<Character*>* chars) { *chars = _chars; }
-	std::vector<Character*>::iterator _player;
+	Player* _player;
 
 
 	void AddCharacter(Character*);

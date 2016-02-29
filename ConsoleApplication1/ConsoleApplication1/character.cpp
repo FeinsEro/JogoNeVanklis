@@ -1,7 +1,7 @@
 #include "Character.hpp"
 #include <string>
 
-static int lastID = 0;
+int Character::lastID = 0;
 
 Character::Character(Sprite* s, unsigned int XP, unsigned int XPos, unsigned int YPos, std::string name,
 	unsigned int HP, unsigned int dinheiro, unsigned int ATK, 

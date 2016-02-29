@@ -2,8 +2,8 @@
 
 CharacterManager::CharacterManager(){}
 void CharacterManager::AddCharacter(Character* c){
-	fprintf(stderr, "[CharacterManager] Char com id %d adicionado no CharManager\n",
-		c->GetID());
+	fprintf(stderr, "[CharacterManager] Char com id %d:%d adicionado no CharManager\n",
+		c->GetTypeID(), c->GetID());
 
 	_chars.push_back(c);
 
@@ -48,11 +48,11 @@ Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
 	unsigned int x, y, w, h;
 	c->GetPosition(x, y);
 
-	//1 unidade = 4 pixels
-	//Sprites têm 32 pixels (geralmente) = 8 unidades.
+	//1 unidade = 8 pixels
+	//Sprites têm 32 pixels (geralmente) = 4 unidades.
 	//TODO: Character::Get/SetSize()
-	w = 8;
-	h = 8;
+	w = 4;
+	h = 4;
 
 	Character* destiny = NULL;
 
@@ -132,7 +132,7 @@ void CharacterManager::SetPlayer(Player* p) {
 	for (auto it = _chars.begin(); it != _chars.end(); it++){
 		//O player tem um ID específico.
 		if ((*it)->GetID() == p->GetID()) {
-			_player = it;
+			_player = (Player*)(*it);
 			return;
 		}
 
@@ -140,8 +140,8 @@ void CharacterManager::SetPlayer(Player* p) {
 
 	//Não achou? Então adicionamos.
 	_chars.push_back(p);
-	_player = --_chars.end();
+	_player = p;
 }
 Player* CharacterManager::GetPlayer() {
-	return (Player*)(*_player);
+	return _player;
 }

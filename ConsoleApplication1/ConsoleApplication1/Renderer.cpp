@@ -38,7 +38,7 @@ Renderer::Renderer(int w, int h) {
 	_screenw = w;
 	_screenh = h;
 
-	_unitsize = 4.0; //4 pixels = 1 unidade
+	_unitsize = 8.0; //4 pixels = 1 unidade
 }
 
 /* Renderiza um frame. */
