@@ -45,21 +45,21 @@ void CharacterManager::DoAllEvents() {
 	*/
 
 Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
-	unsigned int x, y, w, h;
+	float x, y, w, h;
 	c->GetPosition(x, y);
 
-	//1 unidade = 8 pixels
-	//Sprites têm 32 pixels (geralmente) = 4 unidades.
+	//1 unidade = 32 pixels
+	//Sprites têm 32 pixels (geralmente) = 1 unidades.
 	//TODO: Character::Get/SetSize()
-	w = 4;
-	h = 4;
+	w = 32;
+	h = 32;
 
 	Character* destiny = NULL;
 
 	for (auto it = _chars.begin();
 	it != _chars.end();
 		it++) {
-		unsigned int destx, desty;
+		float destx, desty;
 		(*it)->GetPosition(destx, desty);
 		Sprite* s;
 		(*it)->GetSprite(&s);

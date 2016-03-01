@@ -12,7 +12,7 @@
 
 class Character {
 protected:
-	unsigned int _XPos, _YPos;
+	float _XPos, _YPos;
 
 	static int lastID;
 
@@ -40,8 +40,8 @@ public:
 	inline void GetXP(unsigned int& xp) { xp = this->_xp; }
 	inline void SetXP(unsigned int& xp) { this->_xp = xp; }
 
-	inline void GetPosition(unsigned int& x, unsigned int& y) { x = this->_XPos; y = this->_YPos; }
-	inline void SetPosition(unsigned int& x, unsigned int& y) { this->_XPos = x; this->_YPos = y; }
+	inline void GetPosition(float& x, float& y) { x = this->_XPos; y = this->_YPos; }
+	inline void SetPosition(float& x, float& y) { this->_XPos = x; this->_YPos = y; }
 	inline void GetHP(unsigned int& HP) { HP = this->_HP; }
 	inline void SetHP(unsigned int& HP) { this->_HP = HP; }
 	inline void GetATK(unsigned int& ATK) { ATK = this->_ATK; }
@@ -78,12 +78,12 @@ public:
 	inline int GetID() { return _ID; }
 
 	virtual std::string Falar() = 0;
-	virtual void Andar(int deltax, int deltay) = 0;
+	virtual void Andar(float deltax, float deltay) = 0;
 	virtual void Lutar() = 0;
 	virtual void DoEvents(void* charmanager, Map* map) = 0;
 	virtual void Reviver() = 0;
 
-	virtual Character* Clone(unsigned int x, unsigned int y) { return NULL; }
+	virtual Character* Clone(float x, float y) { return NULL; }
 
 
 	Character(Sprite* s = NULL, unsigned int XP = 0, 

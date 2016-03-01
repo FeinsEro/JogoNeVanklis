@@ -17,7 +17,7 @@ private:
 
 	HUD* _hud;
 
-	int _screenx, _screeny; //Onde a tela está (em relação ao jogo)
+	float _screenx, _screeny; //Onde a tela está (em relação ao jogo)
 	float _unitsize; //Quantos pixels são necessários para 1 unidade no jogo?
 	
 	CharacterManager* _cm;

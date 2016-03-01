@@ -38,7 +38,7 @@ Renderer::Renderer(int w, int h) {
 	_screenw = w;
 	_screenh = h;
 
-	_unitsize = 8.0; //4 pixels = 1 unidade
+	_unitsize = 32.0; //32 pixels = 1 unidade
 }
 
 /* Renderiza um frame. */
@@ -49,11 +49,11 @@ bool Renderer::Render() {
 	std::vector<Character*> characters;
 	_cm->GetAllChars(&characters);
 
-	int playerx, playery;
+	float playerx, playery;
 
 	// Calcula a posição da tela pela posição do player.
 	// Isso permite que ele fique estático enquanto a tela se move.
-	_cm->GetPlayer()->GetPosition((unsigned int&)playerx, (unsigned int&)playery);
+	_cm->GetPlayer()->GetPosition(playerx, playery);
 	_screenx = max(0, playerx - (_screenw / 2 / _unitsize));
 	_screeny = max(0, playery - (_screenh / 2 /_unitsize));
 
@@ -71,8 +71,8 @@ bool Renderer::Render() {
 
 		if (!s) continue;
 
-		int gamex, gamey;
-		c->GetPosition((unsigned int&)gamex, (unsigned int&)gamey);
+		float gamex, gamey;
+		c->GetPosition(gamex, gamey);
 
 
 		ALLEGRO_BITMAP* bm_sprite = s->GetFrameImage();

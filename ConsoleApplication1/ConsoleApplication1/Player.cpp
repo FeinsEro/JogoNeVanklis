@@ -26,7 +26,7 @@ void Player::DoEvents(void* cm, Map* map) {
 }
 
 
-void Player::Andar(int deltax, int deltay) {
+void Player::Andar(float deltax, float deltay) {
 	
 	if (deltax == 0 && deltay == 0) {
 		this->_sprite->SetFrame(framestop);
@@ -34,6 +34,36 @@ void Player::Andar(int deltax, int deltay) {
 	}
 
 	int fn;
+
+	if (deltax != 0) {
+		if (deltax < 0) {
+			//Esquerda
+			fn = this->_sprite->GetFrameNumber();
+
+			angle = 270;
+			if (fn < 3 || fn >= 4) {
+				this->_sprite->SetFrame(2);
+			}
+
+			framestop = 2;
+
+			this->_sprite->NextFrame();
+		}
+		else {
+			//Direita
+			fn = this->_sprite->GetFrameNumber();
+
+			angle = 90;
+			if (fn < 5 || fn >= 6) {
+				this->_sprite->SetFrame(4);
+			}
+
+			framestop = 4;
+			this->_sprite->NextFrame();
+		}
+		return;
+	}
+
 	if (deltay != 0) {
 		fn = this->_sprite->GetFrameNumber();
 
@@ -59,30 +89,4 @@ void Player::Andar(int deltax, int deltay) {
 		this->_sprite->NextFrame();		
 	}
 
-	if (deltax != 0) {
-		if (deltax < 0) {
-			//Esquerda
-			fn = this->_sprite->GetFrameNumber();
-
-			angle = 270;
-			if (fn < 3 || fn >= 4) {
-				this->_sprite->SetFrame(2);
-			}
-
-			framestop = 2;
-				
-			this->_sprite->NextFrame();		
-		} else {
-			//Direita
-			fn = this->_sprite->GetFrameNumber();
-
-			angle = 90;
-			if (fn < 5 || fn >= 6) {
-				this->_sprite->SetFrame(4);
-			}
-
-			framestop = 4;
-			this->_sprite->NextFrame();
-		}
-	}
 }

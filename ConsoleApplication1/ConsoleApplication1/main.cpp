@@ -49,15 +49,15 @@ int main(int argc, char **argv) {
 		cm.AddCharacter(&mb);
 		cm.SetPlayer(&mb);
 
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 15));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 50, 15));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 95, 15));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 50));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 50, 50));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 95, 50));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 95));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 50, 95));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 95, 95));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 3, 8));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 6, 11));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 9, 20));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 12, 25));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 30));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 18, 35));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 21, 40));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 24, 45));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 27, 50));
 
 		Map* m;
 		
@@ -67,7 +67,9 @@ int main(int argc, char **argv) {
 
 		int px, py;
 		m->GetInitialPlayerPos(px, py);
-		mb.SetPosition((unsigned int&)px, (unsigned int&)py);
+
+		float fx = px, fy = py;
+		mb.SetPosition(fx, fy);
 		
 		if (!m) {
 			char strmaperr[32];
@@ -82,7 +84,7 @@ int main(int argc, char **argv) {
 	
 
 		bool render = true;;
-		int playerdx = 0, playerdy = 0;
+		float playerdx = 0, playerdy = 0;
 
 		while (render) {
 			
@@ -98,10 +100,10 @@ int main(int argc, char **argv) {
 			Event e;
 
 			if (ev.PopEvent(e)) {
-				unsigned int x, y;
+				float x, y;
 				mb.GetPosition(x, y);
 
-				int dx = 0, dy = 0;
+				float dx = 0, dy = 0;
 
 				switch (e.keycode) {
 				case ALLEGRO_KEY_UP:
@@ -158,10 +160,10 @@ int main(int argc, char **argv) {
 
 				}
 
-				if (cima) dy--;
-				if (baixo) dy++;
-				if (direita) dx++;
-				if (esquerda) dx--;
+				if (cima) dy -= .1;
+				if (baixo) dy += .1;
+				if (direita) dx += .1;
+				if (esquerda) dx -= .1;
 
 				
 
@@ -179,7 +181,7 @@ int main(int argc, char **argv) {
 			}
 
 
-			if (frames % 16 == 0) {
+			if (frames % 8 == 0) {
 				mb.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;
