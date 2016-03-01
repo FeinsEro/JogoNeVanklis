@@ -53,11 +53,11 @@ int main(int argc, char **argv) {
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 6, 11));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 9, 20));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 12, 25));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 30));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 18, 35));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 21, 40));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 24, 45));
-		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 27, 50));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 15, 20));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 18, 11));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 21, 8));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 24, 11));
+		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 27, 20));
 
 		Map* m;
 		
@@ -71,12 +71,16 @@ int main(int argc, char **argv) {
 		float fx = px, fy = py;
 		mb.SetPosition(fx, fy);
 		
+
 		if (!m) {
 			char strmaperr[32];
 			sprintf_s(strmaperr, 32, "Erro ao abrir o mapa!");
 			throw std::runtime_error(strmaperr);
 		}
 
+		Map::LoadTiles();
+
+		r->SetMap(m);
 
 		HUD* hud = new HUD(&mb);
 		r->SetHUD(hud);
@@ -176,6 +180,9 @@ int main(int argc, char **argv) {
 				x = max(1, x);
 				y = max(1, y);
 
+				x = min(x, m->GetWidth());
+				y = min(y, m->GetHeight());
+
 				mb.SetPosition(x, y);
 
 			}
@@ -185,6 +192,7 @@ int main(int argc, char **argv) {
 				mb.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;
+
 			}
 
 			cm.DoAllEvents();

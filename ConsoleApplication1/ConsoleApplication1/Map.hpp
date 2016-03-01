@@ -2,6 +2,10 @@
 
 /* Internal things for the map */
 #include <allegro5/bitmap.h>
+#include "Sprite.hpp"
+
+//Quantidade de pixels por unidade no jogo.
+#define TILE_SIZE 32
 
 class Map {
 private:
@@ -25,6 +29,12 @@ public:
 	inline void GetInitialPlayerPos(int& x, int& y) {
 		x = _playerX; y = _playerY;
 	}
+
+
+	inline int GetWidth() { return _width; }
+	inline int GetHeight() { return _height; }
+
+	ALLEGRO_BITMAP* Render(float startx, float starty, float width, float height, ALLEGRO_DISPLAY* d);
 
 	/* Load all map tiles */
 	static void LoadTiles();

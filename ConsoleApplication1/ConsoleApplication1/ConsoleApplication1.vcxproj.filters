@@ -123,5 +123,8 @@
     <Image Include="..\characters\dann.bmp">
       <Filter>Sprites</Filter>
     </Image>
+    <Image Include="mapdata.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

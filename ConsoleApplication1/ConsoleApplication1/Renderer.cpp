@@ -38,7 +38,6 @@ Renderer::Renderer(int w, int h) {
 	_screenw = w;
 	_screenh = h;
 
-	_unitsize = 32.0; //32 pixels = 1 unidade
 }
 
 /* Renderiza um frame. */
@@ -54,11 +53,20 @@ bool Renderer::Render() {
 	// Calcula a posição da tela pela posição do player.
 	// Isso permite que ele fique estático enquanto a tela se move.
 	_cm->GetPlayer()->GetPosition(playerx, playery);
-	_screenx = max(0, playerx - (_screenw / 2 / _unitsize));
-	_screeny = max(0, playery - (_screenh / 2 /_unitsize));
+
+	float mapx, mapy;
+	mapx = playerx - (_screenw / 2.0 / TILE_SIZE);
+	mapy = playery - (_screenh / 2.0 / TILE_SIZE);
+
+	_screenx = max(0, mapx);
+	_screeny = max(0, mapy);
+
+	
 
 	//Renderiza o mapa
-
+	if (_map)
+		al_draw_bitmap(_map->Render(_screenx, _screeny, _screenw, _screenh, _display),
+			0, 0, 0);
 
 	//Renderiza os sprites dos characters nas posições que eles estão
 	for (auto sp_iter = characters.begin();
@@ -77,19 +85,19 @@ bool Renderer::Render() {
 
 		ALLEGRO_BITMAP* bm_sprite = s->GetFrameImage();
 
-		if (_screenx > (gamex + (al_get_bitmap_width(bm_sprite)/_unitsize))) {
+		if (_screenx > (gamex + (al_get_bitmap_width(bm_sprite)/TILE_SIZE))) {
 			//Não dá nem pra ver o personagem
 			continue;
 		}
 
-		if ((_screenx)+(_screenw / _unitsize) < gamex) {
+		if ((_screenx)+(_screenw / TILE_SIZE) < gamex) {
 			//A tela está antes do personagem
 			continue;
 		}
 
 
-		float drawx = (gamex - _screenx) * _unitsize;
-		float drawy = (gamey - _screeny) * _unitsize;
+		float drawx = (gamex - _screenx) * TILE_SIZE;
+		float drawy = (gamey - _screeny) * TILE_SIZE;
 
 		al_draw_scaled_bitmap(bm_sprite, 0, 0, al_get_bitmap_width(bm_sprite), al_get_bitmap_height(bm_sprite),
 			drawx, drawy, al_get_bitmap_width(bm_sprite) * s->GetZoomFactor(),

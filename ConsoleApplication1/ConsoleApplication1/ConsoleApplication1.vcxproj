@@ -192,6 +192,7 @@
     <Image Include="..\characters\akhbran.bmp" />
     <Image Include="..\characters\asura.bmp" />
     <Image Include="..\characters\dann.bmp" />
+    <Image Include="mapdata.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

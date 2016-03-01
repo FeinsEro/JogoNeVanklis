@@ -9,6 +9,7 @@
 
 #include "CharacterManager.hpp"
 #include "HUD.hpp"
+#include "Map.hpp"
 
 class Renderer {
 private:
@@ -16,6 +17,7 @@ private:
 	int _screenw, _screenh; //Tamanho da tela
 
 	HUD* _hud;
+	Map* _map;
 
 	float _screenx, _screeny; //Onde a tela está (em relação ao jogo)
 	float _unitsize; //Quantos pixels são necessários para 1 unidade no jogo?
@@ -33,6 +35,10 @@ public:
 
 	inline HUD* GetHUD() { return _hud; }
 	inline void SetHUD(HUD* h) { _hud = h; }
+
+	inline Map* GetMap() { return _map; }
+	inline void SetMap(Map* m) { _map = m; }
+
 
 	/* Renderiza um frame. */
 	bool Render();

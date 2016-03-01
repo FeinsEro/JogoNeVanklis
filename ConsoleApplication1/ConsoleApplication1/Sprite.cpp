@@ -37,6 +37,9 @@ float Sprite::GetZoomFactor() { return _zoom; }
 void Sprite::UpdateSheet() {
 	_sheet_cache = al_load_bitmap(this->sheet_path.c_str());
 
+	if (!_sheet_cache)
+		return;
+
 	this->_image_height = al_get_bitmap_height(_sheet_cache);
 	this->_image_width = al_get_bitmap_width(_sheet_cache);
 

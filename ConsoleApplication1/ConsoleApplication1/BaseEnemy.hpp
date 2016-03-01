@@ -13,7 +13,7 @@ public:
 
 	void DoEvents(void* cm, Map* map) override {}
 	std::string Falar() override  { return ""; }
-	void Andar(int deltax, int deltay) override {}
+	void Andar(float deltax, float deltay) override {}
 	void Lutar() override {}
 	void Reviver() override {}
 

@@ -37,6 +37,8 @@ Map* MapOpener::Open(std::string path) {
 
 	fprintf(stderr, "[MapOpener] O mapa %s possui %d x %d blocos\n",
 		path.c_str(), mapData.width, mapData.height);
+	fprintf(stderr, "	Posição inicial do player: (%d,%d)\n",
+		mapData.playerX, mapData.playerY);
 
 	mp->SetData(data);
 	mp->SetInitialPlayerPos(mapData.playerX, mapData.playerY);
