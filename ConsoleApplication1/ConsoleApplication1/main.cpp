@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 27, 20));
 
 		Map* m;
-		
+		Map::LoadTiles();
 
 		MapOpener mpop;
 		m = mpop.Open("..\\maps\\map2.map");
@@ -78,7 +78,6 @@ int main(int argc, char **argv) {
 			throw std::runtime_error(strmaperr);
 		}
 
-		Map::LoadTiles();
 
 		r->SetMap(m);
 

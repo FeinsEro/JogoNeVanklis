@@ -13,6 +13,30 @@ Map::Map(int w, int h) {
 
 void Map::SetData(int* indices) {
 	_map_tile_indices = indices;
+	
+	if (cache_map)
+		al_destroy_bitmap(cache_map);
+
+	if (!tile_files || !tile_files->GetFrameImage())
+		return;
+
+	cache_map = al_create_bitmap(_width * TILE_SIZE, _height * TILE_SIZE);
+
+	al_set_target_bitmap(cache_map);
+
+	int rx = 0, ry = 0;
+	for (int y = 0; y <= _height; y++) {
+		for (int x = 0; x <= _width; x++) {
+				tile_files->SetFrame(_map_tile_indices[y*_width + x]);
+				tile_files->NextFrame();
+				al_draw_bitmap(tile_files->GetFrameImage(), rx, ry, 0);
+
+				rx += TILE_SIZE;
+		}
+		ry += TILE_SIZE;
+		rx = 0;
+	}
+
 }
 int* Map::GetData() const{
 	return _map_tile_indices;
@@ -26,55 +50,28 @@ int* Map::GetData() const{
 		width, height - tamanho, em pixels
 		d = Display*/
 
+static ALLEGRO_BITMAP* cache_area;
+
 ALLEGRO_BITMAP* Map::Render(float startx, float starty, float width, float height, ALLEGRO_DISPLAY* d) {
 
-	if (startx == lastsx && starty == lastsy && width == lastw && height == lasth) {
-		return cache_map;
-	}
+	if (lastsx == startx && lastsy == starty && lastw == width && lasth == height)
+		return cache_area;
 
-	if (cache_map)
-		al_destroy_bitmap(cache_map);
+	if (cache_area)
+		al_destroy_bitmap(cache_area);
 
-	if (!tile_files || !tile_files->GetFrameImage())
-		return NULL;
+	cache_area = al_create_bitmap(width, height);
 
+	al_set_target_bitmap(cache_area);
 
-
-	cache_map = al_create_bitmap(width, height);
-
-	al_set_target_bitmap(cache_map);
-
-	int rx = 0;
-	int ry = 0;
-
-	for (int y = starty; y <= starty + (height / TILE_SIZE) + 1; y++) {
-		for (int x = startx; x <= startx + (width / TILE_SIZE) + 1; x++) {
-			if (x <= _width && y <= _height){
- 				tile_files->SetFrame(_map_tile_indices[y*_width + x]);
-				tile_files->NextFrame();
-				al_draw_bitmap(tile_files->GetFrameImage(), rx, ry, 0);
-
-				rx += TILE_SIZE;
-			}
-			else {
-				goto next_row;
-			}
-		}
-	next_row:
-
-		ry += TILE_SIZE;
-		rx = 0;
-	}
-
-	lastsx = startx;
-	lastsy = starty;
-	lastw = width;
-	lasth = height;
+	al_draw_bitmap_region(cache_map, startx*TILE_SIZE, starty*TILE_SIZE, width, height,
+		0, 0, 0);
+	
 	al_set_target_bitmap(al_get_backbuffer(d));
 
-	return cache_map;
+	lastsx = startx; lastsy = starty; lastw = width; lasth = height;
 
-
+	return cache_area;
 }
 
 

@@ -43,6 +43,7 @@ Renderer::Renderer(int w, int h) {
 /* Renderiza um frame. */
 bool Renderer::Render() {
 
+	al_set_target_bitmap(al_get_backbuffer(_display));
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	
 	std::vector<Character*> characters;
