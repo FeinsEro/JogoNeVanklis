@@ -30,7 +30,7 @@ void CharacterManager::DoAllEvents() {
 	for (auto i = _chars.begin();
 	i != _chars.end();
 		++i) {
-		(*i)->DoEvents(this, NULL);
+		(*i)->DoEvents(this, _map);
 	}
 }
 

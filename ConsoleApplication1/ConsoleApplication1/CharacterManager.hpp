@@ -5,15 +5,20 @@
 #include <vector>
 #include "Character.hpp"
 #include "Player.hpp"
+#include "Map.hpp"
 
 class CharacterManager {
 private:
 	std::vector<Character*> _chars;
-
+	Map* _map = NULL;
 public:
 	CharacterManager();
 
 	inline void GetAllChars(std::vector<Character*>* chars) { *chars = _chars; }
+
+	inline void SetMap(Map* map) { _map = map; }
+	inline Map* GetMap() { return _map; }
+
 	Player* _player;
 
 

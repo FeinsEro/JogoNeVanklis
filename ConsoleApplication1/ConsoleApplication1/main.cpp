@@ -15,7 +15,6 @@
 
 #include <allegro5/allegro_windows.h>
 
-bool cima = false, baixo = false, direita = false, esquerda = false;
 int frames = 0;
 int main(int argc, char **argv) {
 
@@ -28,14 +27,14 @@ int main(int argc, char **argv) {
 		CharacterManager cm;
 		r->SetCharManager(&cm);
 
-		Player mb = Player(10, 10, "Dann Von Veigar");
-	
+		Player player = Player(10, 10, "Dann Von Veigar");
+		player.SetEventQueue(&ev);
 
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
-		mb.AddItem(&it);
+		player.AddItem(&it);
 
 		Sprite s = Sprite("..\\characters\\Normal.png", 1.5f);
-		mb.SetSprite(&s);
+		player.SetSprite(&s);
 
 		CharFactory* cf = new CharFactory(&cm);
 
@@ -46,8 +45,8 @@ int main(int argc, char **argv) {
 		cf->RegisterCharacter(t.GetTypeID(), &t);
 
 
-		cm.AddCharacter(&mb);
-		cm.SetPlayer(&mb);
+		cm.AddCharacter(&player);
+		cm.SetPlayer(&player);
 
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 3, 8));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 6, 11));
@@ -69,7 +68,7 @@ int main(int argc, char **argv) {
 		m->GetInitialPlayerPos(px, py);
 
 		float fx = px, fy = py;
-		mb.SetPosition(fx, fy);
+		player.SetPosition(fx, fy);
 		
 
 		if (!m) {
@@ -80,19 +79,25 @@ int main(int argc, char **argv) {
 
 
 		r->SetMap(m);
+		cm.SetMap(m);
 
-		HUD* hud = new HUD(&mb);
+		HUD* hud = new HUD(&player);
 		r->SetHUD(hud);
 
 	
 
-		bool render = true;;
+		bool render = true;
+
+		double fps = (1/60), start_time, end_time;
+
 		float playerdx = 0, playerdy = 0;
+
+		start_time = al_get_time();
 
 		while (render) {
 			
 			//Atualiza personagens
-
+			cm.DoAllEvents();
 
 			//Processa eventos
 			if (!ev.CheckEvents()) {
@@ -101,41 +106,11 @@ int main(int argc, char **argv) {
 
 			
 			Event e;
+			player.Control(m);
 
 			if (ev.PopEvent(e)) {
-				float x, y;
-				mb.GetPosition(x, y);
-
-				float dx = 0, dy = 0;
 
 				switch (e.keycode) {
-				case ALLEGRO_KEY_UP:
-					if (e.key_status == ButtonStatus::Pressed)
-						cima = true;
-					else if (e.key_status == ButtonStatus::Released)
-						cima = false;
-					break;
-
-				case ALLEGRO_KEY_DOWN:
-					if (e.key_status == ButtonStatus::Pressed)
-						baixo = true;
-					else if (e.key_status == ButtonStatus::Released)
-						baixo = false;
-					break;
-
-				case ALLEGRO_KEY_LEFT:
-					if (e.key_status == ButtonStatus::Pressed)
-						esquerda = true;
-					else if (e.key_status == ButtonStatus::Released)
-						esquerda = false;
-					break;
-
-				case ALLEGRO_KEY_RIGHT:
-					if (e.key_status == ButtonStatus::Pressed)
-						direita = true;
-					else if (e.key_status == ButtonStatus::Released)
-						direita = false;
-					break;
 
 				case ALLEGRO_KEY_I:
 
@@ -143,7 +118,7 @@ int main(int argc, char **argv) {
 
 					//Enumera os itens no inventário do player.
 					std::vector<Item*>* list;
-					mb.GetAllItems(&list);
+					player.GetAllItems(&list);
 
 					std::stringstream line;
 
@@ -163,32 +138,12 @@ int main(int argc, char **argv) {
 
 				}
 
-				if (cima) dy -= .1;
-				if (baixo) dy += .1;
-				if (direita) dx += .1;
-				if (esquerda) dx -= .1;
-
 				
-
-				x += dx;
-				y += dy;
-
-				playerdx += dx;
-				playerdy += dy;
-
-				x = max(1, x);
-				y = max(1, y);
-
-				x = min(x, m->GetWidth());
-				y = min(y, m->GetHeight());
-
-				mb.SetPosition(x, y);
-
 			}
 
 
 			if (frames % 8 == 0) {
-				mb.Andar(playerdx, playerdy);
+				player.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;
 
@@ -199,8 +154,20 @@ int main(int argc, char **argv) {
 			//Os renderiza
 			r->Render();
 
+
+			end_time = al_get_time();
+
+			if ((end_time - start_time) < fps) {
+				double delta = (end_time - start_time);
+				Sleep((fps - delta) * 1000);
+				
+			}
+			
+			start_time = al_get_time();
+
 			frames++;
 		}
+
 
 	}
 	catch (std::runtime_error& e) {

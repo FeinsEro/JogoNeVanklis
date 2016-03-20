@@ -25,8 +25,8 @@ void Map::SetData(int* indices) {
 	al_set_target_bitmap(cache_map);
 
 	int rx = 0, ry = 0;
-	for (int y = 0; y <= _height; y++) {
-		for (int x = 0; x <= _width; x++) {
+	for (int y = 0; y < _height; y++) {
+		for (int x = 0; x < _width; x++) {
 				tile_files->SetFrame(_map_tile_indices[y*_width + x]);
 				tile_files->NextFrame();
 				al_draw_bitmap(tile_files->GetFrameImage(), rx, ry, 0);
