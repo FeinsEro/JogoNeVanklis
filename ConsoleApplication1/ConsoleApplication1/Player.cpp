@@ -4,10 +4,15 @@
 #include "Player.hpp"
 #include "EventQueue.hpp"
 
+
+float _last_control_update;
+float deltax = 0, deltay = 0;
 Player::Player(unsigned int x, unsigned int y, const char* name) : Character(NULL, 0, x, y, std::string(name),
 	100, 0, 0, 0, 0, 0, 0){
 
 	this->_TypeID = TYPEID_PLAYER;
+	
+	_last_control_update = al_get_time();
 }
 
 
@@ -23,8 +28,8 @@ void Player::DoEvents(void* cm, Map* map) {
 	Character* c = charm->GetNearestCharacter(this, angle);
 
 
-}
 
+}
 
 void Player::Control(Map* map) {
 	Event e;
@@ -76,6 +81,9 @@ void Player::Control(Map* map) {
 		x = min(x, map->GetWidth() - 1.0);
 		y = min(y, map->GetHeight() - 1.0);
 
+		deltax = x - this->_XPos;
+		deltay = y - this->_YPos;
+
 		this->_XPos = x;
 		this->_YPos = y;
 	}
@@ -83,7 +91,7 @@ void Player::Control(Map* map) {
 
 void Player::SetEventQueue(void* ev) { _ev = (EventQueue*) ev; }
 
-void Player::Andar(float deltax, float deltay) {
+void Player::Andar(float a, float b) {
 	
 	if (deltax == 0 && deltay == 0) {
 		this->_sprite->SetFrame(framestop);

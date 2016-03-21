@@ -104,9 +104,9 @@ int main(int argc, char **argv) {
 				render = false;
 			}
 
-			
-			Event e;
+
 			player.Control(m);
+			Event e;
 
 			if (ev.PopEvent(e)) {
 
@@ -142,7 +142,7 @@ int main(int argc, char **argv) {
 			}
 
 
-			if (frames % 8 == 0) {
+			if (frames % 12 == 0) {
 				player.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;

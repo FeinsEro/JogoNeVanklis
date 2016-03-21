@@ -13,7 +13,7 @@ public:
 	void Control(Map* map);
 
 	std::string Falar() { return ""; }
-	void Andar(float deltax, float deltay);
+	void Andar(float, float);
 	void Lutar() {}
 	void Reviver() {}
 
