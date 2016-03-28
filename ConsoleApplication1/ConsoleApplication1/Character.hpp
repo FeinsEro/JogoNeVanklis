@@ -66,8 +66,8 @@ public:
 	inline void GetDefDemon(unsigned int& defdemon) { defdemon = this->_defdemon; }
 	inline void SetDefDemon(unsigned int& defdemon) { this->_defdemon = defdemon; }
 
-	inline void GetSprite(Sprite** s) { *s = _sprite; }
-	inline void SetSprite(Sprite* s) { _sprite = s; }
+	void GetSprite(Sprite** s) { *s = _sprite; }
+	void SetSprite(Sprite* s) { _sprite = s; }
 	
 	void AddItem(Item* i);
 	void RemoveItem(int itemID);

@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.hpp"
+#include "Animation.hpp"
 
 class Player : public Character {
 private:
@@ -18,4 +19,6 @@ public:
 	void Reviver() {}
 
 	void SetEventQueue(void* ev);
+
+	void SetSprite(Sprite*);
 };

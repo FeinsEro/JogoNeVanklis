@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="CharFactory.cpp" />
@@ -172,6 +173,7 @@
     <None Include="..\..\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.hpp" />
     <ClInclude Include="BaseEnemy.hpp" />
     <ClInclude Include="Character.hpp" />
     <ClInclude Include="CharacterManager.hpp" />

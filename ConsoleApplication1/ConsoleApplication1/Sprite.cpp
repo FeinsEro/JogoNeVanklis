@@ -58,7 +58,7 @@ void Sprite::UpdateSheet() {
 
 	this->StepFrames(0); //carrega o primeiro frame
 }
-ALLEGRO_BITMAP* Sprite::NextFrame(){
+ALLEGRO_BITMAP* Sprite::NextFrame(bool returnImage){
 	return this->StepFrames(1);	
 }
 ALLEGRO_BITMAP* Sprite::PreviousFrame(){
