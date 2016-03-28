@@ -16,10 +16,10 @@ Player::Player(unsigned int x, unsigned int y, const char* name) : Character(NUL
 	_last_control_update = al_get_time();
 	_anim = new Animation(this->_sprite);
 
-	_anim->Add(AnimationProperties("descer", 1, 2 ));
-	_anim->Add(AnimationProperties("subir", 8, 9));
-	_anim->Add(AnimationProperties("direita", 5, 6));
-	_anim->Add(AnimationProperties("esquerda", 3, 4));
+	_anim->Add(AnimationProperties("descer", 0, 1 ));
+	_anim->Add(AnimationProperties("subir", 7, 8));
+	_anim->Add(AnimationProperties("direita", 4, 5));
+	_anim->Add(AnimationProperties("esquerda", 2, 3));
 	_anim->Add(AnimationProperties("parado", 0, 0));
 }
 

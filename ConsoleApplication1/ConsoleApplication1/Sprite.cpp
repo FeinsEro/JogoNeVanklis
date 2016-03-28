@@ -59,12 +59,12 @@ void Sprite::UpdateSheet() {
 	this->StepFrames(0); //carrega o primeiro frame
 }
 ALLEGRO_BITMAP* Sprite::NextFrame(bool returnImage){
-	return this->StepFrames(1);	
+	return this->StepFrames(1, returnImage);	
 }
-ALLEGRO_BITMAP* Sprite::PreviousFrame(){
-	return this->StepFrames(-1);
+ALLEGRO_BITMAP* Sprite::PreviousFrame(bool returnImage){
+	return this->StepFrames(-1, returnImage);
 }
-ALLEGRO_BITMAP* Sprite::StepFrames(int num) {
+ALLEGRO_BITMAP* Sprite::StepFrames(int num, bool returnImage) {
 	
 	this->_frame_num += num;
 	
@@ -76,10 +76,16 @@ ALLEGRO_BITMAP* Sprite::StepFrames(int num) {
 		this->_frame_num = 0;
 	}
 
+
+	if (!returnImage){
+		al_destroy_bitmap(this->_frame_cache);
+		this->_frame_cache = NULL;
+		return NULL; //Pula os cálculos de corte do frame.
+	}
+
 	this->_frame_y = (this->_frame_num * _frame_width) / _image_width;
 	this->_frame_x = (this->_frame_num * _frame_width) % _image_width;
 	
-
 	//Talvez usar unique_ptr no bitmap do frame
 	this->_frame_cache = al_create_sub_bitmap(this->_sheet_cache, this->_frame_x, this->_frame_y,
 		this->_frame_width, this->_frame_height);
@@ -94,6 +100,9 @@ int Sprite::GetFrameNumber() {
 }
 
 ALLEGRO_BITMAP* Sprite::GetFrameImage() {
+	if (!this->_frame_cache) {
+		this->StepFrames(0);
+	}
 	return this->_frame_cache;
 }
 

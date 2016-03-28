@@ -47,9 +47,18 @@ public:
 	void SetZoomFactor(float);
 	float GetZoomFactor();
 
-	ALLEGRO_BITMAP* NextFrame();
-	ALLEGRO_BITMAP* PreviousFrame();
-	ALLEGRO_BITMAP* StepFrames(int);
+	/*	As funções abaixo modificam o frame atual. Se returnImage for falso, ele
+		vai retornar NULL e não retorna imagem nenhuma 
+		Isso pode economizar memória em situações onde você só quer modificar 
+		o frame atual, sem retorno de imagem. 
+
+		StepFrames(n, false) NÃO é igual a SetFrame(n)
+		SetFrames() não checa os limites de frame do sprite.
+	*/
+
+	ALLEGRO_BITMAP* NextFrame(bool returnImage = true);
+	ALLEGRO_BITMAP* PreviousFrame(bool returnImage = true);
+	ALLEGRO_BITMAP* StepFrames(int, bool returnImage = true);
 
 	int GetFrameNumber();
 	ALLEGRO_BITMAP* GetFrameImage();
