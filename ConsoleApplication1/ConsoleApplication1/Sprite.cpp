@@ -4,25 +4,27 @@ Sprite::Sprite(){
 	
 }
 
-Sprite::Sprite(const char* path, int frame_width, int frame_height) {
+Sprite::Sprite(const char* path, int zindex, int frame_width, int frame_height) {
 	this->sheet_path = std::string(path);
 	this->_frame_width = frame_width;
 	this->_frame_height = frame_height;
 	this->_frame_cache = NULL;
 
 	this->_zoom = 1.0f;
+	this->_zIndex = zindex;
 
 	UpdateSheet();
 
 }
 
-Sprite::Sprite(const char* path, float zoomfactor, int frame_width, int frame_height) {
+Sprite::Sprite(const char* path, float zoomfactor, int zindex, int frame_width, int frame_height) {
 	this->sheet_path = std::string(path);
 	this->_frame_width = frame_width;
 	this->_frame_height = frame_height;
 	this->_frame_cache = NULL;
 
 	this->_zoom = zoomfactor;
+	this->_zIndex = zindex;
 
 	UpdateSheet();
 

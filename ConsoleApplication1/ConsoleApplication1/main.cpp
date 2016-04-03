@@ -33,13 +33,13 @@ int main(int argc, char **argv) {
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
 		player.AddItem(&it);
 
-		Sprite s = Sprite("..\\characters\\Normal.png", 1.5f);
+		Sprite s = Sprite("..\\characters\\Normal.png", 1.5f, 0);
 		player.SetSprite(&s);
 
 		CharFactory* cf = new CharFactory(&cm);
 
 		Tree t = Tree(20, 20);
-		Sprite stree = Sprite("..\\characters\\arvore1.png", 60, 80);
+		Sprite stree = Sprite("..\\characters\\arvore1.png", 1, 60, 80);
 		t.SetSprite(&stree);
 
 		cf->RegisterCharacter(t.GetTypeID(), &t);

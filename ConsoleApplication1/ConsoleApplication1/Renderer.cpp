@@ -68,7 +68,7 @@ bool Renderer::Render() {
 	if (_map)
 		al_draw_bitmap(_map->Render(_screenx, _screeny, _screenw, _screenh, _display),
 			0, 0, 0);
-
+	
 	//Renderiza os sprites dos characters nas posições que eles estão
 	for (auto sp_iter = characters.begin();
 		sp_iter != characters.end();

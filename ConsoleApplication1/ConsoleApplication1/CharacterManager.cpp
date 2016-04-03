@@ -1,9 +1,41 @@
 #include "CharacterManager.hpp"
 
 CharacterManager::CharacterManager(){}
+
+int minZIndex = 1;
 void CharacterManager::AddCharacter(Character* c){
 	fprintf(stderr, "[CharacterManager] Char com id %d:%d adicionado no CharManager\n",
 		c->GetTypeID(), c->GetID());
+
+	Sprite* ns;
+	c->GetSprite(&ns);
+
+	//Se for menor, já adiciona
+	if (ns->GetZIndex() < minZIndex) {
+		minZIndex = ns->GetZIndex();
+		_chars.insert(_chars.begin(), c);
+		return;
+	}
+
+	/*	Ordena os characters por z-index do sprite conforme os adiciona 
+		Isso não faz _muita_ diferença na hora de rodar, já que a adição dos 
+		chars é feita atualmente no começo (e talvez nem faça muita no final),
+		mas já fica no esquema na hora de renderizar */
+	for (auto i = _chars.begin();
+		i != _chars.end();
+		++i) {
+
+		Sprite* s;
+		(*i)->GetSprite(&s);
+	
+		if (s && ns) {
+			if (s->GetZIndex() == ns->GetZIndex()) {
+				_chars.insert(i, c);
+				return;
+			}
+		}
+
+	}
 
 	_chars.push_back(c);
 

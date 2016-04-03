@@ -34,11 +34,14 @@ private:
 
 	void UpdateSheet(); 
 
+	//O zindex do sprite. Quanto maior esse número, mais 'na frente' ele vai ser renderizado.
+	int _zIndex;
+
 public:
 	Sprite();
-	Sprite(const char* path,
+	Sprite(const char* path, int zindex = 1,
 		int frame_width = DEFAULT_FRAME_WIDTH, int height = DEFAULT_FRAME_HEIGHT);
-	Sprite(const char* path, float zoomfactor,
+	Sprite(const char* path, float zoomfactor, int zindex = 1,
 		int frame_width = DEFAULT_FRAME_WIDTH, int height = DEFAULT_FRAME_HEIGHT);
 	
 	void GetPath(std::string&);
@@ -63,6 +66,9 @@ public:
 	int GetFrameNumber();
 	ALLEGRO_BITMAP* GetFrameImage();
 	void SetFrame(int);
+
+	inline int GetZIndex() { return _zIndex; }
+	inline void SetZIndex(int i) { _zIndex = i; }
 
 };
 
