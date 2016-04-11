@@ -3,6 +3,8 @@
 /*	Character Manager
 	Gerencia os chars do jogo, */
 #include <vector>
+#include <cmath>
+
 #include "Character.hpp"
 #include "Player.hpp"
 #include "Map.hpp"

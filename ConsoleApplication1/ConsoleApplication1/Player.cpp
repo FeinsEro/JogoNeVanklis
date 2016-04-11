@@ -8,6 +8,9 @@ float _last_control_update;
 float deltax = 0, deltay = 0;
 Animation* _anim;
 
+
+float angle;
+
 Player::Player(unsigned int x, unsigned int y, const char* name) : Character(NULL, 0, x, y, std::string(name),
 	100, 0, 0, 0, 0, 0, 0){
 
@@ -21,20 +24,32 @@ Player::Player(unsigned int x, unsigned int y, const char* name) : Character(NUL
 	_anim->Add(AnimationProperties("direita", 4, 5));
 	_anim->Add(AnimationProperties("esquerda", 2, 3));
 	_anim->Add(AnimationProperties("parado", 0, 0));
+
+	angle = 0.0f;
 }
 
 
 int framestop = -1;
 
-float angle;
 
 EventQueue* _ev;
 
 void Player::DoEvents(void* cm, Map* map) {
 	auto charm = (CharacterManager*)cm;
-	
-	Character* c = charm->GetNearestCharacter(this, angle);
+	printf("You are at %.1fx%.1f ", this->_XPos, this->_YPos);
 
+	Character* c = charm->GetNearestCharacter(this, angle);
+	if (c) {
+		float fx, fy;
+		c->GetPosition(fx, fy);
+		printf(", next from %s (%d) at (%.1fx%.1f)", c->GetName().c_str(), c->GetID(), 
+			fx, fy);
+	}
+	else {
+		printf("\t\t\t\t\t");
+	}
+
+	printf("\r");
 }
 
 void Player::SetSprite(Sprite* s ) {
@@ -81,10 +96,10 @@ void Player::Control(Map* map) {
 
 		}
 
-		if (cima) y -= .1;
-		if (baixo) y += .1;
-		if (direita) x += .1;
-		if (esquerda) x -= .1;
+		if (cima) { y -= .1; angle = 90; }
+		if (baixo) { y += .1; angle = 270; }
+		if (direita) { x += .1; angle = 0; }
+		if (esquerda) { x -= .1; angle = 180; }
 
 		x = max(x, 0);
 		y = max(y, 0);
@@ -112,14 +127,14 @@ void Player::Andar(float a, float b) {
 	if (deltax != 0) {
 		if (deltax < 0) {
 			//Esquerda
-			
-			angle = 270;
+	
+			//angle = 180;
 			_anim->RunAnimation("esquerda");
 		}
 		else {
 			//Direita
 			
-			angle = 90;
+			//angle = 0;
 			_anim->RunAnimation("direita");
 		}
 		return;
@@ -129,12 +144,12 @@ void Player::Andar(float a, float b) {
 		
 		if (deltay > 0) {
 			//Descendo
-			angle = 180;
+			//angle = 270;
 			_anim->RunAnimation("descer");
 		}
 		else {
 			//Subindo
-			angle = 0;
+			//angle = 90;
 			_anim->RunAnimation("subir");
 
 		}

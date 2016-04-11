@@ -61,7 +61,7 @@ void Animation::RunAnimation(const char* animation) {
 		_sprite->SetFrame(_framecache);
 	}
 
-	printf("%d\n", _framecache);
+	//printf("%d\n", _framecache);
 	_framecache++;
 	_sprite->NextFrame(false);
 }

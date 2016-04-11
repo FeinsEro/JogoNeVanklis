@@ -70,5 +70,8 @@ public:
 	inline int GetZIndex() { return _zIndex; }
 	inline void SetZIndex(int i) { _zIndex = i; }
 
+	inline int GetFrameWidth() { return _frame_width; }
+	inline int GetFrameHeight() { return _frame_height; }
+
 };
 

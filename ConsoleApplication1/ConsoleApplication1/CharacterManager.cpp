@@ -73,10 +73,12 @@ void CharacterManager::DoAllEvents() {
 	180	graus = baixo
 	270 graus = esquerda 
 	
-	Atualmente, 'angle' não faz efeito.
+	360 graus = todos.
 	*/
 
 Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
+	float angle_rad = angle * 3.1415f / 180.0f;
+
 	float x, y, w, h;
 	c->GetPosition(x, y);
 
@@ -96,13 +98,42 @@ Character* CharacterManager::GetNearestCharacter(Character* c, int angle) {
 		Sprite* s;
 		(*it)->GetSprite(&s);
 
-		w = 8 * s->GetZoomFactor();
-		h = 8 * s->GetZoomFactor();
+		w = (s->GetFrameWidth() / 32.0f) * s->GetZoomFactor();
+		h = (s->GetFrameHeight() / 32.0f) * s->GetZoomFactor();
 
-		if (destx > (x - 2 * w) && destx < (x + 2 * w)) {
-			if (desty > (y - 2 * h) && desty < (y + 2 * h)) {
-				if (c->GetID() != (*it)->GetID())
-					destiny = (Character*)(*it);
+		if (destx >= (x - w) && destx <= (x + w)) {
+			if (desty >= (y - h) && desty <= (y + h)) {
+				if (c->GetID() != (*it)->GetID()){
+
+					/* Otimizado para ângulos retos
+						TODO: Otimizar de 45 em 45, não é necessário agora*/
+					bool isOK = false;
+					switch (angle) {
+					case 0:
+						isOK = (destx > x);
+						break;
+					case 90:
+						isOK = (desty > y);
+						break;
+					case 180:
+						isOK = (x > destx);
+						break;
+					case 270:
+						isOK = (y > desty);
+						break;
+					case 360:
+						isOK = true;
+
+					}
+
+					if (isOK)
+						destiny = (Character*)(*it);
+					
+
+
+
+					
+				}
 			}
 		}
 

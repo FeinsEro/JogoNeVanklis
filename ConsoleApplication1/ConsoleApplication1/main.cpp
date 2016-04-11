@@ -162,7 +162,7 @@ int main(int argc, char **argv) {
 				Sleep((fps - delta) * 1000);
 				
 			}
-			printf("\r%.5f ms", end_time - start_time);
+			//printf("\r%.5f ms", end_time - start_time);
 			
 			start_time = al_get_time();
 
