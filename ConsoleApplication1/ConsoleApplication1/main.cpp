@@ -15,6 +15,15 @@
 
 #include <allegro5/allegro_windows.h>
 
+/* 
+	EU
+	TU
+	NÓS BOTA NELA
+	O DANN CHEGOU
+	É O PREDADOR DE PERERECA
+	
+*/
+
 int frames = 0;
 int main(int argc, char **argv) {
 

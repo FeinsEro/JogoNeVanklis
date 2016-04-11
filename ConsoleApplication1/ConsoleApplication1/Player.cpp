@@ -33,20 +33,25 @@ int framestop = -1;
 
 
 EventQueue* _ev;
+bool attackOn = false;
 
 void Player::DoEvents(void* cm, Map* map) {
 	auto charm = (CharacterManager*)cm;
 	printf("You are at %.1fx%.1f ", this->_XPos, this->_YPos);
 
-	Character* c = charm->GetNearestCharacter(this, angle);
-	if (c) {
-		float fx, fy;
-		c->GetPosition(fx, fy);
-		printf(", next from %s (%d) at (%.1fx%.1f)", c->GetName().c_str(), c->GetID(), 
-			fx, fy);
-	}
-	else {
-		printf("\t\t\t\t\t");
+
+	if (attackOn){
+		Character* c = charm->GetNearestCharacter(this, angle);
+		if (c) {
+			float fx, fy;
+			c->GetPosition(fx, fy);
+			printf(", Tried to attack %s (%d) at (%.1fx%.1f)", c->GetName().c_str(), c->GetID(), 
+				fx, fy);
+			charm->DoFight(this, c);
+		}
+		else {
+			printf("\t\t\t\t\t");
+		}
 	}
 
 	printf("\r");
@@ -93,6 +98,15 @@ void Player::Control(Map* map) {
 			else if (e.key_status == ButtonStatus::Released)
 				direita = false;
 			break;
+
+		case ALLEGRO_KEY_LCTRL:
+			if (e.key_status == ButtonStatus::Pressed)
+				attackOn = true;
+			else if (e.key_status == ButtonStatus::Released)
+				attackOn = false;
+
+			break;
+
 
 		}
 
