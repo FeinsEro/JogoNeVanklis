@@ -66,6 +66,9 @@
     <ClCompile Include="Asura.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Akhbran.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md">
@@ -119,6 +122,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Asura.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Akhbran.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

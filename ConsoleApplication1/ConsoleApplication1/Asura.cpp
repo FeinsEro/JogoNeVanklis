@@ -22,6 +22,7 @@ void Asura::DoEvents(void* cm, Map* map) {
 
 	Player* p = cManager->GetPlayer();
 
+
 	if (!p) return;
 
 	float nX, nY;

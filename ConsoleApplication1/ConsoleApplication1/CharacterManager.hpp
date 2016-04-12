@@ -13,6 +13,7 @@ enum TypeIDList {
 	TYPEID_PLAYER = 0,
 	TYPEID_TREE1 = 1,
 	TYPEID_ASURA = 66,
+	TYPEID_AKHBRAN = 67,
 };
 
 class CharacterManager {

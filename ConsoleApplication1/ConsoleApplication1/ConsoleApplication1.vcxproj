@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Akhbran.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Asura.cpp" />
     <ClCompile Include="BaseEnemy.cpp" />
@@ -174,6 +175,7 @@
     <None Include="..\..\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Akhbran.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Asura.hpp" />
     <ClInclude Include="BaseEnemy.hpp" />

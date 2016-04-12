@@ -16,6 +16,7 @@
 #include <allegro5/allegro_windows.h>
 
 #include "Asura.hpp"
+#include "Akhbran.hpp"
 /* 
 	EU
 	TU
@@ -47,6 +48,7 @@ int main(int argc, char **argv) {
 		player.SetSprite(&s);
 
 		Asura asu = Asura{ 0,0 };
+		Akhbran ahk = Akhbran{ 0,0 };
 
 		CharFactory* cf = new CharFactory(&cm);
 
@@ -71,6 +73,7 @@ int main(int argc, char **argv) {
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 27, 20));
 
 		cm.AddCharacter(&asu);
+		cm.AddCharacter(&ahk);
 
 		Map* m;
 		Map::LoadTiles();
@@ -159,6 +162,7 @@ int main(int argc, char **argv) {
 			if (frames % 12 == 0) {
 				player.Andar(playerdx, playerdy);
 				asu.Andar(playerdx, playerdy);
+				ahk.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;
 
