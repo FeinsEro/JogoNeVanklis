@@ -16,7 +16,10 @@ public:
 	std::string Falar() { return ""; }
 	void Andar(float, float);
 	void Lutar() {}
+	
 	void Reviver() {}
+
+	int GetAngle();
 
 	void SetEventQueue(void* ev);
 

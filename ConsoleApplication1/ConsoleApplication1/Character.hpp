@@ -8,7 +8,6 @@
 #include "Item.hpp"
 #include "Map.hpp"
 
-#define TYPEID_PLAYER 0
 
 class Character {
 protected:
@@ -82,6 +81,8 @@ public:
 	virtual void Lutar() = 0;
 	virtual void DoEvents(void* charmanager, Map* map) = 0;
 	virtual void Reviver() = 0;
+
+	virtual int GetAngle() = 0;
 
 	virtual Character* Clone(float x, float y) { return NULL; }
 

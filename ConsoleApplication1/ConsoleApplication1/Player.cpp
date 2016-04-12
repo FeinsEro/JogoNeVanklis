@@ -170,3 +170,7 @@ void Player::Andar(float a, float b) {
 	}
 
 }
+
+int Player::GetAngle() {
+	return angle;
+}

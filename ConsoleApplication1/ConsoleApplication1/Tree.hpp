@@ -5,9 +5,7 @@
 class Tree : public Character {
 
 public:
-	Tree(unsigned int x, unsigned int y) : Character(NULL, 0, x, y, "Árvore", 0xffffffff) {
-		_TypeID = 1;
-	}
+	Tree(unsigned int x, unsigned int y);
 
 
 	std::string Falar() override { return "Eu sou uma árvore. Eu não falo, idiota."; }
@@ -16,6 +14,7 @@ public:
 	void DoEvents(void* charmanager, Map* map) override {}
 	void Reviver() override {}
 
+	int GetAngle() { return 0; }
 
 	Character* Clone(float x, float y) override;
 

@@ -9,6 +9,12 @@
 #include "Player.hpp"
 #include "Map.hpp"
 
+enum TypeIDList {
+	TYPEID_PLAYER = 0,
+	TYPEID_TREE1 = 1,
+	TYPEID_ASURA = 66,
+};
+
 class CharacterManager {
 private:
 	std::vector<Character*> _chars;

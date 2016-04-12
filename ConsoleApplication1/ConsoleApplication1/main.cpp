@@ -15,6 +15,7 @@
 
 #include <allegro5/allegro_windows.h>
 
+#include "Asura.hpp"
 /* 
 	EU
 	TU
@@ -42,8 +43,10 @@ int main(int argc, char **argv) {
 		Item it = Item("Insígnia do MC Bin Laden", "insignia do mestre Bin Laden", 3000);
 		player.AddItem(&it);
 
-		Sprite s = Sprite("..\\characters\\Normal.png", 1.5f, 0);
+		Sprite s = Sprite("..\\characters\\dann.png", 1.5f, 0);
 		player.SetSprite(&s);
+
+		Asura asu = Asura{ 0,0 };
 
 		CharFactory* cf = new CharFactory(&cm);
 
@@ -66,6 +69,8 @@ int main(int argc, char **argv) {
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 21, 8));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 24, 11));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 27, 20));
+
+		cm.AddCharacter(&asu);
 
 		Map* m;
 		Map::LoadTiles();
@@ -153,6 +158,7 @@ int main(int argc, char **argv) {
 
 			if (frames % 12 == 0) {
 				player.Andar(playerdx, playerdy);
+				asu.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;
 

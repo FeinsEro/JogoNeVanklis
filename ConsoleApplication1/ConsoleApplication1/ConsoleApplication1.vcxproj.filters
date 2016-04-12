@@ -63,6 +63,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Asura.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md">
@@ -115,22 +118,22 @@
     <ClInclude Include="Animation.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Asura.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\characters\abraoleos.bmp">
-      <Filter>Sprites</Filter>
-    </Image>
     <Image Include="..\characters\akhbran.bmp">
       <Filter>Sprites</Filter>
     </Image>
     <Image Include="..\characters\asura.bmp">
       <Filter>Sprites</Filter>
     </Image>
-    <Image Include="..\characters\dann.bmp">
-      <Filter>Sprites</Filter>
-    </Image>
     <Image Include="mapdata.png">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\characters\dann.png">
+      <Filter>Sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>
