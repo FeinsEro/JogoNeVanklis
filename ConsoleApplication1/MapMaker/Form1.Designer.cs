@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlMapDraw = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,12 +48,13 @@
             this.pnlMapInfo.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlMapDraw
             // 
-            this.panel1.Location = new System.Drawing.Point(12, 64);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(807, 351);
-            this.panel1.TabIndex = 0;
+            this.pnlMapDraw.Location = new System.Drawing.Point(12, 64);
+            this.pnlMapDraw.Name = "pnlMapDraw";
+            this.pnlMapDraw.Size = new System.Drawing.Size(807, 351);
+            this.pnlMapDraw.TabIndex = 0;
+            this.pnlMapDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMapDraw_Paint);
             // 
             // menuStrip1
             // 
@@ -184,7 +185,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 427);
             this.Controls.Add(this.pnlMapInfo);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlMapDraw);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -201,7 +202,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlMapDraw;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem novoToolStripMenuItem;

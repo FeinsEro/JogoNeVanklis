@@ -47,8 +47,10 @@ namespace MapMaker
 
         public Bitmap GetImageFromIndex(int index)
         {
-            int yPos = (index / bmp.Height);
-            int xPos = (index % bmp.Height);
+            int yPos = (index / bmp.Width) * elemSize;
+            int xPos = (index % bmp.Width) * elemSize;
+
+            if (yPos >= bmp.Height) return null;
 
             Bitmap _bmp = this.SliceImage(xPos, yPos);
             

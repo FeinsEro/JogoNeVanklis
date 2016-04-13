@@ -7,7 +7,7 @@ namespace MapMaker
 {
     public class Map
     {
-        private int[] elements;
+        public int[] Elements { get; private set; }
         private String path;
 
         private uint offData, offChars;
@@ -57,14 +57,14 @@ namespace MapMaker
                 throw new InvalidMapException();
             
             /* Lê os dados do mapa */
-            this.elements = new int[this.Width * this.Height];
+            this.Elements = new int[this.Width * this.Height];
             bread.BaseStream.Seek(this.offData, SeekOrigin.Begin);
 
             for (uint y = 0; y < this.Height; y++)
             {
                 for (uint x = 0; x < this.Width; x++)
                 {
-                    elements[y * this.Width + x] = bread.ReadInt32();
+                    Elements[y * this.Width + x] = bread.ReadInt32();
                 }
             }
 

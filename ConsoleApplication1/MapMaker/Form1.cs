@@ -19,6 +19,14 @@ namespace MapMaker
         MapDataParser mdp;
         Map map = null;
 
+        struct _GFXDATA {
+            public Graphics gfx;
+            public int xoff, yoff;
+            public int elWidth, elHeight;
+        }
+
+        _GFXDATA gfxData;
+
         private void Form1_Load(object sender, EventArgs e)
         {
 #if DEBUG
@@ -129,10 +137,44 @@ namespace MapMaker
                 lblPlayerPos.Text = "(" + map.PlayerX + ", " + map.PlayerY + ")";
                 pnlMapInfo.Visible = true;
                 this.Text = map.Filename + " - Criador de Mapas";
+
+                gfxData.gfx = this.pnlMapDraw.CreateGraphics();
+                gfxData.gfx.Clear(SystemColors.Control);
+                gfxData.xoff = 0;
+                gfxData.yoff = 0;
+                gfxData.elWidth = (pnlMapDraw.Width / 32) + 1;
+                gfxData.elHeight = (pnlMapDraw.Width / 32) + 1;
+
+
             } catch (InvalidMapException ex)
             {
                 MessageBox.Show(this, "Mapa inválido", "Criador de mapas", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
+        }
+
+        private void pnlMapDraw_Paint(object sender, PaintEventArgs e)
+        {
+            if (map != null)
+            {
+
+                for (int y = gfxData.yoff; y < (gfxData.elHeight + gfxData.yoff); y++){
+                    for (int x = gfxData.xoff; x < (gfxData.elWidth + gfxData.xoff); x++)
+                    {
+                        if (x > map.Width)
+                            break;
+
+                        Bitmap bmp = mdp.GetImageFromIndex(map.Elements[y * map.Width + x]);
+
+                        if (bmp == null)
+                            break;
+
+                        gfxData.gfx.DrawImage(bmp, new Point(x * 32, y * 32));
+                    }
+
+                    if (y > map.Height)
+                        break;
+                }
             }
         }
     }

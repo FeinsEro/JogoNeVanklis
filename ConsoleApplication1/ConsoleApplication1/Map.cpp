@@ -28,8 +28,7 @@ void Map::SetData(int* indices) {
 	for (int y = 0; y < _height; y++) {
 		for (int x = 0; x < _width; x++) {
 				tile_files->SetFrame(_map_tile_indices[y*_width + x]);
-				tile_files->NextFrame();
-				al_draw_bitmap(tile_files->GetFrameImage(), rx, ry, 0);
+				al_draw_bitmap(tile_files->StepFrames(0), rx, ry, 0);
 
 				rx += TILE_SIZE;
 		}
