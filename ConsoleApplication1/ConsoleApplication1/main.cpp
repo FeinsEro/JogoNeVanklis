@@ -107,14 +107,21 @@ int main(int argc, char **argv) {
 
 		double fps = (1/60), start_time, end_time;
 
+		float start_animations = al_get_time();
+		float start_events = al_get_time();
+
 		float playerdx = 0, playerdy = 0;
 
 		start_time = al_get_time();
 
 		while (render) {
 			
-			//Atualiza personagens
-			cm.DoAllEvents();
+			//Run events in 15fps.
+			float end_events = al_get_time();
+			if ((end_events - start_events) >= 1/15.0f){
+				cm.DoAllEvents();
+				start_events - end_events;
+			}
 
 			//Processa eventos
 			if (!ev.CheckEvents()) {
@@ -158,13 +165,15 @@ int main(int argc, char **argv) {
 				
 			}
 
-
-			if (frames % 12 == 0) {
+			float end_animations = al_get_time();
+			/* Run animations in 5 fps by default. */
+			if ((end_animations - start_animations) >= 1/5.0f) {
 				player.Andar(playerdx, playerdy);
 				asu.Andar(playerdx, playerdy);
 				ahk.Andar(playerdx, playerdy);
 				playerdx = 0;
 				playerdy = 0;
+				start_animations = end_animations;
 
 			}
 
