@@ -259,6 +259,14 @@ namespace MapMaker
 
                     e.Graphics.DrawRectangle(pn, new Rectangle(pixelX, pixelY, 32, 32));
                 }
+
+                int playerPixelX = ((int) (map.PlayerX - gfxData.xoff) * 32);
+                int playerPixelY = ((int)(map.PlayerY - gfxData.yoff) * 32);
+
+                e.Graphics.DrawEllipse(Pens.White, new Rectangle(playerPixelX, playerPixelY, 32, 32));
+
+                e.Graphics.DrawString("P", new Font(FontFamily.GenericMonospace, 12, GraphicsUnit.Point),
+                    Brushes.Black, new Point(playerPixelX + 12, playerPixelY + 12));
             }
         }
 
@@ -292,6 +300,7 @@ namespace MapMaker
                 if (!multiple)
                 {
                     selectedTiles.Clear();
+                    
                 }
 
 
@@ -396,6 +405,29 @@ namespace MapMaker
 
             map.Save();
             this.Text = map.Filename + " - Criador de mapas";
+        }
+
+        private void alterarPosDoPlayerParaCáToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int gameX, gameY;
+            gameX = ((contextMenuStrip1.Left - pnlMapDraw.Location.X) / 32) + gfxData.xoff;
+            gameY = ((contextMenuStrip1.Top - pnlMapDraw.Location.Y) / 32) + gfxData.yoff;
+
+            gameX = (int) Math.Min(gameX, map.Width - 1);
+            gameY = (int) Math.Min(gameY, map.Height - 1);
+
+            map.PlayerX = (uint) gameX;
+            map.PlayerY = (uint) gameY;
+
+            lblPlayerPos.Text = "(" + map.PlayerX + ", " + map.PlayerY + ")";
+
+            pnlMapDraw.Refresh();
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            
         }
     }
 }

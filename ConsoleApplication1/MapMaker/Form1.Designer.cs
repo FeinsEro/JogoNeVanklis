@@ -50,6 +50,7 @@
             this.lblSize = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.alterarPosDoPlayerParaCáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMapDraw.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -78,20 +79,22 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mudarItemParaToolStripMenuItem,
-            this.toolStripMenuItem2});
+            this.toolStripMenuItem2,
+            this.alterarPosDoPlayerParaCáToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 32);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(228, 76);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // mudarItemParaToolStripMenuItem
             // 
             this.mudarItemParaToolStripMenuItem.Name = "mudarItemParaToolStripMenuItem";
-            this.mudarItemParaToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.mudarItemParaToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.mudarItemParaToolStripMenuItem.Text = "Mudar item para";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(159, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(224, 6);
             // 
             // vScrollBar1
             // 
@@ -130,7 +133,7 @@
             // novoToolStripMenuItem
             // 
             this.novoToolStripMenuItem.Name = "novoToolStripMenuItem";
-            this.novoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.novoToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.novoToolStripMenuItem.Text = "Novo";
             this.novoToolStripMenuItem.Click += new System.EventHandler(this.novoToolStripMenuItem_Click);
             // 
@@ -151,7 +154,7 @@
             // salvarComoToolStripMenuItem
             // 
             this.salvarComoToolStripMenuItem.Name = "salvarComoToolStripMenuItem";
-            this.salvarComoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salvarComoToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.salvarComoToolStripMenuItem.Text = "Salvar Como";
             this.salvarComoToolStripMenuItem.Click += new System.EventHandler(this.salvarComoToolStripMenuItem_Click);
             // 
@@ -242,6 +245,13 @@
             this.hScrollBar1.Size = new System.Drawing.Size(818, 17);
             this.hScrollBar1.TabIndex = 3;
             // 
+            // alterarPosDoPlayerParaCáToolStripMenuItem
+            // 
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Name = "alterarPosDoPlayerParaCáToolStripMenuItem";
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Text = "Alterar pos. do player para cá";
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Click += new System.EventHandler(this.alterarPosDoPlayerParaCáToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,6 +302,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mudarItemParaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem alterarPosDoPlayerParaCáToolStripMenuItem;
     }
 }
 
