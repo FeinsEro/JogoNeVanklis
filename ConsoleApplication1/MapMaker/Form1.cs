@@ -97,6 +97,19 @@ namespace MapMaker
             mdp = new MapDataParser();
             mdp.Open();
 
+            contextMenuStrip1.Enabled = false;
+            int tcount = Enum.GetValues(typeof(MapDataParser.MapTiles)).Length;
+            /* Adiciona novos itens de acordo com a pos. de mapa deles */
+            for (int i = 0; i < tcount; i++)
+            {
+                ToolStripMenuItem itTile = new ToolStripMenuItem(
+                    Enum.GetName(typeof(MapDataParser.MapTiles), i),
+                    mdp.GetImageFromIndex(i));
+                itTile.Tag = i;
+                itTile.Click += ItTile_Click;
+                mudarItemParaToolStripMenuItem.DropDownItems.Add(itTile);
+            }
+
             if (map == null)
             {
                 pnlMapInfo.Visible = false;
@@ -106,11 +119,29 @@ namespace MapMaker
             {
                 vScrollBar1.Maximum = 100; // gfxData.elHeight;
                 vScrollBar1.Minimum = 0;
+
+
+                contextMenuStrip1.Enabled = true;
+
             }
             else
             {
                 vScrollBar1.Enabled = false;
             }
+        }
+
+        private void ItTile_Click(object sender, EventArgs e)
+        {
+            //Pega o ID do tile modificado.
+            int tileid = (int)((ToolStripMenuItem)sender).Tag;
+
+            foreach (Point pt in selectedTiles)
+            {
+                map.Elements[pt.Y * map.Width + pt.X] = tileid;
+            }
+
+            selectedTiles.Clear();
+            pnlMapDraw.Refresh();
         }
 
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,6 +189,8 @@ namespace MapMaker
                 gfxData.yoff = 0;
                 gfxData.elWidth = (pnlMapDraw.Width / 32) + 1;
                 gfxData.elHeight = (pnlMapDraw.Height / 32) + 1;
+
+                //habilita o double buffering *apenas* no painel de desenho de mapa
                 typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
                     | BindingFlags.Instance | BindingFlags.NonPublic, null,
                     pnlMapDraw, new object[] { true });
@@ -167,6 +200,8 @@ namespace MapMaker
                  //   vScrollBar1.Maximum = gfxData.elHeight;
                     vScrollBar1.Minimum = 0;
                     vScrollBar1.Enabled = true;
+                    contextMenuStrip1.Enabled = true;
+                    pnlMapDraw.Refresh();
                 }
             } catch (InvalidMapException ex)
             {
@@ -174,6 +209,8 @@ namespace MapMaker
                     MessageBoxIcon.Error);
             }
         }
+
+        List<Point> selectedTiles = new List<Point>();
 
         private void pnlMapDraw_Paint(object sender, PaintEventArgs e)
         {
@@ -209,6 +246,17 @@ namespace MapMaker
                     if (y > map.Height)
                         break;
                 }
+
+                Pen pn = new Pen(Brushes.Black, 2);
+                
+                foreach (Point pt in selectedTiles)
+                {
+                    int pixelX, pixelY;
+                    pixelX = ((pt.X - gfxData.xoff) * 32);
+                    pixelY = ((pt.Y - gfxData.yoff) * 32);
+
+                    e.Graphics.DrawRectangle(pn, new Rectangle(pixelX, pixelY, 32, 32));
+                }
             }
         }
 
@@ -226,6 +274,46 @@ namespace MapMaker
             gfxData.yoff = e.NewValue;
             pnlMapDraw.Refresh();
 
+        }
+
+        bool multiple = false;
+        private void pnlMapDraw_Click(object sender, EventArgs e)
+        {
+          
+
+        }
+
+        private void pnlMapDraw_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (map != null) { 
+                if (!multiple)
+                {
+                    selectedTiles.Clear();
+                }
+
+                
+
+                int gameX, gameY;
+                gameX = (e.X / 32) + gfxData.xoff;
+                gameY = (e.Y / 32) + gfxData.yoff;
+               selectedTiles.Add(new Point(gameX, gameY));
+            }
+
+            pnlMapDraw.Refresh();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Shift)
+                multiple = true;
+
+           
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Shift)
+                multiple = false;
         }
     }
 }

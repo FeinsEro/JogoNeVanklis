@@ -28,7 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlMapDraw = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mudarItemParaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,8 +49,9 @@
             this.labelPP = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.pnlMapDraw.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnlMapInfo.SuspendLayout();
             this.SuspendLayout();
@@ -56,14 +62,46 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMapDraw.BackColor = System.Drawing.Color.Black;
+            this.pnlMapDraw.ContextMenuStrip = this.contextMenuStrip1;
             this.pnlMapDraw.Controls.Add(this.vScrollBar1);
-            this.pnlMapDraw.Location = new System.Drawing.Point(12, 64);
+            this.pnlMapDraw.Location = new System.Drawing.Point(12, 62);
             this.pnlMapDraw.Name = "pnlMapDraw";
             this.pnlMapDraw.Size = new System.Drawing.Size(835, 351);
             this.pnlMapDraw.TabIndex = 0;
             this.pnlMapDraw.ClientSizeChanged += new System.EventHandler(this.pnlMapDraw_Resize);
+            this.pnlMapDraw.Click += new System.EventHandler(this.pnlMapDraw_Click);
             this.pnlMapDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMapDraw_Paint);
+            this.pnlMapDraw.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMapDraw_MouseClick);
             this.pnlMapDraw.Resize += new System.EventHandler(this.pnlMapDraw_Resize);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mudarItemParaToolStripMenuItem,
+            this.toolStripMenuItem2});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 32);
+            // 
+            // mudarItemParaToolStripMenuItem
+            // 
+            this.mudarItemParaToolStripMenuItem.Name = "mudarItemParaToolStripMenuItem";
+            this.mudarItemParaToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.mudarItemParaToolStripMenuItem.Text = "Mudar item para";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(159, 6);
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.vScrollBar1.Location = new System.Drawing.Point(818, 0);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 351);
+            this.vScrollBar1.TabIndex = 0;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // menuStrip1
             // 
@@ -156,6 +194,7 @@
             // 
             // lblPlayerPos
             // 
+            this.lblPlayerPos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPlayerPos.AutoSize = true;
             this.lblPlayerPos.Location = new System.Drawing.Point(641, 4);
             this.lblPlayerPos.Name = "lblPlayerPos";
@@ -165,6 +204,7 @@
             // 
             // labelPP
             // 
+            this.labelPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPP.AutoSize = true;
             this.labelPP.Location = new System.Drawing.Point(557, 4);
             this.labelPP.Name = "labelPP";
@@ -190,21 +230,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Tamanho:";
             // 
-            // vScrollBar1
+            // hScrollBar1
             // 
-            this.vScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.hScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.vScrollBar1.Location = new System.Drawing.Point(818, 0);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 351);
-            this.vScrollBar1.TabIndex = 0;
-            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
+            this.hScrollBar1.Location = new System.Drawing.Point(12, 417);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(818, 17);
+            this.hScrollBar1.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(859, 443);
+            this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.pnlMapInfo);
             this.Controls.Add(this.pnlMapDraw);
             this.Controls.Add(this.menuStrip1);
@@ -212,7 +252,10 @@
             this.Name = "Form1";
             this.Text = "Criador de Mapas";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.pnlMapDraw.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlMapInfo.ResumeLayout(false);
@@ -241,6 +284,10 @@
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.HScrollBar hScrollBar1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mudarItemParaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
     }
 }
 

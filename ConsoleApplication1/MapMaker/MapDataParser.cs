@@ -9,11 +9,12 @@ namespace MapMaker
     /* Faz o parsing dos sprites de terreno do mapdata.png */
     public class MapDataParser
     {
-        enum MapTiles
+        public enum MapTiles
         {
             TILE_GRASS = 0,
             TILE_WATER = 1,
             TILE_DIRT = 2,
+                
         }
 
         private String path;
