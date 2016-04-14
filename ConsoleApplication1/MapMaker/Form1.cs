@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -29,6 +30,9 @@ namespace MapMaker
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            gfxData.elHeight = 0;
+            gfxData.elWidth = 0;
+            gfxData.gfx = null;
 #if DEBUG
             Properties.Settings.Default.Reset();
 #endif
@@ -98,7 +102,15 @@ namespace MapMaker
                 pnlMapInfo.Visible = false;
             }
 
-
+            if (gfxData.elHeight > 0)
+            {
+                vScrollBar1.Maximum = 100; // gfxData.elHeight;
+                vScrollBar1.Minimum = 0;
+            }
+            else
+            {
+                vScrollBar1.Enabled = false;
+            }
         }
 
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
@@ -138,14 +150,24 @@ namespace MapMaker
                 pnlMapInfo.Visible = true;
                 this.Text = map.Filename + " - Criador de Mapas";
 
-                gfxData.gfx = this.pnlMapDraw.CreateGraphics();
-                gfxData.gfx.Clear(SystemColors.Control);
+                if (gfxData.gfx == null)
+                    gfxData.gfx = this.pnlMapDraw.CreateGraphics();
+
+                gfxData.gfx.Clear(Color.Black);
                 gfxData.xoff = 0;
                 gfxData.yoff = 0;
                 gfxData.elWidth = (pnlMapDraw.Width / 32) + 1;
-                gfxData.elHeight = (pnlMapDraw.Width / 32) + 1;
+                gfxData.elHeight = (pnlMapDraw.Height / 32) + 1;
+                typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
+                    | BindingFlags.Instance | BindingFlags.NonPublic, null,
+                    pnlMapDraw, new object[] { true });
 
-
+                if (gfxData.elHeight > 0)
+                {
+                 //   vScrollBar1.Maximum = gfxData.elHeight;
+                    vScrollBar1.Minimum = 0;
+                    vScrollBar1.Enabled = true;
+                }
             } catch (InvalidMapException ex)
             {
                 MessageBox.Show(this, "Mapa inválido", "Criador de mapas", MessageBoxButtons.OK,
@@ -158,10 +180,21 @@ namespace MapMaker
             if (map != null)
             {
 
-                for (int y = gfxData.yoff; y < (gfxData.elHeight + gfxData.yoff); y++){
-                    for (int x = gfxData.xoff; x < (gfxData.elWidth + gfxData.xoff); x++)
+                if (e != null)
+                {
+                    e.Graphics.FillRectangle(Brushes.Black, e.ClipRectangle);
+                } else
+                {
+                    e.Graphics.Clear(Color.Black);
+                }
+                
+                for (int y = gfxData.yoff; y <= (gfxData.elHeight + gfxData.yoff); y++){
+                    for (int x = gfxData.xoff; x <= (gfxData.elWidth + gfxData.xoff); x++)
                     {
                         if (x > map.Width)
+                            break;
+
+                        if (y+1 >= map.Height)
                             break;
 
                         Bitmap bmp = mdp.GetImageFromIndex(map.Elements[y * map.Width + x]);
@@ -169,13 +202,30 @@ namespace MapMaker
                         if (bmp == null)
                             break;
 
-                        gfxData.gfx.DrawImage(bmp, new Point(x * 32, y * 32));
+                        e.Graphics.DrawImage(bmp, 
+                            new Point((x-gfxData.xoff) * 32, (y-gfxData.yoff) * 32));
                     }
 
                     if (y > map.Height)
                         break;
                 }
             }
+        }
+
+        bool sizeChanged = false;
+        private void pnlMapDraw_Resize(object sender, EventArgs e)
+        {
+            gfxData.elWidth = (pnlMapDraw.Width / 32) + 1;
+            gfxData.elHeight = (pnlMapDraw.Height / 32) + 1;
+            pnlMapDraw.Refresh();
+            sizeChanged = true;
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            gfxData.yoff = e.NewValue;
+            pnlMapDraw.Refresh();
+
         }
     }
 }
