@@ -228,15 +228,16 @@ namespace MapMaker
                     e.Graphics.Clear(Color.Black);
                 }
 
-                for (int y = gfxData.yoff; y <= (gfxData.elHeight + gfxData.yoff); y++)
+                for (int y = gfxData.yoff; y < (gfxData.elHeight + gfxData.yoff); y++)
                 {
-                    for (int x = gfxData.xoff; x <= (gfxData.elWidth + gfxData.xoff); x++)
+                    if (y >= map.Height)
+                        break;
+
+                    for (int x = gfxData.xoff; x < (gfxData.elWidth + gfxData.xoff); x++)
                     {
-                        if (x > map.Width)
+                        if (x >= map.Width)
                             break;
 
-                        if (y + 1 >= map.Height)
-                            break;
 
                         Bitmap bmp = mdp.GetImageFromIndex(map.Elements[y * map.Width + x]);
 
@@ -246,9 +247,6 @@ namespace MapMaker
                         e.Graphics.DrawImage(bmp,
                             new Point((x - gfxData.xoff) * 32, (y - gfxData.yoff) * 32));
                     }
-
-                    if (y > map.Height)
-                        break;
                 }
 
                 Pen pn = new Pen(Brushes.Black, 2);
