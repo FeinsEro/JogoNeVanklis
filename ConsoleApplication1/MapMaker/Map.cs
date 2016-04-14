@@ -68,7 +68,34 @@ namespace MapMaker
                 }
             }
 
+            bread.Close();
 
+
+        }
+
+        public void Save()
+        {
+            StreamWriter sw = new StreamWriter(this.Filename);
+            BinaryWriter bw = new BinaryWriter(sw.BaseStream);
+
+            /* Magic words */
+            bw.Write('W'); bw.Write('E'); bw.Write('R'); bw.Write('L');
+
+            /* Metadados */
+            bw.Write(this.Width);       //Largura
+            bw.Write(this.Height);      //Altura
+            bw.Write(bw.BaseStream.Position + 16); //Posição para os dados do mapa.
+            bw.Write((int)0); //Posição para os dados do char (n implementado)
+            bw.Write(this.PlayerX); //Pos. X do player
+            bw.Write(this.PlayerY); //Pos. Y do player
+
+            for (int i = 0; i < (this.Width * this.Height); i++)
+            {
+                bw.Write(this.Elements[i]);
+            }
+
+            bw.Flush();
+            bw.Close();
         }
 
     }

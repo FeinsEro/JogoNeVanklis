@@ -312,8 +312,17 @@ namespace MapMaker
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+           
             if (e.Shift)
                 multiple = false;
+        }
+
+        private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (map != null)
+            {
+                map.Save();
+            }
         }
     }
 }
