@@ -20,7 +20,8 @@ namespace MapMaker
         MapDataParser mdp;
         Map map = null;
 
-        struct _GFXDATA {
+        struct _GFXDATA
+        {
             public Graphics gfx;
             public int xoff, yoff;
             public int elWidth, elHeight;
@@ -43,19 +44,20 @@ namespace MapMaker
             {
                 bool validFolder = false;
 
-                while (!validFolder) { 
+                while (!validFolder)
+                {
                     FolderBrowserDialog fbd = new FolderBrowserDialog();
                     fbd.Description = "Não foi possível encontrar a pasta de instalação do jogo Dois Demônios. \n" +
                          "Informe-nos onde você o instalou";
                     fbd.SelectedPath = Application.StartupPath;
-                
+
                     if (fbd.ShowDialog() == DialogResult.OK)
                     {
                         /* Verifica a existência de três subpastas: game, characters e maps */
                         bool isChar = false, isGame = false, isMaps = false;
                         foreach (String dir in Directory.EnumerateDirectories(fbd.SelectedPath))
                         {
-                            
+
                             if (dir.EndsWith("game"))
                                 isGame = true;
 
@@ -68,15 +70,16 @@ namespace MapMaker
 
                         }
 
-                        
+
                         validFolder = (isGame && isChar && isMaps);
                         if (!validFolder)
                         {
-                            MessageBox.Show(this, "Pasta inválida!", "Criador de Mapas", MessageBoxButtons.OK, 
+                            MessageBox.Show(this, "Pasta inválida!", "Criador de Mapas", MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-                        } else
+                        }
+                        else
                         {
-                            
+
                         }
 
 
@@ -89,7 +92,7 @@ namespace MapMaker
                 }
 
                 Properties.Settings.Default.Save();
-                
+
 
 
             }
@@ -167,13 +170,15 @@ namespace MapMaker
                 {
                     file = ofd.FileName;
 
-                } else
+                }
+                else
                 {
                     return;
                 }
             }
 
-            try { 
+            try
+            {
                 map = new Map(file);
                 map.Open();
                 lblSize.Text = map.Width + " x " + map.Height;
@@ -181,10 +186,6 @@ namespace MapMaker
                 pnlMapInfo.Visible = true;
                 this.Text = map.Filename + " - Criador de Mapas";
 
-                if (gfxData.gfx == null)
-                    gfxData.gfx = this.pnlMapDraw.CreateGraphics();
-
-                gfxData.gfx.Clear(Color.Black);
                 gfxData.xoff = 0;
                 gfxData.yoff = 0;
                 gfxData.elWidth = (pnlMapDraw.Width / 32) + 1;
@@ -197,13 +198,14 @@ namespace MapMaker
 
                 if (gfxData.elHeight > 0)
                 {
-                 //   vScrollBar1.Maximum = gfxData.elHeight;
+                    //   vScrollBar1.Maximum = gfxData.elHeight;
                     vScrollBar1.Minimum = 0;
                     vScrollBar1.Enabled = true;
                     contextMenuStrip1.Enabled = true;
                     pnlMapDraw.Refresh();
                 }
-            } catch (InvalidMapException ex)
+            }
+            catch (InvalidMapException ex)
             {
                 MessageBox.Show(this, "Mapa inválido", "Criador de mapas", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -220,18 +222,20 @@ namespace MapMaker
                 if (e != null)
                 {
                     e.Graphics.FillRectangle(Brushes.Black, e.ClipRectangle);
-                } else
+                }
+                else
                 {
                     e.Graphics.Clear(Color.Black);
                 }
-                
-                for (int y = gfxData.yoff; y <= (gfxData.elHeight + gfxData.yoff); y++){
+
+                for (int y = gfxData.yoff; y <= (gfxData.elHeight + gfxData.yoff); y++)
+                {
                     for (int x = gfxData.xoff; x <= (gfxData.elWidth + gfxData.xoff); x++)
                     {
                         if (x > map.Width)
                             break;
 
-                        if (y+1 >= map.Height)
+                        if (y + 1 >= map.Height)
                             break;
 
                         Bitmap bmp = mdp.GetImageFromIndex(map.Elements[y * map.Width + x]);
@@ -239,8 +243,8 @@ namespace MapMaker
                         if (bmp == null)
                             break;
 
-                        e.Graphics.DrawImage(bmp, 
-                            new Point((x-gfxData.xoff) * 32, (y-gfxData.yoff) * 32));
+                        e.Graphics.DrawImage(bmp,
+                            new Point((x - gfxData.xoff) * 32, (y - gfxData.yoff) * 32));
                     }
 
                     if (y > map.Height)
@@ -248,7 +252,7 @@ namespace MapMaker
                 }
 
                 Pen pn = new Pen(Brushes.Black, 2);
-                
+
                 foreach (Point pt in selectedTiles)
                 {
                     int pixelX, pixelY;
@@ -279,24 +283,25 @@ namespace MapMaker
         bool multiple = false;
         private void pnlMapDraw_Click(object sender, EventArgs e)
         {
-          
+
 
         }
 
         private void pnlMapDraw_MouseClick(object sender, MouseEventArgs e)
         {
-            if (map != null) { 
+            if (map != null)
+            {
                 if (!multiple)
                 {
                     selectedTiles.Clear();
                 }
 
-                
+
 
                 int gameX, gameY;
                 gameX = (e.X / 32) + gfxData.xoff;
                 gameY = (e.Y / 32) + gfxData.yoff;
-               selectedTiles.Add(new Point(gameX, gameY));
+                selectedTiles.Add(new Point(gameX, gameY));
             }
 
             pnlMapDraw.Refresh();
@@ -307,12 +312,12 @@ namespace MapMaker
             if (e.Shift)
                 multiple = true;
 
-           
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-           
+
             if (e.Shift)
                 multiple = false;
         }
@@ -321,8 +326,78 @@ namespace MapMaker
         {
             if (map != null)
             {
-                map.Save();
+                if (map.Filename == String.Empty)
+                    salvarComoToolStripMenuItem_Click(sender, e);
+                else
+                    map.Save();
             }
+        }
+
+        private void novoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Size mapSize;
+            using (NewMapForm frmNew = new NewMapForm())
+            {
+                if (frmNew.ShowDialog() != DialogResult.OK)
+                    return;
+
+                mapSize = frmNew.GetMapSize();
+            }
+
+            this.Text = "Criador de Mapas - Criando...";
+
+            map = new Map((uint)mapSize.Width, (uint)mapSize.Height);
+            lblSize.Text = map.Width + " x " + map.Height;
+            lblPlayerPos.Text = "(" + map.PlayerX + ", " + map.PlayerY + ")";
+            pnlMapInfo.Visible = true;
+
+            if (gfxData.gfx == null)
+                gfxData.gfx = this.pnlMapDraw.CreateGraphics();
+
+            gfxData.gfx.Clear(Color.Black);
+            gfxData.xoff = 0;
+            gfxData.yoff = 0;
+            gfxData.elWidth = (pnlMapDraw.Width / 32) + 1;
+            gfxData.elHeight = (pnlMapDraw.Height / 32) + 1;
+
+            //habilita o double buffering *apenas* no painel de desenho de mapa
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
+                | BindingFlags.Instance | BindingFlags.NonPublic, null,
+                pnlMapDraw, new object[] { true });
+            vScrollBar1.Maximum = 100; // gfxData.elHeight;
+            vScrollBar1.Minimum = 0;
+
+            this.Text = "Sem Título - Criador de Mapas";
+
+            contextMenuStrip1.Enabled = true;
+
+            pnlMapDraw.Refresh();
+        }
+
+        private void salvarComoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.AddExtension = true;
+                sfd.Title = "Salvar mapa";
+                sfd.CheckPathExists = true;
+                sfd.AutoUpgradeEnabled = true;
+                sfd.Filter = "Tribalia map files (*.map)|*.map|All files|*.*";
+                sfd.FilterIndex = 0;
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    map.Filename = sfd.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            map.Save();
+            this.Text = map.Filename + " - Criador de mapas";
         }
     }
 }

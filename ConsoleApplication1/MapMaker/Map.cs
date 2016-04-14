@@ -18,11 +18,20 @@ namespace MapMaker
         public uint PlayerX { get; set; }
         public uint PlayerY { get; set; }
 
-        public String Filename { get; private set; }
+        public String Filename { get; set; }
 
         public Map(String path)
         {
             this.Filename = path;
+        }
+
+        public Map(uint width, uint height)
+        {
+            this.Width = width;
+            this.Height = height;
+            this.Elements = new int[width * height];
+            this.Filename = String.Empty;
+            
         }
 
         public void Open()
@@ -84,7 +93,7 @@ namespace MapMaker
             /* Metadados */
             bw.Write(this.Width);       //Largura
             bw.Write(this.Height);      //Altura
-            bw.Write(bw.BaseStream.Position + 16); //Posição para os dados do mapa.
+            bw.Write((uint)bw.BaseStream.Position + 16); //Posição para os dados do mapa.
             bw.Write((int)0); //Posição para os dados do char (n implementado)
             bw.Write(this.PlayerX); //Pos. X do player
             bw.Write(this.PlayerY); //Pos. Y do player
