@@ -266,6 +266,17 @@ namespace MapMaker
                     e.Graphics.DrawRectangle(pn, new Rectangle(pixelX, pixelY, 32, 32));
                 }
 
+                foreach (Character c in map.CharacterList)
+                {
+                    int pixelX, pixelY;
+                    pixelX = ((c.Location.X - gfxData.xoff) * 32);
+                    pixelY = ((c.Location.Y - gfxData.yoff) * 32);
+
+                    e.Graphics.DrawImage(c.TypeData.CharacterBitmap,
+                        new Point(pixelX, pixelY));
+
+                }
+
                 int playerPixelX = ((int) (map.PlayerX - gfxData.xoff) * 32);
                 int playerPixelY = ((int)(map.PlayerY - gfxData.yoff) * 32);
 
@@ -273,6 +284,8 @@ namespace MapMaker
 
                 e.Graphics.DrawString("P", new Font(FontFamily.GenericMonospace, 12, GraphicsUnit.Point),
                     Brushes.Black, new Point(playerPixelX + 12, playerPixelY + 12));
+
+
             }
         }
 
@@ -479,6 +492,8 @@ namespace MapMaker
             GameChars gch = new GameChars(map.CharacterList);
             gch.ShowDialog(this);
             map.CharacterList = gch.GetCharacters();
+
+            pnlMapDraw.Refresh(); //redesenha os novos chars
 
         }
     }

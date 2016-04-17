@@ -39,6 +39,7 @@ namespace MapMaker
 
         }
 
+
         Character c;
         private void button1_Click(object sender, EventArgs e)
         {

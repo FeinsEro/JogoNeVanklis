@@ -31,7 +31,16 @@ namespace MapMaker
 
         private void GameChars_Load(object sender, EventArgs e)
         {
+            AddAllCharsToList();
+        }
 
+
+        void AddAllCharsToList()
+        {
+            foreach (Character c in this._chars)
+            {
+                AddGameCharToList(c);
+            }
         }
 
         void AddGameCharToList(Character character)

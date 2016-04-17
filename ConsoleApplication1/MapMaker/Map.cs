@@ -81,6 +81,39 @@ namespace MapMaker
                 }
             }
 
+            /* Lê os characters do mapa */
+            bread.BaseStream.Seek(this.offChars, SeekOrigin.Begin);
+            uint count = bread.ReadUInt32();
+
+            for (int i = 0; i < count; i++)
+            {
+                uint elsize = bread.ReadUInt32();
+                
+                uint tid, objid, xpos, ypos, hp;
+
+                if (elsize >= 20)
+                {
+                    tid = bread.ReadUInt32();
+                    objid = bread.ReadUInt32();
+                    xpos = bread.ReadUInt32();
+                    ypos = bread.ReadUInt32();
+                    hp = bread.ReadUInt32();
+                    bread.BaseStream.Seek((elsize - 20), SeekOrigin.Current);
+                } else
+                {
+                    /* Elementos com size < 20 não suportados */
+                    throw new InvalidMapException();
+                }
+
+                Character ch = new Character((CharacterID)tid);
+                ch.ID = objid;
+                ch.Location = new System.Drawing.Point((int)xpos, (int)ypos);
+                ch.HP = (int)hp;
+
+                this.CharacterList.Add(ch);
+            }
+            
+
             bread.Close();
 
 
