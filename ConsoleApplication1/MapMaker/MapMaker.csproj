@@ -51,6 +51,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameCharAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameCharAdd.Designer.cs">
+      <DependentUpon>GameCharAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameChars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameChars.Designer.cs">
+      <DependentUpon>GameChars.cs</DependentUpon>
+    </Compile>
     <Compile Include="Map.cs" />
     <Compile Include="MapDataParser.cs" />
     <Compile Include="NewMapForm.cs">
@@ -63,6 +75,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameCharAdd.resx">
+      <DependentUpon>GameCharAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameChars.resx">
+      <DependentUpon>GameChars.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewMapForm.resx">
       <DependentUpon>NewMapForm.cs</DependentUpon>

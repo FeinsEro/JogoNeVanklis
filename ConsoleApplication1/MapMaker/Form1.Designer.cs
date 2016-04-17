@@ -51,6 +51,9 @@
             this.lblSize = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.mapaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.caracteresDoJogoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMapDraw.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -117,6 +120,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arquivoToolStripMenuItem,
+            this.mapaToolStripMenuItem,
             this.ajudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -253,6 +257,29 @@
             this.hScrollBar1.Size = new System.Drawing.Size(818, 17);
             this.hScrollBar1.TabIndex = 3;
             // 
+            // mapaToolStripMenuItem
+            // 
+            this.mapaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.informaçõesToolStripMenuItem,
+            this.caracteresDoJogoToolStripMenuItem});
+            this.mapaToolStripMenuItem.Name = "mapaToolStripMenuItem";
+            this.mapaToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.mapaToolStripMenuItem.Text = "&Mapa";
+            // 
+            // informaçõesToolStripMenuItem
+            // 
+            this.informaçõesToolStripMenuItem.Name = "informaçõesToolStripMenuItem";
+            this.informaçõesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.informaçõesToolStripMenuItem.Text = "Informações...";
+            this.informaçõesToolStripMenuItem.Click += new System.EventHandler(this.informaçõesToolStripMenuItem_Click);
+            // 
+            // caracteresDoJogoToolStripMenuItem
+            // 
+            this.caracteresDoJogoToolStripMenuItem.Name = "caracteresDoJogoToolStripMenuItem";
+            this.caracteresDoJogoToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.caracteresDoJogoToolStripMenuItem.Text = "Caracteres do jogo...";
+            this.caracteresDoJogoToolStripMenuItem.Click += new System.EventHandler(this.caracteresDoJogoToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,6 +293,7 @@
             this.Name = "Form1";
             this.Text = "Criador de Mapas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
@@ -304,6 +332,9 @@
         private System.Windows.Forms.ToolStripMenuItem mudarItemParaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem alterarPosDoPlayerParaCáToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mapaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem informaçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem caracteresDoJogoToolStripMenuItem;
     }
 }
 

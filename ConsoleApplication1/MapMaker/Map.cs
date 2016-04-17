@@ -25,6 +25,7 @@ namespace MapMaker
         public Map(String path)
         {
             this.Filename = path;
+            this.CharacterList = new List<Character>();
         }
 
         public Map(uint width, uint height)
@@ -33,7 +34,8 @@ namespace MapMaker
             this.Height = height;
             this.Elements = new int[width * height];
             this.Filename = String.Empty;
-            
+
+            this.CharacterList = new List<Character>();
         }
 
         public void Open()

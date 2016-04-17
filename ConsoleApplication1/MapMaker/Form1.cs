@@ -17,6 +17,7 @@ namespace MapMaker
             InitializeComponent();
         }
 
+
         MapDataParser mdp;
         Map map = null;
 
@@ -31,6 +32,7 @@ namespace MapMaker
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            saved = true;
             gfxData.elHeight = 0;
             gfxData.elWidth = 0;
             gfxData.gfx = null;
@@ -117,6 +119,7 @@ namespace MapMaker
             if (map == null)
             {
                 pnlMapInfo.Visible = false;
+                mapaToolStripMenuItem.Visible = false;
             }
 
             if (gfxData.elHeight > 0)
@@ -204,6 +207,8 @@ namespace MapMaker
                     vScrollBar1.Enabled = true;
                     contextMenuStrip1.Enabled = true;
                     pnlMapDraw.Refresh();
+
+                    mapaToolStripMenuItem.Visible = true;
                 }
             }
             catch (InvalidMapException ex)
@@ -385,6 +390,7 @@ namespace MapMaker
             this.Text = "Sem Título - Criador de Mapas";
 
             contextMenuStrip1.Enabled = true;
+            mapaToolStripMenuItem.Visible = true;
 
             pnlMapDraw.Refresh();
         }
@@ -443,6 +449,37 @@ namespace MapMaker
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+            this.Close();
+        }
+
+        private void informaçõesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this,
+                " Tamanho: " + map.Width + "x" + map.Height + "\n" +
+                " Posição inicial do player: (" + map.PlayerX + "," + map.PlayerY + ")",
+                "Informações");
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!saved)
+            {
+                if (MessageBox.Show(this, "Há dados não salvos\n\nDeseja mesmo sair?", "Criador de mapas",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+
+            }
+            
+        }
+
+        private void caracteresDoJogoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GameChars gch = new GameChars(map.CharacterList);
+            gch.ShowDialog(this);
+            map.CharacterList = gch.GetCharacters();
+
         }
     }
 }

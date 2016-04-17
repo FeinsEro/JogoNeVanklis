@@ -39,6 +39,7 @@ namespace MapMaker
         public string SpritePath;
         public Size SpriteElementSize;
         public float SpriteScale;
+        public Image CharacterBitmap;
 
         public CharacterType(uint tid, String path, float scale = 1.0f, int spritew = 32, int spriteh = 32)
         {
@@ -46,6 +47,15 @@ namespace MapMaker
             this.SpritePath = path;
             this.SpriteScale = scale;
             this.SpriteElementSize = new Size(spritew, spriteh);
+
+            /* Desenha o primeiro frame do sprite */
+            Image img = Image.FromFile(this.SpritePath);
+
+            this.CharacterBitmap = new Bitmap((int)(spritew * scale), (int)(spriteh * scale));
+            Graphics gfx = Graphics.FromImage(this.CharacterBitmap);
+            gfx.DrawImage(img, new Rectangle(0, 0, (int)(spritew * scale), (int)(spriteh * scale)), 
+                new Rectangle(0, 0, spritew, spriteh), GraphicsUnit.Pixel);
+            
         }
 
         public static CharacterType GetTypeByID(CharacterID typeid)
