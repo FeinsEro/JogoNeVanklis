@@ -13,6 +13,17 @@ Character* CharFactory::PutCharacter(int type_id, unsigned int x, unsigned int y
 	catch (...) { return NULL; }
 }
 
+Character* CharFactory::PutCharacter(int type_id, int id, unsigned int x, unsigned int y, int hp) {
+	try { 
+		Character* ch = _enemies_list.at(type_id)->Clone(x, y); 
+		ch->_ID = id;
+		ch->_HP = hp;
+		return ch;
+	}
+	catch (...) { return NULL; }
+}
+
+
 CharFactory::~CharFactory() {
 
 }

@@ -16,6 +16,7 @@ public:
 
 	void RegisterCharacter(int type_id, Character* char_instance);
 	Character* PutCharacter(int type_id, unsigned int x, unsigned int y);
+	Character* PutCharacter(int type_id, int id, unsigned int x, unsigned int y, int hp);
 
 	~CharFactory();
 };

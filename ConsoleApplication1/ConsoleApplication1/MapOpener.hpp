@@ -18,6 +18,7 @@ struct MapFile {
 	int playerY;
 };
 
+
 class MapOpener {
 private:
 	std::string _path;

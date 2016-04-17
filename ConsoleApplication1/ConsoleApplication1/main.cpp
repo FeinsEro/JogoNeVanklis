@@ -62,6 +62,8 @@ int main(int argc, char **argv) {
 		cm.AddCharacter(&player);
 		cm.SetPlayer(&player);
 
+		
+		/*
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 3, 8));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 6, 11));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 9, 20));
@@ -71,6 +73,7 @@ int main(int argc, char **argv) {
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 21, 8));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 24, 11));
 		cm.AddCharacter(cf->PutCharacter(t.GetTypeID(), 27, 20));
+		*/
 
 		cm.AddCharacter(&asu);
 		cm.AddCharacter(&ahk);
@@ -94,6 +97,15 @@ int main(int argc, char **argv) {
 		float fx = px, fy = py;
 		player.SetPosition(fx, fy);
 
+
+		std::vector<CharacterData>* chd = m->GetCharData();
+
+		if (chd->size() > 0) {
+			for (auto i = chd->begin(); i != chd->end(); i++) {
+				cm.AddCharacter(cf->PutCharacter(i->Type, i->XPos, i->YPos));
+			}
+
+		}
 
 		r->SetMap(m);
 		cm.SetMap(m);

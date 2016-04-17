@@ -4,8 +4,21 @@
 #include <allegro5/bitmap.h>
 #include "Sprite.hpp"
 
+#include <vector>
+
 //Quantidade de pixels por unidade no jogo.
 #define TILE_SIZE 32
+
+struct CharacterData {
+	unsigned int Type;
+	unsigned int ID;
+	unsigned int XPos;
+	unsigned int YPos;
+	unsigned int HP;	
+	//unsigned int atk;
+	//unsigned int def;
+};
+
 
 class Map {
 private:
@@ -16,6 +29,8 @@ private:
 	/* Índices no array de tiles.*/
 	int* _map_tile_indices;
 
+	/* Dados dos chars no mapa */
+	std::vector<CharacterData> _chardata;
 public:
 	Map(int w, int h);
 
@@ -30,6 +45,13 @@ public:
 		x = _playerX; y = _playerY;
 	}
 
+	inline std::vector<CharacterData>* GetCharData() {
+		return &_chardata;
+	}
+
+	inline void SetCharData(std::vector<CharacterData>* chardata) {
+		_chardata = *chardata;
+	}
 
 	inline int GetWidth() { return _width; }
 	inline int GetHeight() { return _height; }

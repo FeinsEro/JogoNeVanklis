@@ -10,6 +10,8 @@
 
 
 class Character {
+	friend class CharFactory;
+
 protected:
 	float _XPos, _YPos;
 

@@ -42,6 +42,39 @@ Map* MapOpener::Open(std::string path) {
 
 	mp->SetData(data);
 	mp->SetInitialPlayerPos(mapData.playerX, mapData.playerY);
+
+
+	if (mapData.offset_to_chars == 0) {
+		fprintf(stderr, "AVISO: Não há objetos no mapa.\n");
+	} else {
+		fseek(fMap, mapData.offset_to_chars, 0);
+		/* O primeiro campo é a quantidade de objetos a serem carregados*/
+		uint32_t objCount = 0;
+		fread(&objCount, sizeof(uint32_t), 1, fMap);
+		fprintf(stderr, "O mapa possui %d objetos\n", objCount);
+
+		auto mapobjects = std::vector<CharacterData>();
+
+		for (int i = 0; i < objCount; i++) {
+			/* Para cada campo de objetos há o seu tamanho.*/
+			int size;
+			fread(&size, sizeof(int), 1, fMap);
+
+			/* Escolhe o menor dos tamanhos */
+			size = min(sizeof(CharacterData), size);
+
+			/* O restante tem o layout igual ao do campo CharacterData*/
+			CharacterData chdata;
+			fread(&chdata, size, 1, fMap);
+			
+			mapobjects.push_back(chdata);
+		}
+
+		mp->SetCharData(&mapobjects);
+	}
+
+	
+	fclose(fMap);
 	return mp;
 
 }
