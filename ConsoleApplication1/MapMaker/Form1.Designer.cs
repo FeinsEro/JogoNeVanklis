@@ -33,6 +33,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mudarItemParaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.alterarPosDoPlayerParaCáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,7 +51,6 @@
             this.lblSize = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
-            this.alterarPosDoPlayerParaCáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMapDraw.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -82,7 +82,7 @@
             this.toolStripMenuItem2,
             this.alterarPosDoPlayerParaCáToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(228, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(228, 54);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // mudarItemParaToolStripMenuItem
@@ -95,6 +95,13 @@
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(224, 6);
+            // 
+            // alterarPosDoPlayerParaCáToolStripMenuItem
+            // 
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Name = "alterarPosDoPlayerParaCáToolStripMenuItem";
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Text = "Alterar pos. do player para cá";
+            this.alterarPosDoPlayerParaCáToolStripMenuItem.Click += new System.EventHandler(this.alterarPosDoPlayerParaCáToolStripMenuItem_Click);
             // 
             // vScrollBar1
             // 
@@ -166,8 +173,9 @@
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sairToolStripMenuItem.Text = "Sair";
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // ajudaToolStripMenuItem
             // 
@@ -244,13 +252,6 @@
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(818, 17);
             this.hScrollBar1.TabIndex = 3;
-            // 
-            // alterarPosDoPlayerParaCáToolStripMenuItem
-            // 
-            this.alterarPosDoPlayerParaCáToolStripMenuItem.Name = "alterarPosDoPlayerParaCáToolStripMenuItem";
-            this.alterarPosDoPlayerParaCáToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.alterarPosDoPlayerParaCáToolStripMenuItem.Text = "Alterar pos. do player para cá";
-            this.alterarPosDoPlayerParaCáToolStripMenuItem.Click += new System.EventHandler(this.alterarPosDoPlayerParaCáToolStripMenuItem_Click);
             // 
             // Form1
             // 

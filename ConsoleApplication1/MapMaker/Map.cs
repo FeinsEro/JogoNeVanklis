@@ -20,6 +20,8 @@ namespace MapMaker
 
         public String Filename { get; set; }
 
+        public List<Character> CharacterList { get; set; }
+
         public Map(String path)
         {
             this.Filename = path;
@@ -87,14 +89,19 @@ namespace MapMaker
             StreamWriter sw = new StreamWriter(this.Filename);
             BinaryWriter bw = new BinaryWriter(sw.BaseStream);
 
+            
             /* Magic words */
             bw.Write('W'); bw.Write('E'); bw.Write('R'); bw.Write('L');
+
 
             /* Metadados */
             bw.Write(this.Width);       //Largura
             bw.Write(this.Height);      //Altura
-            bw.Write((uint)bw.BaseStream.Position + 16); //Posição para os dados do mapa.
-            bw.Write((int)0); //Posição para os dados do char (n implementado)
+
+            uint mapData = (uint) bw.BaseStream.Position + 16;
+            uint charData = mapData + (sizeof(int) * this.Width * this.Height);
+            bw.Write(mapData); //Posição para os dados do mapa.
+            bw.Write(charData); //Posição para os dados do char (n implementado)
             bw.Write(this.PlayerX); //Pos. X do player
             bw.Write(this.PlayerY); //Pos. Y do player
 
@@ -103,9 +110,30 @@ namespace MapMaker
                 bw.Write(this.Elements[i]);
             }
 
-            bw.Flush();
-            bw.Close();
-        }
+            /* Escreve os dados dos chars
+                Eles estão nessa ordem:
+                [quant. de chars: uint]
+                
+                E para cada char disponível
+                [tamanho do campo: uint (geralmente 20 )]
+                [Type][ID][XPos][YPos][HP] (todos uints)
+
+            */
+            bw.Write((uint)CharacterList.Count);
+            
+            foreach(Character c in this.CharacterList)
+            {
+                bw.Write((uint)20);
+                bw.Write(c.TypeData.TypeID);
+                bw.Write(c.ID);
+                bw.Write((uint)c.Location.X);
+                bw.Write((uint)c.Location.Y);
+                bw.Write((uint)c.HP);
+            }
+
+            bw.Flush();                                   
+            bw.Close();                                   
+        }                                                
 
     }
 

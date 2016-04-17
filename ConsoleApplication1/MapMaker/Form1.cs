@@ -112,6 +112,7 @@ namespace MapMaker
                 itTile.Click += ItTile_Click;
                 mudarItemParaToolStripMenuItem.DropDownItems.Add(itTile);
             }
+            
 
             if (map == null)
             {
@@ -309,9 +310,11 @@ namespace MapMaker
                 gameX = (e.X / 32) + gfxData.xoff;
                 gameY = (e.Y / 32) + gfxData.yoff;
                 selectedTiles.Add(new Point(gameX, gameY));
+                saved = false;
             }
 
             pnlMapDraw.Refresh();
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -319,14 +322,18 @@ namespace MapMaker
             if (e.Shift)
                 multiple = true;
 
+            if (e.KeyCode == Keys.Escape) { 
+                selectedTiles.Clear();
+                multiple = false;
+            }
 
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
 
-            if (e.Shift)
-                multiple = false;
+
+            multiple = false;
         }
 
         private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -382,6 +389,7 @@ namespace MapMaker
             pnlMapDraw.Refresh();
         }
 
+        bool saved = false;
         private void salvarComoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog sfd = new SaveFileDialog())
@@ -404,6 +412,8 @@ namespace MapMaker
             }
 
             map.Save();
+
+            saved = true;
             this.Text = map.Filename + " - Criador de mapas";
         }
 
@@ -422,10 +432,15 @@ namespace MapMaker
             lblPlayerPos.Text = "(" + map.PlayerX + ", " + map.PlayerY + ")";
 
             pnlMapDraw.Refresh();
-
+            saved = false;
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
         }
