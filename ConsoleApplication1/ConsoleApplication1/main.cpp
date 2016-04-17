@@ -79,20 +79,20 @@ int main(int argc, char **argv) {
 		Map::LoadTiles();
 
 		MapOpener mpop;
-		m = mpop.Open("..\\maps\\map2.map");
-
-		int px, py;
-		m->GetInitialPlayerPos(px, py);
-
-		float fx = px, fy = py;
-		player.SetPosition(fx, fy);
-		
+		m = mpop.Open("..\\maps\\map2.map");		
 
 		if (!m) {
 			char strmaperr[32];
 			sprintf_s(strmaperr, 32, "Erro ao abrir o mapa!");
 			throw std::runtime_error(strmaperr);
 		}
+
+
+		int px, py;
+		m->GetInitialPlayerPos(px, py);
+
+		float fx = px, fy = py;
+		player.SetPosition(fx, fy);
 
 
 		r->SetMap(m);
