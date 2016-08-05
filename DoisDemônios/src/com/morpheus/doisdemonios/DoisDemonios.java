@@ -5,6 +5,7 @@
  */
 package com.morpheus.doisdemonios;
 
+import com.morpheus.doisdemonios.graphics.InputManager;
 import com.morpheus.doisdemonios.graphics.ObjectRenderer;
 import com.morpheus.doisdemonios.graphics.Window;
 import com.morpheus.doisdemonios.graphics.Renderer;
@@ -29,7 +30,7 @@ public class DoisDemonios {
        Window win = null;
        Renderer renderer = null;
        ObjectRenderer or = null;
-    
+          
        try {
             win = new Window(640, 480);
             renderer = new Renderer(win);
@@ -44,15 +45,26 @@ public class DoisDemonios {
        
        win.show();
        ObjectManager.getInstance().setObjectRenderer(or);
+       InputManager.getInstance().setObjectRenderer(or);
        Dann d = new Dann(new Vector2f(0.8f, 0.6f));
        boolean do_render = false;
        
-       do {
+       float begin = 0.0f;       
+       float end = 0.0f;       
+       do {           
            ObjectManager.getInstance().runAll();
            
+           or.update();           
            or.render();
            do_render = renderer.Render();
            GLFW.glfwPollEvents();
+           
+           end = (float)GLFW.glfwGetTime();
+
+           System.out.println("Frame time: " + (end-begin) + " ms");           
+           InputManager.getInstance().setFrameTime(end-begin);
+
+           begin = end;
            
        } while (do_render);
        

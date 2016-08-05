@@ -1,6 +1,7 @@
 package com.morpheus.doisdemonios.graphics;
 
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWErrorCallback;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 /**
@@ -27,9 +28,13 @@ public class Window {
             throw new WindowException("Unable to start GLFW");
         }
         
+        // Setup an error callback. The default implementation
+		// will print the error message in System.err.
+        GLFWErrorCallback.createPrint(System.err).set();
+        
+        GLFW.glfwDefaultWindowHints();
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 1);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 3);
-        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_ANY_PROFILE, GLFW.GLFW_TRUE);
         
         /* Create the window */
         windowHnd = GLFW.glfwCreateWindow(w, h, "Dois Demônios", 0, 0);
@@ -44,6 +49,8 @@ public class Window {
         GLFW.glfwSetKeyCallback(windowHnd, (window, key, scancode, action, mods) -> {
 			if ( key == GLFW.GLFW_KEY_ESCAPE && action == GLFW.GLFW_RELEASE )
 				GLFW.glfwSetWindowShouldClose(window, true); // We will detect this in our rendering loop
+                        
+                        InputManager.getInstance().ProcessInput(key, scancode, action, mods);
 		});
         
         width = w;

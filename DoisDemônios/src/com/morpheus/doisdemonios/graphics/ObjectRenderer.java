@@ -22,13 +22,13 @@ import static org.lwjgl.opengl.GL11.glClear;
 public class ObjectRenderer {
     private List<ObjectRenderData> objs;
     
-    private Vector2f initialPos;
+    private Vector2f cameraPos;
     public final int SCREEN_TILE_WIDTH = 30;
     public final int SCREEN_TILE_HEIGHT = 20;
     
     public ObjectRenderer(Vector2f initialPos) {
         objs = new ArrayList<>();
-        this.initialPos = initialPos;
+        this.cameraPos = initialPos;
     }  
     
     public void addToRender(IBaseObject o) {
@@ -36,12 +36,29 @@ public class ObjectRenderer {
         pos = new Vector2f(o.getPosition().getX(), o.getPosition().getY());
         size = new Vector2f(o.getSize().getX(), o.getSize().getY());
         
-        pos.subtract(initialPos, null);
+        pos.subtract(cameraPos, null);
         size = new Vector2f(size.getX() / SCREEN_TILE_WIDTH, 
-                size.getY() / SCREEN_TILE_WIDTH);
+                size.getY() / SCREEN_TILE_HEIGHT);
         
         ObjectRenderData ord = new ObjectRenderData(pos, size, o, 0);
         objs.add(ord);
+    }
+    
+    public void update() {
+         for (ObjectRenderData ord : objs) {  
+             IBaseObject ibo = ord.getObject();
+             ord.getPosition()[0] = ibo.getPosition().getX() - cameraPos.getX();
+             ord.getPosition()[1] = ibo.getPosition().getY() - cameraPos.getY();
+             
+         }
+    }
+    
+    public void setCameraPos(Vector2f cam) {
+        this.cameraPos = cam;
+    }
+    
+    public Vector2f getCameraPos() {
+        return this.cameraPos;
     }
     
     public void render() {
