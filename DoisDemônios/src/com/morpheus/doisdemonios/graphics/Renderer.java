@@ -1,0 +1,34 @@
+package com.morpheus.doisdemonios.graphics;
+
+import org.lwjgl.opengl.GL;
+import static org.lwjgl.opengl.GL11.*;
+
+/**
+ * Rendering class
+ * 
+ * @author Arthur Mendes <arthurmco@gmail.com>
+ */
+public class Renderer {
+    
+    private Window _win;
+    public Renderer(Window win) {
+        _win = win;
+        
+        GL.createCapabilities();
+        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    }
+    
+    /***
+     * Render the scene
+     * @return True if all rendered ok, false otherwise
+     */
+    public boolean Render() {
+        if (_win.checkIfShouldClose()) return false;
+        
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        _win.update();
+        return true;        
+    }
+    
+}
