@@ -18,6 +18,11 @@ public class Renderer {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         
         glViewport(0, 0, win.getWidth(), win.getHeight());
+        
+        /* Set projection matrix */
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0,1,0,1,0,1);                   
     }
     
     /***
@@ -26,7 +31,7 @@ public class Renderer {
      */
     public boolean Render() {
         if (_win.checkIfShouldClose()) return false;
-        
+                
         _win.update();
         return true;        
     }

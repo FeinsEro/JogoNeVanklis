@@ -33,7 +33,7 @@ public class DoisDemonios {
        try {
             win = new Window(640, 480);
             renderer = new Renderer(win);
-            or = new ObjectRenderer(new Vector2f(0.9f, 0.0f));
+            or = new ObjectRenderer(new Vector2f(0.6f, 0.0f));
        } catch (Window.WindowException e) {
             System.err.println("Graphical error while starting: " + e.getMessage());
             System.exit(1);
