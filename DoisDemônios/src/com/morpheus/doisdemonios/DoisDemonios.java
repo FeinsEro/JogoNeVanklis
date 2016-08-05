@@ -9,9 +9,11 @@ import com.morpheus.doisdemonios.graphics.InputManager;
 import com.morpheus.doisdemonios.graphics.ObjectRenderer;
 import com.morpheus.doisdemonios.graphics.Window;
 import com.morpheus.doisdemonios.graphics.Renderer;
+import com.morpheus.doisdemonios.graphics.SpriteManager;
 import com.morpheus.doisdemonios.logic.ObjectManager;
 import com.morpheus.doisdemonios.logic.objects.Dann;
 import com.morpheus.doisdemonios.util.Vector2f;
+import java.io.IOException;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -37,16 +39,30 @@ public class DoisDemonios {
             or = new ObjectRenderer(new Vector2f(0.6f, 0.0f));
        } catch (Window.WindowException e) {
             System.err.println("Graphical error while starting: " + e.getMessage());
+            e.printStackTrace();
             System.exit(1);
        } catch (Exception e) {
             System.err.println("Error while starting: " + e.getMessage());
+            e.printStackTrace();
             System.exit(1);
        }
        
        win.show();
+       SpriteManager.getInstance().init();
        ObjectManager.getInstance().setObjectRenderer(or);
        InputManager.getInstance().setObjectRenderer(or);
+       
+       try {
        Dann d = new Dann(new Vector2f(0.8f, 0.6f));
+       } catch (IOException ex) {
+           System.err.println("Error: I/O error: " + ex.getMessage());
+           ex.printStackTrace();
+           System.exit(1);
+       } catch (Exception ex) {
+           System.err.println("Error" + ex.getMessage());
+           ex.printStackTrace();
+           System.exit(1);
+       }
        boolean do_render = false;
        
        float begin = 0.0f;       
@@ -54,6 +70,7 @@ public class DoisDemonios {
        do {           
            ObjectManager.getInstance().runAll();
            
+           SpriteManager.getInstance().updateAll();
            or.update();           
            or.render();
            do_render = renderer.Render();

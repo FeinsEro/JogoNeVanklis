@@ -1,5 +1,6 @@
 package com.morpheus.doisdemonios.logic;
 
+import com.morpheus.doisdemonios.graphics.SpriteSheet;
 import com.morpheus.doisdemonios.util.Vector2f;
 
 /**
@@ -18,30 +19,31 @@ public class BaseObject implements IBaseObject {
     protected Vector2f position;
     protected double life;
     protected ObjectType type;
-
+    protected SpriteSheet sprite;
     protected final int ID;
     protected String name;
     
     protected Vector2f size;
 
     public BaseObject(Vector2f position, double life, String name,
-            Vector2f size) {
+            Vector2f size, SpriteSheet s) {
         this.position = position;
         this.life = life;
         this.ID = ObjectManager.getInstance().count();
         this.name = name;
         this.size = size;
-        
+        this.sprite = s;        
         ObjectManager.getInstance().add(this);
     }
     
     public BaseObject(Vector2f position, double life, int ID, String name,
-            Vector2f size) {
+            Vector2f size, SpriteSheet s) {
         this.position = position;
         this.life = life;
         this.ID = ID;
         this.name = name;
         this.size = size;
+        this.sprite = s;
         
         ObjectManager.getInstance().add(this);
     }
@@ -98,6 +100,16 @@ public class BaseObject implements IBaseObject {
     protected void finalize() throws Throwable {
         ObjectManager.getInstance().remove(this);
         super.finalize(); 
+    }
+    
+    @Override
+    public SpriteSheet getSprite() {
+        return sprite;
+    }
+
+    @Override
+    public void setSprite(SpriteSheet sprite) {
+        this.sprite = sprite;
     }
 
     

@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.lwjgl.opengl.GL11;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glEnable;
 
 /**
  * Object rendering class.
@@ -40,7 +42,7 @@ public class ObjectRenderer {
         size = new Vector2f(size.getX() / SCREEN_TILE_WIDTH, 
                 size.getY() / SCREEN_TILE_HEIGHT);
         
-        ObjectRenderData ord = new ObjectRenderData(pos, size, o, 0);
+        ObjectRenderData ord = new ObjectRenderData(pos, size, o, o.getSprite());
         objs.add(ord);
     }
     
@@ -64,16 +66,28 @@ public class ObjectRenderer {
     public void render() {
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
-
+        
         glClear(GL_COLOR_BUFFER_BIT);
 
-        GL11.glColor3f(1.0f, 1.0f, 1.0f);
+        GL11.glColor3f(1.0f, 0.0f, 1.0f);
         for (ObjectRenderData ord : objs) {
+            ord.getSprite().bindTexture();
+            float[] frame = ord.getSprite().getCoordinates();
+            float[] pos = ord.getPosition();
+            float[] size = ord.getSize();
+            
             GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f(ord.getPosition()[0], ord.getPosition()[1] + ord.getSize()[1]);
-                GL11.glVertex2f(ord.getPosition()[0], ord.getPosition()[1]);
-                GL11.glVertex2f(ord.getPosition()[0] + ord.getSize()[0], ord.getPosition()[1]);
-                GL11.glVertex2f(ord.getPosition()[0] + ord.getSize()[0], ord.getPosition()[1] + ord.getSize()[1]);
+                GL11.glTexCoord2f(frame[0], frame[1]);
+                GL11.glVertex2f(pos[0], pos[1]);
+                
+                GL11.glTexCoord2f(frame[0]+frame[2], frame[1]);                
+                GL11.glVertex2f(pos[0]+size[0], pos[1]);
+                
+                GL11.glTexCoord2f(frame[0]+frame[2], frame[1]+frame[3]);                                
+                GL11.glVertex2f(pos[0]+size[0], pos[1]+size[1]);
+                
+                GL11.glTexCoord2f(frame[0]+frame[2], frame[1]);                
+                GL11.glVertex2f(pos[0], pos[1]+size[1]);
             GL11.glEnd();
         }
         

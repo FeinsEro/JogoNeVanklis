@@ -1,5 +1,6 @@
 package com.morpheus.doisdemonios.logic;
 
+import com.morpheus.doisdemonios.graphics.SpriteSheet;
 import com.morpheus.doisdemonios.util.Vector2f;
 
 /**
@@ -13,7 +14,7 @@ public interface IBaseObject {
     public int getID();
     public String getName();
     public ObjectType getType();
-    
+    public SpriteSheet getSprite();
     
     /*  Size, in tiles. Check SCREEN_TILE_WIDTH and SCREEN_TILE_HEIGHT to
         see how much tiles you'll have in the screen */
@@ -22,6 +23,7 @@ public interface IBaseObject {
     public void setPosition(Vector2f position);
     public void setLife(double life);
     public void setName(String name);
+    public void setSprite(SpriteSheet s);
     
     public void run();
     

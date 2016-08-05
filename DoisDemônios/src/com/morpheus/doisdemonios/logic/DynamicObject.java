@@ -1,5 +1,6 @@
 package com.morpheus.doisdemonios.logic;
 
+import com.morpheus.doisdemonios.graphics.SpriteSheet;
 import com.morpheus.doisdemonios.util.Vector2f;
 
 /**
@@ -19,7 +20,8 @@ public class DynamicObject implements IBaseObject {
     protected double life;
     protected ObjectType type;
     protected Vector2f size;
-
+    protected SpriteSheet sprite;
+    
     protected final int ID;
     protected String name;
 
@@ -28,25 +30,27 @@ public class DynamicObject implements IBaseObject {
     protected double magicalDefense, pureDefense;
       
     public DynamicObject(Vector2f position, double life, ObjectType type, 
-            String name, Vector2f size) {
+            String name, Vector2f size, SpriteSheet s) {
         this.position = position;
         this.life = life;
         this.type = type;
         this.name = name;
         this.size = size;
         this.ID = ObjectManager.getInstance().count();
+        this.sprite = s;
         ObjectManager.getInstance().add(this);
 
     }
     
     public DynamicObject(Vector2f position, double life, ObjectType type, 
-            int ID, String name, Vector2f size) {
+            int ID, String name, Vector2f size, SpriteSheet s) {
         this.position = position;
         this.life = life;
         this.type = type;
         this.ID = ID;
         this.name = name;
         this.size = size;
+        this.sprite = s;        
         ObjectManager.getInstance().add(this);
         
     }
@@ -54,7 +58,7 @@ public class DynamicObject implements IBaseObject {
     
     public DynamicObject(Vector2f position, double life, ObjectType type, 
             String name, Vector2f size, double magicalAttack, double pureAttack, 
-            double magicalDefense, double pureDefense) {
+            double magicalDefense, double pureDefense, SpriteSheet s) {
         this.position = position;
         this.life = life;
         this.type = type;
@@ -65,13 +69,15 @@ public class DynamicObject implements IBaseObject {
         this.pureAttack = pureAttack;
         this.magicalDefense = magicalDefense;
         this.pureDefense = pureDefense;
+        this.sprite = s;        
         ObjectManager.getInstance().add(this);
 
     }
     
     public DynamicObject(Vector2f position, double life, ObjectType type, 
             int ID, String name, Vector2f size, double magicalAttack, 
-            double pureAttack, double magicalDefense, double pureDefense) {
+            double pureAttack, double magicalDefense, double pureDefense,
+            SpriteSheet s) {
         this.position = position;
         this.life = life;
         this.type = type;
@@ -82,6 +88,7 @@ public class DynamicObject implements IBaseObject {
         this.pureAttack = pureAttack;
         this.magicalDefense = magicalDefense;
         this.pureDefense = pureDefense;
+        this.sprite = s;        
         ObjectManager.getInstance().add(this);
         
     }
@@ -147,6 +154,17 @@ public class DynamicObject implements IBaseObject {
     public void setName(String name) {
         this.name = name;
     }
+          
+    @Override
+    public SpriteSheet getSprite() {
+        return sprite;
+    }
+
+    @Override
+    public void setSprite(SpriteSheet sprite) {
+        this.sprite = sprite;
+    }
+
     
     @Override
     public void run() {

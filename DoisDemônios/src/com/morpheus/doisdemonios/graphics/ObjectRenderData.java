@@ -33,17 +33,17 @@ public class ObjectRenderData {
     /* index 0: width, index 1: height, proportionally, between 0 and 1. */
     private float[] size;
     
-    /* OpenGL texture handle for the object */
-    private int textureHandle;
+    /* OpenGL texture for the object */
+    private SpriteSheet sprite;
     
     /* Base object, for mere identification */
     private IBaseObject object;
 
     public ObjectRenderData(Vector2f pos, Vector2f size, IBaseObject object, 
-            int textureHandle) {
+            SpriteSheet sprite) {
         this.position = pos.getNative();
         this.size = size.getNative();
-        this.textureHandle = textureHandle;
+        this.sprite = sprite;
         this.object = object;
     }
 
@@ -55,8 +55,8 @@ public class ObjectRenderData {
         return size;
     }
 
-    public int getTextureHandle() {
-        return textureHandle;
+    public SpriteSheet getSprite() {
+        return sprite;
     }
 
     public IBaseObject getObject() {
@@ -71,8 +71,8 @@ public class ObjectRenderData {
         this.size = size;
     }
 
-    public void setTextureHandle(int textureHandle) {
-        this.textureHandle = textureHandle;
+    public void setSprite(SpriteSheet s) {
+        this.sprite = s;
     }
     
 }
