@@ -41,6 +41,7 @@ public class DoisDemonios {
        do {
            do_render = renderer.Render();
            GLFW.glfwPollEvents();
+           
        } while (do_render);
        
        win.close();   
