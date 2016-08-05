@@ -33,8 +33,8 @@ public class ObjectRenderer {
     
     public void addToRender(IBaseObject o) {
         Vector2f pos, size;
-        pos = o.getPosition();
-        size = o.getSize();
+        pos = new Vector2f(o.getPosition().getX(), o.getPosition().getY());
+        size = new Vector2f(o.getSize().getX(), o.getSize().getY());
         
         pos.subtract(initialPos, null);
         size = new Vector2f(size.getX() / SCREEN_TILE_WIDTH, 

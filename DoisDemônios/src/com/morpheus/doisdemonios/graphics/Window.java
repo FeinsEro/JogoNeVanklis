@@ -27,6 +27,10 @@ public class Window {
             throw new WindowException("Unable to start GLFW");
         }
         
+        GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 1);
+        GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 3);
+        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_ANY_PROFILE, GLFW.GLFW_TRUE);
+        
         /* Create the window */
         windowHnd = GLFW.glfwCreateWindow(w, h, "Dois Demônios", 0, 0);
         if (windowHnd == NULL) {
