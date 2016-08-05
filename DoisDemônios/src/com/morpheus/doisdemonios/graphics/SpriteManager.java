@@ -36,16 +36,13 @@ public class SpriteManager {
     }
 
     public SpriteSheet OpenFromFile(String path, int framew, int frameh) throws IOException {
-        BufferedImage im = null;
-        im = ImageIO.read(new File(path));
+        //BufferedImage bi = ImageIO.read(new File(path));
         
-        System.out.println("[SpriteManager] Opening file " + path + ", "
-                + "size " + im.getWidth() + "x" + im.getHeight());
-        
-        ByteBuffer dtest = BufferUtils.createByteBuffer(64*64);
+                //ByteBuffer dtest = BufferUtils.createByteBuffer(bi.getHeight() * bi.getWidth() * 3);
+        ByteBuffer dtest = BufferUtils.createByteBuffer(64 * 64 * 3);
                                 
-        for (int i = 0; i < 64*64; i++) {
-            dtest.put((byte)0x30);
+        for (int i = 0; i < 64*3*64; i++) {
+            dtest.put((byte)0xff);
         }
         
         dtest.flip();        

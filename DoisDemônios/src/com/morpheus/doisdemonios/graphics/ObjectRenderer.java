@@ -69,7 +69,6 @@ public class ObjectRenderer {
         
         glClear(GL_COLOR_BUFFER_BIT);
 
-        GL11.glColor3f(1.0f, 0.0f, 1.0f);
         for (ObjectRenderData ord : objs) {
             ord.getSprite().bindTexture();
             float[] frame = ord.getSprite().getCoordinates();
