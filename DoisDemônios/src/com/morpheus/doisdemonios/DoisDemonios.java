@@ -7,6 +7,7 @@ package com.morpheus.doisdemonios;
 
 import com.morpheus.doisdemonios.graphics.Window;
 import com.morpheus.doisdemonios.graphics.Renderer;
+import com.morpheus.doisdemonios.logic.ObjectManager;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -39,6 +40,8 @@ public class DoisDemonios {
        win.show();
        boolean do_render = false;
        do {
+           ObjectManager.getInstance().runAll();
+           
            do_render = renderer.Render();
            GLFW.glfwPollEvents();
            
