@@ -38,10 +38,11 @@ hs_err_pid*
 
 
 ### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-.nb-gradle/
+DoisDemonios/nbproject/private/
+DoisDemonios/build/
+DoisDemonios/nbbuild/
+DoisDemonios/dist/
+DoisDemonios/nbdist/
+DoisDemonios/nbactions.xml
+DoisDemonios/.nb-gradle/
+libs/
