@@ -11,6 +11,15 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Window {
     
     private long windowHnd;
+    private int width, height;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
     
     public Window(int w, int h) {
         
@@ -32,6 +41,9 @@ public class Window {
 			if ( key == GLFW.GLFW_KEY_ESCAPE && action == GLFW.GLFW_RELEASE )
 				GLFW.glfwSetWindowShouldClose(window, true); // We will detect this in our rendering loop
 		});
+        
+        width = w;
+        height = h;
     }
     
     public void show() {

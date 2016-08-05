@@ -15,7 +15,9 @@ public class Renderer {
         _win = win;
         
         GL.createCapabilities();
-        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        
+        glViewport(0, 0, win.getWidth(), win.getHeight());
     }
     
     /***
@@ -24,8 +26,6 @@ public class Renderer {
      */
     public boolean Render() {
         if (_win.checkIfShouldClose()) return false;
-        
-        glClear(GL_COLOR_BUFFER_BIT);
         
         _win.update();
         return true;        

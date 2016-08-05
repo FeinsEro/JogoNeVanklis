@@ -18,6 +18,7 @@ public class DynamicObject implements IBaseObject {
     protected Vector2f position;
     protected double life;
     protected ObjectType type;
+    protected Vector2f size;
 
     protected final int ID;
     protected String name;
@@ -27,48 +28,56 @@ public class DynamicObject implements IBaseObject {
     protected double magicalDefense, pureDefense;
       
     public DynamicObject(Vector2f position, double life, ObjectType type, 
-            String name) {
+            String name, Vector2f size) {
         this.position = position;
         this.life = life;
         this.type = type;
         this.name = name;
+        this.size = size;
         this.ID = ObjectManager.getInstance().count();
+        ObjectManager.getInstance().add(this);
+
     }
     
     public DynamicObject(Vector2f position, double life, ObjectType type, 
-            int ID, String name) {
+            int ID, String name, Vector2f size) {
         this.position = position;
         this.life = life;
         this.type = type;
         this.ID = ID;
         this.name = name;
+        this.size = size;
         ObjectManager.getInstance().add(this);
         
     }
     
     
     public DynamicObject(Vector2f position, double life, ObjectType type, 
-            String name, double magicalAttack, double pureAttack, 
+            String name, Vector2f size, double magicalAttack, double pureAttack, 
             double magicalDefense, double pureDefense) {
         this.position = position;
         this.life = life;
         this.type = type;
         this.ID = ObjectManager.getInstance().count();
         this.name = name;
+        this.size = size;
         this.magicalAttack = magicalAttack;
         this.pureAttack = pureAttack;
         this.magicalDefense = magicalDefense;
         this.pureDefense = pureDefense;
+        ObjectManager.getInstance().add(this);
+
     }
     
     public DynamicObject(Vector2f position, double life, ObjectType type, 
-            int ID, String name, double magicalAttack, double pureAttack, 
-            double magicalDefense, double pureDefense) {
+            int ID, String name, Vector2f size, double magicalAttack, 
+            double pureAttack, double magicalDefense, double pureDefense) {
         this.position = position;
         this.life = life;
         this.type = type;
         this.ID = ID;
         this.name = name;
+        this.size = size;
         this.magicalAttack = magicalAttack;
         this.pureAttack = pureAttack;
         this.magicalDefense = magicalDefense;
@@ -118,6 +127,12 @@ public class DynamicObject implements IBaseObject {
         return pureDefense;
     }   
 
+    @Override
+    public Vector2f getSize() {
+        return size;
+    }
+    
+   
     @Override
     public void setPosition(Vector2f position) {
         this.position = position;

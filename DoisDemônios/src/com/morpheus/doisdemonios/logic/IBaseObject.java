@@ -13,6 +13,11 @@ public interface IBaseObject {
     public int getID();
     public String getName();
     public ObjectType getType();
+    
+    
+    /*  Size, in tiles. Check SCREEN_TILE_WIDTH and SCREEN_TILE_HEIGHT to
+        see how much tiles you'll have in the screen */
+    public Vector2f getSize();
 
     public void setPosition(Vector2f position);
     public void setLife(double life);

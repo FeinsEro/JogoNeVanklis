@@ -5,9 +5,12 @@
  */
 package com.morpheus.doisdemonios;
 
+import com.morpheus.doisdemonios.graphics.ObjectRenderer;
 import com.morpheus.doisdemonios.graphics.Window;
 import com.morpheus.doisdemonios.graphics.Renderer;
 import com.morpheus.doisdemonios.logic.ObjectManager;
+import com.morpheus.doisdemonios.logic.objects.Dann;
+import com.morpheus.doisdemonios.util.Vector2f;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -25,10 +28,12 @@ public class DoisDemonios {
        System.out.println("--> Creating window...");
        Window win = null;
        Renderer renderer = null;
+       ObjectRenderer or = null;
     
        try {
             win = new Window(640, 480);
             renderer = new Renderer(win);
+            or = new ObjectRenderer(new Vector2f(0.9f, 0.0f));
        } catch (Window.WindowException e) {
             System.err.println("Graphical error while starting: " + e.getMessage());
             System.exit(1);
@@ -38,10 +43,14 @@ public class DoisDemonios {
        }
        
        win.show();
+       ObjectManager.getInstance().setObjectRenderer(or);
+       Dann d = new Dann(new Vector2f(0.8f, 0.6f));
        boolean do_render = false;
+       
        do {
            ObjectManager.getInstance().runAll();
            
+           or.render();
            do_render = renderer.Render();
            GLFW.glfwPollEvents();
            

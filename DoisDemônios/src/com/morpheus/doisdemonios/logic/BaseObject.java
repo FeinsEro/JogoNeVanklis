@@ -21,21 +21,27 @@ public class BaseObject implements IBaseObject {
 
     protected final int ID;
     protected String name;
+    
+    protected Vector2f size;
 
-    public BaseObject(Vector2f position, double life, String name) {
+    public BaseObject(Vector2f position, double life, String name,
+            Vector2f size) {
         this.position = position;
         this.life = life;
         this.ID = ObjectManager.getInstance().count();
         this.name = name;
+        this.size = size;
         
         ObjectManager.getInstance().add(this);
     }
     
-    public BaseObject(Vector2f position, double life, int ID, String name) {
+    public BaseObject(Vector2f position, double life, int ID, String name,
+            Vector2f size) {
         this.position = position;
         this.life = life;
         this.ID = ID;
         this.name = name;
+        this.size = size;
         
         ObjectManager.getInstance().add(this);
     }
@@ -63,6 +69,11 @@ public class BaseObject implements IBaseObject {
     @Override
     public ObjectType getType() {
         return type;
+    }
+    
+    @Override
+    public Vector2f getSize() {
+        return this.size;
     }
     
     @Override
