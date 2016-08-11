@@ -55,7 +55,7 @@ public class SpriteManager {
                 dtest.put((byte)(colors[2]));
             }
         }
-        
+               
         dtest.flip();        
         
         SpriteSheet s = new SpriteSheet(bi.getWidth(), bi.getHeight(), dtest, 

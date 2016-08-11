@@ -18,13 +18,14 @@ import java.io.IOException;
 public class Dann extends DynamicObject {
         
     public Dann(Vector2f position) throws IOException {
-        super(position, 1000, ObjectType.TDann, "Dann", new Vector2f(1,3), 
+        super(position, 1000, ObjectType.TDann, "Dann", new Vector2f(2,2), 
                 1.0, 0.8, 1.2, 0.9, 
                 SpriteManager.getInstance().OpenFromFile("assets/dann.png", 32, 32));
+        
     }
     
     public Dann(Vector2f position, int ID) throws IOException {
-        super(position, 1000, ObjectType.TDann, ID, "Dann", new Vector2f(1,3), 
+        super(position, 1000, ObjectType.TDann, ID, "Dann", new Vector2f(2,2), 
                 1.0, 0.8, 1.2, 0.9,
                 SpriteManager.getInstance().OpenFromFile("assets/dann.png", 32, 32));
 

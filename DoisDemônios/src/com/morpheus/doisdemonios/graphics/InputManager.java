@@ -5,7 +5,10 @@
  */
 package com.morpheus.doisdemonios.graphics;
 
+import com.morpheus.doisdemonios.Player;
 import com.morpheus.doisdemonios.util.Vector2f;
+import java.util.ArrayList;
+import java.util.List;
 import static org.lwjgl.glfw.GLFW.*;
 
 /**
@@ -21,8 +24,17 @@ public class InputManager {
     }
     
     private ObjectRenderer or;
+    private List<InputReceivable> input_receivers = new ArrayList<>();
     public void setObjectRenderer(ObjectRenderer or) {
         this.or = or;
+    }
+    
+    public void AddInputReceiver(InputReceivable r) {
+        input_receivers.add(r);
+    }
+    
+    public void RemoveInputReceiver(InputReceivable r) {
+        input_receivers.remove(r);
     }
     
     private float frameTime;
@@ -31,22 +43,18 @@ public class InputManager {
     }
     
     public void ProcessInput(int glfwKey, int glfwScanCode, int action, int mods) {
-        if (action != GLFW_RELEASE) {
-            switch (glfwKey) {
-                case GLFW_KEY_W:
-                    or.getCameraPos().add(new Vector2f(0, 0.25f * frameTime), null);
-                    break;
-                case GLFW_KEY_S:
-                    or.getCameraPos().add(new Vector2f(0, -0.25f * frameTime ), null);                    
-                    break;
-                case GLFW_KEY_A:
-                    or.getCameraPos().add(new Vector2f(-0.25f * frameTime, 0), null);
-                    break;
-                case GLFW_KEY_D:
-                    or.getCameraPos().add(new Vector2f(0.25f * frameTime, 0), null);                    
-                    break;
-            }
+        
+        for (InputReceivable r : input_receivers) {
+            r.ReceiveInput(glfwKey, glfwScanCode, action, mods, frameTime);
         }
         
+    }
+
+    public boolean ExistsInputReceiver(InputReceivable r) {
+        if (input_receivers.stream().anyMatch((i) -> (i.equals(r)))) {
+            return true;
+        }
+        
+        return false;
     }
 }

@@ -54,6 +54,7 @@ public class DoisDemonios {
        
        try {
        Dann d = new Dann(new Vector2f(0.8f, 0.6f));
+       Player.GetInstance().setDefaultObject(d);
        } catch (IOException ex) {
            System.err.println("Error: I/O error: " + ex.getMessage());
            ex.printStackTrace();
@@ -80,9 +81,9 @@ public class DoisDemonios {
 
            System.out.println("Frame time: " + (end-begin) + " ms");           
            InputManager.getInstance().setFrameTime(end-begin);
-
-           begin = end;
            
+           
+           begin = end;           
        } while (do_render);
        
        win.close();   
