@@ -110,9 +110,9 @@ public class SpriteSheet {
      */
     public float[] getCoordinates() {
         
-        //fb.put(uv.getNative());
-        //fb.put(frame_size.getNative());
-        return new float[]{uv.getX(), uv.getY(), frame_size.getX(), frame_size.getY()};
+        //OpenGL Y coordinate is inversed.
+        return new float[]{uv.getX(), uv.getY(),
+            frame_size.getX(), frame_size.getY()}; 
     }
     
     

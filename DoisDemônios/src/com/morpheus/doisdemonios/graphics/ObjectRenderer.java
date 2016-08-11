@@ -79,14 +79,14 @@ public class ObjectRenderer {
                 GL11.glTexCoord2f(frame[0], frame[1]);
                 GL11.glVertex2f(pos[0], pos[1]);
                 
-                GL11.glTexCoord2f(frame[0]+frame[2], frame[1]);                
-                GL11.glVertex2f(pos[0]+size[0], pos[1]);
+                GL11.glTexCoord2f(frame[0], frame[1]+frame[3]);                
+                GL11.glVertex2f(pos[0], pos[1]+size[1]);
                 
                 GL11.glTexCoord2f(frame[0]+frame[2], frame[1]+frame[3]);                                
                 GL11.glVertex2f(pos[0]+size[0], pos[1]+size[1]);
                 
                 GL11.glTexCoord2f(frame[0]+frame[2], frame[1]);                
-                GL11.glVertex2f(pos[0], pos[1]+size[1]);
+                GL11.glVertex2f(pos[0]+size[0], pos[1]);
             GL11.glEnd();
         }
         

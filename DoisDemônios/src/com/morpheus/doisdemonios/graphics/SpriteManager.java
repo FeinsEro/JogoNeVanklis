@@ -36,18 +36,30 @@ public class SpriteManager {
     }
 
     public SpriteSheet OpenFromFile(String path, int framew, int frameh) throws IOException {
-        //BufferedImage bi = ImageIO.read(new File(path));
+        BufferedImage bi = ImageIO.read(new File(path));
         
-                //ByteBuffer dtest = BufferUtils.createByteBuffer(bi.getHeight() * bi.getWidth() * 3);
-        ByteBuffer dtest = BufferUtils.createByteBuffer(64 * 64 * 3);
-                                
-        for (int i = 0; i < 64*3*64; i++) {
-            dtest.put((byte)0xff);
+        int bsize = bi.getWidth() * bi.getHeight() * 3;
+        
+        System.out.println("[SpriteManager] Opening image " + path + ", size " + bi.getWidth()
+            + "x" + bi.getHeight() + ", " + bsize + " bytes");
+        
+        ByteBuffer dtest = BufferUtils.createByteBuffer(bsize);
+        
+        /* Copy the image from the BufferedImage to the texture buffer. */
+        for (int y = bi.getHeight()-1; y >= 0; y--) {
+            for (int x = 0; x < bi.getWidth(); x++) {
+                int[] colors = new int[4];
+                bi.getRaster().getPixel(x, y, colors);
+                dtest.put((byte)(colors[0]));
+                dtest.put((byte)(colors[1]));
+                dtest.put((byte)(colors[2]));
+            }
         }
         
         dtest.flip();        
         
-        SpriteSheet s = new SpriteSheet(64, 64, dtest, 16, 16);
+        SpriteSheet s = new SpriteSheet(bi.getWidth(), bi.getHeight(), dtest, 
+                framew, frameh);
         sprites.add(s);
         return s;
     }   
